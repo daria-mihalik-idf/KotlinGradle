@@ -1,19 +1,20 @@
 package config
 
+import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import kotlintest.ApplicationConfig
 
-interface ConfigProvider {
+interface ConfigJsonProvider {
     fun getConfig(): ApplicationConfig
 }
 
-class MmConfigProvider : ConfigProvider {
-    private val filePath: String = "config\\config.yaml"
+class MmConfigJsonProvider : ConfigJsonProvider {
+    private val filePath: String = "config\\config2.json"
     override fun getConfig(): ApplicationConfig {
         return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {
-            ObjectMapper(YAMLFactory())
+            ObjectMapper(JsonFactory())
                 .registerModule(KotlinModule())
                 .readValue(it, ApplicationConfig::class.java)
         } ?: throw IllegalStateException("Could not get Application Config object")

@@ -7,14 +7,14 @@ import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.function.Executable
 
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class ConfigProviderTest {
+class ConfigJsonProviderTest {
 
     //private val invalidHost = "qa-delivery-mx-master.moneyman.by"
     //private val pass = null
 
     @Test
     fun configValCheck() {
-        val config = MmConfigProvider().getConfig()
+        val config = MmConfigJsonProvider().getConfig()
         val password = config.password
         val user = config.user
         val host = config.host
