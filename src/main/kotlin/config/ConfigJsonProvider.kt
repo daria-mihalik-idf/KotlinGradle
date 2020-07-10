@@ -11,7 +11,7 @@ interface ConfigJsonProvider {
 }
 
 class MmConfigJsonProvider : ConfigJsonProvider {
-    private val filePath: String = "config\\config2.json"
+    private val filePath: String = "config/config2.json"
     override fun getConfig(): ApplicationConfig {
         return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {
             ObjectMapper(JsonFactory())
