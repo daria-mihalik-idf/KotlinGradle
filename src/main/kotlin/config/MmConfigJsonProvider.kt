@@ -6,11 +6,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import kotlintest.ApplicationConfig
 
-interface ConfigJsonProvider {
-    fun getConfig(): ApplicationConfig
-}
-
-class MmConfigJsonProvider : ConfigJsonProvider {
+class MmConfigJsonProvider : ConfigProvider {
     private val filePath: String = "config/config2.json"
     override fun getConfig(): ApplicationConfig {
         return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {
