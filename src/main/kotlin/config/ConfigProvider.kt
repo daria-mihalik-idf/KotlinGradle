@@ -2,5 +2,5 @@ package config
 import kotlintest.ApplicationConfig
 
 interface ConfigProvider {
-    fun getConfig(): ApplicationConfig
+    fun getConfig():ApplicationConfig
 }

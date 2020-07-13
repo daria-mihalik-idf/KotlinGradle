@@ -7,7 +7,7 @@ import kotlintest.ApplicationConfig
 
 class MmConfigYamlProvider : ConfigProvider {
     private val filePath: String = "config/config.yaml"
-    override fun getConfig(): ApplicationConfig {
+    override fun getConfig():ApplicationConfig {
         return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {
             ObjectMapper(YAMLFactory())
                 .registerModule(KotlinModule())

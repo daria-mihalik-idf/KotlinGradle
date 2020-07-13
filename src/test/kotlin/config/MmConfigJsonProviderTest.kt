@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
 class MmConfigJsonProviderTest{
-
     @Test
     fun configValCheck() {
         val config = MmConfigJsonProvider().getConfig()
