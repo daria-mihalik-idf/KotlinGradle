@@ -1,13 +1,16 @@
 package config
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
 class MmConfigJsonProviderTest{
+    @JsonIgnoreProperties
     @Test
     fun configValCheck() {
-        val config = MmConfigJsonProvider().getConfig()
+        //val config = MmConfigJsonProvider().getConfig()
+        val config = ConfigFactory().defineFileType(InputFile.JSON)
 
         config.apply {
             assertAll(
@@ -22,6 +25,9 @@ class MmConfigJsonProviderTest{
                 },
                 {
                     Assertions.assertEquals(landingEndpoint, "/")
+                },
+                {
+                    Assertions.assertEquals(fileType, "JSON")
                 }
             )
         }

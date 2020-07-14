@@ -2,3 +2,4 @@ host: qa-delivery-mx-master.moneyman.ru
 user: moneyman
 password: 1005
 landingEndpoint: "/"
+type: YAML
