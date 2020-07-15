@@ -7,7 +7,7 @@ import kotlintest.ApplicationConfig
 
 class MmConfigJsonProvider : ConfigProvider {
     private val filePath: String = "config/config2.json"
-    override fun getConfig():ApplicationConfig {
+    override fun readConfig(): ApplicationConfig {
         return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {
             ObjectMapper(JsonFactory())
                 .registerModule(KotlinModule())

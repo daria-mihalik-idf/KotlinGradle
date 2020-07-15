@@ -3,13 +3,12 @@ package config
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
-import org.junit.jupiter.api.assertAll
 
 class MmConfigYamlProviderTest {
     @Test
     fun configValCheck() {
-        //val config = MmConfigYamlProvider().getConfig()
-        val config = ConfigFactory().defineFileType(InputFile.YAML)
+        //val config = MmConfigYamlProvider().readConfig()
+        val config = ConfigProviderManager().setFileType(InputFile.YAML).getConfig()
 
         config.apply {
             assertAll(
