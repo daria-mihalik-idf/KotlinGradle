@@ -2,8 +2,8 @@ package config
 
 import kotlintest.ApplicationConfig
 
-class JsonFactory : DefaultFactory() {
+class YamlConfigFactory : DefaultFactory() {
     override fun getConfig(): ApplicationConfig {
-        return MmConfigJsonProvider().readConfig()
+        return MmConfigYamlProvider().readConfig()
     }
 }

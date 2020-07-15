@@ -7,7 +7,6 @@ import org.junit.jupiter.api.assertAll
 class MmConfigYamlProviderTest {
     @Test
     fun configValCheck() {
-        //val config = MmConfigYamlProvider().readConfig()
         val config = ConfigProviderManager().setFileType(InputFile.YAML).getConfig()
 
         config.apply {
