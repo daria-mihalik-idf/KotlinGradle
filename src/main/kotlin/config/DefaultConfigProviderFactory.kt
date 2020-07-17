@@ -4,5 +4,5 @@ import kotlintest.ApplicationConfig
 
 abstract class DefaultConfigProviderFactory : ConfigProvider {
     abstract override fun getConfig(): ApplicationConfig
-    abstract val filePath: String
+    protected abstract val filePath: String
 }
