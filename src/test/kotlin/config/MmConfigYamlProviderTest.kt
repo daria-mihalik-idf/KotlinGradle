@@ -25,6 +25,9 @@ class MmConfigYamlProviderTest {
                 },
                 {
                     Assertions.assertEquals(fileType, "YAML")
+                },
+                {
+                    Assertions.assertEquals(testType, null)
                 }
             )
         }

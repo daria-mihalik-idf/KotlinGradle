@@ -27,6 +27,9 @@ class MmConfigJsonProviderTest{
                 },
                 {
                     Assertions.assertEquals(fileType, "JSON")
+                },
+                {
+                    Assertions.assertEquals(testType, null)
                 }
             )
         }

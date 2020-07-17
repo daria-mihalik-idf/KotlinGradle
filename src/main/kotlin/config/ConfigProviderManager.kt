@@ -1,7 +1,7 @@
 package config
 
 class ConfigProviderManager {
-    fun setFileType(file: InputFile): DefaultFactory {
+    fun setFileType(file: InputFile): DefaultConfigProviderFactory {
         return when (file) {
             InputFile.JSON -> {
                 JsonConfigFactory()

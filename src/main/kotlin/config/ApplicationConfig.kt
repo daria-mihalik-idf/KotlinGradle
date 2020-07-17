@@ -11,7 +11,7 @@ data class ApplicationConfig(
     val landingEndpoint: String?,
     @JsonProperty("type")
     val fileType: String,
-    val testType: String
+    val testType: String?
 )
 
 
