@@ -1,12 +1,12 @@
 package config
 
 class ConfigProviderManager {
-    fun setFileType(file: InputFile): DefaultConfigProviderFactory {
+    fun setFileType(file: FileType): DefaultConfigProviderFactory {
         return when (file) {
-            InputFile.JSON -> {
+            FileType.JSON -> {
                 JsonConfigFactory()
             }
-            InputFile.YAML -> {
+            FileType.YAML -> {
                 YamlConfigFactory()
             }
         }

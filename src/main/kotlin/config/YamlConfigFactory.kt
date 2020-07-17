@@ -6,7 +6,8 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import kotlintest.ApplicationConfig
 
 class YamlConfigFactory : DefaultConfigProviderFactory() {
-    private val filePath: String = "config/config.yaml"
+    override val filePath: String = "config/config.yaml"
+
     override fun getConfig(): ApplicationConfig {
         return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {
             ObjectMapper(YAMLFactory())

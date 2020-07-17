@@ -6,7 +6,8 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import kotlintest.ApplicationConfig
 
 class JsonConfigFactory : DefaultConfigProviderFactory() {
-    private val filePath: String = "config/config2.json"
+   override val filePath = "config/config2.json"
+
     override fun getConfig(): ApplicationConfig {
         return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {
             ObjectMapper(JsonFactory())

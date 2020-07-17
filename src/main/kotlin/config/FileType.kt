@@ -1,5 +1,5 @@
 package config
 
-enum class InputFile {
+enum class FileType {
     YAML, JSON
 }
