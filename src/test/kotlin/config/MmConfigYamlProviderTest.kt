@@ -6,8 +6,8 @@ import org.junit.jupiter.api.assertAll
 
 class MmConfigYamlProviderTest {
     @Test
-    fun configValCheck(){
-        val config = MmConfigYamlProvider().getConfig()
+    fun configValCheck() {
+        val config = ConfigProviderManager().setFileType(InputFile.YAML).getConfig()
 
         config.apply {
             assertAll(
@@ -22,6 +22,12 @@ class MmConfigYamlProviderTest {
                 },
                 {
                     Assertions.assertEquals(landingEndpoint, "/")
+                },
+                {
+                    Assertions.assertEquals(fileType, "YAML")
+                },
+                {
+                    Assertions.assertEquals(testType, null)
                 }
             )
         }
