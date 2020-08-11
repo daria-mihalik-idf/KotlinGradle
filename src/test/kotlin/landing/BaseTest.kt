@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver
 import java.util.concurrent.TimeUnit
 
 abstract class BaseTest {
-    var driver: WebDriver? = null
+    lateinit var driver: WebDriver
 
     @BeforeEach
     fun init() {
@@ -19,6 +19,6 @@ abstract class BaseTest {
 
     @AfterEach
     fun quitSession() {
-        driver!!.quit()
+        driver.quit()
     }
 }
