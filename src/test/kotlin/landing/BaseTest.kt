@@ -12,6 +12,7 @@ abstract class BaseTest {
     @BeforeEach
     fun init() {
         driver = ChromeDriver()
+        driver.get("https://moneyman:1005@qa-delivery-mx-master.moneyman.ru")
         System.setProperty("webdriver.chrome.driver", "C:\\SeleniumDriver\\chromedriver.exe")
         (driver as ChromeDriver).manage().window().maximize()
         (driver as ChromeDriver).manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS)
@@ -19,6 +20,6 @@ abstract class BaseTest {
 
     @AfterEach
     fun quitSession() {
-        driver.quit()
+//        driver.quit()
     }
 }
