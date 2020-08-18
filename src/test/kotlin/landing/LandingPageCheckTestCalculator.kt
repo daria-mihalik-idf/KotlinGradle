@@ -24,25 +24,19 @@ class LandingPageCheckTestCalculator : CalculatorBaseTest() {
     @Test
     fun `LP - Verify Calculator Displayed`() {
         val calculatorLocator: WebElement = driver.findElement(calculator)
-        Assertions.assertTrue(calculatorLocator.isDisplayed, "Calculator isn't displayed")
+        Assertions.assertTrue(calculatorLocator.isDisplayed, "Calculator wasn't displayed")
 
         val calculatorGetCreditButton: WebElement = driver.findElement(getCreditButton)
-        Assertions.assertTrue(calculatorGetCreditButton.isDisplayed, "Calculator isn't displayed")
-
-        val creditButtonLocator: WebElement = driver.findElement(getCreditButton)
-        Assertions.assertTrue(creditButtonLocator.isDisplayed, "getCreditButton isn't displayed")
+        Assertions.assertTrue(calculatorGetCreditButton.isDisplayed, "getCreditButton wasn't displayed")
     }
 
     @Test
     fun `LP - Calculator Check`() {
         val calculatorLocator: WebElement = driver.findElement(calculator)
-        Assertions.assertTrue(calculatorLocator.isDisplayed, "Calculator isn't displayed")
+        Assertions.assertTrue(calculatorLocator.isDisplayed, "Calculator wasn't displayed")
 
         val calculatorGetCreditButton: WebElement = driver.findElement(getCreditButton)
-        Assertions.assertTrue(calculatorGetCreditButton.isDisplayed, "Calculator isn't displayed")
-
-        val creditButtonLocator: WebElement = driver.findElement(getCreditButton)
-        Assertions.assertTrue(creditButtonLocator.isDisplayed, "getCreditButton isn't displayed")
+        Assertions.assertTrue(calculatorGetCreditButton.isDisplayed, "getCreditButton wasn't displayed")
 
         val actions = Actions(driver)
         val amountSliderLocator: WebElement = driver.findElement(amountSlider)
