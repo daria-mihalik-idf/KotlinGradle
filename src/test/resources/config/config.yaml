@@ -3,3 +3,6 @@ user: moneyman
 password: 1005
 landingEndpoint: "/"
 type: YAML
+protocol: https://
+registrationUrl: client-area/index.html#/registration
+

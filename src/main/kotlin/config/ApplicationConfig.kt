@@ -9,12 +9,14 @@ data class ApplicationConfig(
     val user: String,
     val password: Int,
     val landingEndpoint: String?,
+    val protocol: String,
+    val registrationUrl: String,
     @JsonProperty("type")
     val fileType: String,
     val testType: String?
 ) {
-     fun getApplicationConfig(): String {
-        return "https://$user:$password@$host"
+     fun getBaseUrlWithAuth(): String {
+        return "$protocol$user:$password@$host"
     }
 }
 
