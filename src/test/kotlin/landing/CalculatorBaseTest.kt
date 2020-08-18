@@ -9,12 +9,13 @@ import org.openqa.selenium.chrome.ChromeDriver
 import java.util.concurrent.TimeUnit
 
 abstract class CalculatorBaseTest {
-    val driver: WebDriver = ChromeDriver()
+    lateinit var driver: WebDriver
 
     @BeforeEach
     fun init() {
-        val landingPage = ConfigProviderManager().setFileType(FileType.YAML).getConfig()
-        driver.get("https://" + landingPage.user + ":" + landingPage.password + "@" + landingPage.host)
+        driver = ChromeDriver()
+        val applicationConfig = ConfigProviderManager().setFileType(FileType.YAML).getConfig().getApplicationConfig()
+        driver.get(applicationConfig)
         System.setProperty("webdriver.chrome.driver", "C:\\SeleniumDriver\\chromedriver.exe")
         (driver as ChromeDriver).manage().window().maximize()
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS)

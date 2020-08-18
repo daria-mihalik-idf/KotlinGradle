@@ -12,7 +12,11 @@ data class ApplicationConfig(
     @JsonProperty("type")
     val fileType: String,
     val testType: String?
-)
+) {
+     fun getApplicationConfig(): String {
+        return "https://$user:$password@$host"
+    }
+}
 
 
 
