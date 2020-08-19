@@ -1,4 +1,4 @@
-package kotlintest
+package config
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -10,16 +10,17 @@ data class ApplicationConfig(
     val password: Int,
     val landingEndpoint: String?,
     val registrationUrl: String,
+    val httpsPrefix: String = "https://",
     @JsonProperty("type")
     val fileType: String,
     val testType: String?
 ) {
      fun getBaseUrlWithAuthorization(): String {
-        return "https://$user:$password@$host"
+        return "$httpsPrefix$user:$password@$host"
     }
 
-    fun getBaseUrlWithoutAuthorization():String{
-        return "https://$host/"
+    fun getBaseUrl():String{
+        return "$httpsPrefix$host/"
     }
 }
 

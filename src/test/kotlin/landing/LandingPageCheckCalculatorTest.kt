@@ -6,7 +6,7 @@ import org.openqa.selenium.*
 import org.openqa.selenium.interactions.Actions
 
 
-class LandingPageCheckTestCalculator : CalculatorBaseTest() {
+class LandingPageCheckCalculatorTest : CalculatorBaseTest() {
     private val minPeriodValue = "7"
     private val maxPeriodValue = "30"
     private val minAmountValue = "1,000"
@@ -23,14 +23,9 @@ class LandingPageCheckTestCalculator : CalculatorBaseTest() {
     private val lpTitle: By = By.xpath("//*[text()='Préstamos en línea']")
 
     @Test
-    fun `LP - Verify Calculator Displayed`() {
+    fun `LP - Verify Calculator And Apply for Loan`() {
         val lpTitleLocator: WebElement = driver.findElement(lpTitle)
         Assertions.assertTrue(lpTitleLocator.isDisplayed, "LP wasn't opened")
-        Assertions.assertEquals(
-            driver.currentUrl,
-            applicationConfig.getBaseUrlWithoutAuthorization(),
-            "Incorrect LP url"
-        )
 
         val calculatorLocator: WebElement = driver.findElement(calculator)
         Assertions.assertTrue(calculatorLocator.isDisplayed, "Calculator wasn't displayed")
@@ -58,7 +53,7 @@ class LandingPageCheckTestCalculator : CalculatorBaseTest() {
         val calculatorGetCreditButtonLocator: WebElement = driver.findElement(getCreditButton)
         Assertions.assertTrue(calculatorGetCreditButtonLocator.isDisplayed, "getCreditButton wasn't displayed")
 
-        clickToElement(driver, calculatorGetCreditButtonLocator)
+        calculatorGetCreditButtonLocator.click()
 
         val rootRegistrationPageElementLocator: WebElement = driver.findElement(rootRegistrationPageElement)
         Assertions.assertTrue(rootRegistrationPageElementLocator.isDisplayed, "registration page wasn't opened")
@@ -68,11 +63,6 @@ class LandingPageCheckTestCalculator : CalculatorBaseTest() {
     fun `LP - Calculator Check`() {
         val lpTitleLocator: WebElement = driver.findElement(lpTitle)
         Assertions.assertTrue(lpTitleLocator.isDisplayed, "LP wasn't opened")
-        Assertions.assertEquals(
-            driver.currentUrl,
-            applicationConfig.getBaseUrlWithoutAuthorization(),
-            "Incorrect LP url"
-        )
 
         val calculatorLocator: WebElement = driver.findElement(calculator)
         Assertions.assertTrue(calculatorLocator.isDisplayed, "Calculator wasn't displayed")
