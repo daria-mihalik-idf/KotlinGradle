@@ -19,24 +19,63 @@ class LandingPageCheckTestCalculator : CalculatorBaseTest() {
     private val periodSlider: By =
         By.xpath("//*[@data-test-id='period']//div[contains(@class, 'mainCalculator__slider')]/span")
     private val periodInput: By = By.cssSelector("[data-test-id='calculator_days']")
-
+    private val rootRegistrationPageElement: By = By.cssSelector("[data-step-name]")
+    private val lpTitle: By = By.xpath("//*[text()='Préstamos en línea']")
 
     @Test
     fun `LP - Verify Calculator Displayed`() {
+        val lpTitleLocator: WebElement = driver.findElement(lpTitle)
+        Assertions.assertTrue(lpTitleLocator.isDisplayed, "LP wasn't opened")
+        Assertions.assertEquals(
+            driver.currentUrl,
+            applicationConfig.getBaseUrlWithoutAuthorization(),
+            "Incorrect LP url"
+        )
+
         val calculatorLocator: WebElement = driver.findElement(calculator)
         Assertions.assertTrue(calculatorLocator.isDisplayed, "Calculator wasn't displayed")
 
-        val calculatorGetCreditButton: WebElement = driver.findElement(getCreditButton)
-        Assertions.assertTrue(calculatorGetCreditButton.isDisplayed, "getCreditButton wasn't displayed")
+        val periodLocator: WebElement = driver.findElement(periodInput)
+
+        setInputValue(periodLocator, maxPeriodValue)
+        var changedValue = driver.findElement(periodInput).getAttribute("value")
+        Assertions.assertEquals(maxPeriodValue, changedValue, "Max period is incorrect")
+
+        setInputValue(periodLocator, minPeriodValue)
+        changedValue = driver.findElement(periodInput).getAttribute("value")
+        Assertions.assertEquals(minPeriodValue, changedValue, "Min period is incorrect")
+
+        val amountLocator: WebElement = driver.findElement(amountInput)
+
+        setInputValue(amountLocator, maxAmountValue)
+        changedValue = driver.findElement(amountInput).getAttribute("value")
+        Assertions.assertEquals(maxAmountValue, changedValue, "Max value is incorrect")
+
+        setInputValue(amountLocator, minAmountValue)
+        changedValue = driver.findElement(amountInput).getAttribute("value")
+        Assertions.assertEquals(minAmountValue, changedValue, "Min value is incorrect")
+
+        val calculatorGetCreditButtonLocator: WebElement = driver.findElement(getCreditButton)
+        Assertions.assertTrue(calculatorGetCreditButtonLocator.isDisplayed, "getCreditButton wasn't displayed")
+
+        clickToElement(driver, calculatorGetCreditButtonLocator)
+
+        val rootRegistrationPageElementLocator: WebElement = driver.findElement(rootRegistrationPageElement)
+        Assertions.assertTrue(rootRegistrationPageElementLocator.isDisplayed, "registration page wasn't opened")
     }
 
     @Test
     fun `LP - Calculator Check`() {
+        val lpTitleLocator: WebElement = driver.findElement(lpTitle)
+        Assertions.assertTrue(lpTitleLocator.isDisplayed, "LP wasn't opened")
+        Assertions.assertEquals(
+            driver.currentUrl,
+            applicationConfig.getBaseUrlWithoutAuthorization(),
+            "Incorrect LP url"
+        )
+
         val calculatorLocator: WebElement = driver.findElement(calculator)
         Assertions.assertTrue(calculatorLocator.isDisplayed, "Calculator wasn't displayed")
-
-        val calculatorGetCreditButton: WebElement = driver.findElement(getCreditButton)
-        Assertions.assertTrue(calculatorGetCreditButton.isDisplayed, "getCreditButton wasn't displayed")
 
         val actions = Actions(driver)
         val amountSliderLocator: WebElement = driver.findElement(amountSlider)
@@ -50,33 +89,13 @@ class LandingPageCheckTestCalculator : CalculatorBaseTest() {
         Assertions.assertEquals(changedValue, minAmountValue, "Incorrect min amount")
 
         val periodSliderLocator: WebElement = driver.findElement(periodSlider)
-        changedValue = driver.findElement(periodInput).getAttribute("value")
-
         actions.dragAndDropBy(periodSliderLocator, 300, 0).release().build().perform()
+        changedValue = driver.findElement(periodInput).getAttribute("value")
         Assertions.assertEquals(changedValue, maxPeriodValue, "Incorrect max period")
 
         actions.dragAndDropBy(periodSliderLocator, -400, 0).release().build().perform()
+        changedValue = driver.findElement(periodInput).getAttribute("value")
         Assertions.assertEquals(changedValue, minPeriodValue, "Incorrect min period")
-
-        val amountLocator: WebElement = driver.findElement(amountInput)
-
-        setInputValue(amountLocator, maxAmountValue)
-        changedValue = driver.findElement(amountInput).getAttribute("value")
-        Assertions.assertEquals(maxAmountValue, changedValue, "Max value is incorrect")
-
-        setInputValue(amountLocator, minAmountValue)
-        changedValue = driver.findElement(amountInput).getAttribute("value")
-        Assertions.assertEquals(minAmountValue, changedValue, "Min value is incorrect")
-
-        val periodLocator: WebElement = driver.findElement(periodInput)
-
-        setInputValue(periodLocator, maxPeriodValue)
-        changedValue = driver.findElement(periodInput).getAttribute("value")
-        Assertions.assertEquals(maxPeriodValue, changedValue, "Max period is incorrect")
-
-        setInputValue(periodLocator, minPeriodValue)
-        changedValue = driver.findElement(periodInput).getAttribute("value")
-        Assertions.assertEquals(minPeriodValue, changedValue, "Min period is incorrect")
     }
 
     private fun setInputValue(locator: WebElement, value: String) {
@@ -91,5 +110,6 @@ class LandingPageCheckTestCalculator : CalculatorBaseTest() {
         executor.executeScript("arguments[0].click();", element)
     }
 }
+
 
 

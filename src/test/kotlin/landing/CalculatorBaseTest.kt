@@ -21,7 +21,8 @@ abstract class CalculatorBaseTest {
         System.setProperty("webdriver.chrome.driver", "C:\\SeleniumDriver\\chromedriver.exe")
         (driver as ChromeDriver).manage().window().maximize()
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS)
-        driver.get(applicationConfig.getBaseUrlWithAuth())
+        driver.get(applicationConfig.getBaseUrlWithAuthorization())
+        driver.get(applicationConfig.getBaseUrlWithoutAuthorization())
     }
 
     @AfterEach
