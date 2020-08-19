@@ -94,11 +94,6 @@ class LandingPageCheckCalculatorTest : CalculatorBaseTest() {
         locator.sendKeys("${Keys.DELETE}")
         locator.sendKeys(value)
     }
-
-    private fun clickToElement(driver: WebDriver, element: WebElement?) {
-        val executor = driver as JavascriptExecutor
-        executor.executeScript("arguments[0].click();", element)
-    }
 }
 
 

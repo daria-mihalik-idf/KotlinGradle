@@ -10,12 +10,13 @@ data class ApplicationConfig(
     val password: Int,
     val landingEndpoint: String?,
     val registrationUrl: String,
-    val httpsPrefix: String = "https://",
     @JsonProperty("type")
     val fileType: String,
     val testType: String?
 ) {
-     fun getBaseUrlWithAuthorization(): String {
+    private val httpsPrefix: String = "https://"
+
+    fun getBaseUrlWithAuthorization(): String {
         return "$httpsPrefix$user:$password@$host"
     }
 
