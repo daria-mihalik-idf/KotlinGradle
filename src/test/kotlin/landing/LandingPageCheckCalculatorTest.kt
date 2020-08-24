@@ -13,7 +13,7 @@ class LandingPageCheckCalculatorTest : CalculatorBaseTest() {
     private val maxAmountValue = "4,000"
 
     @Test
-    fun `LP - Verify Calculator And Apply for Loan`() {
+    fun `LP - Verify Calculator And Apply for Loan`(){
         val lp = LandingPage(driver)
         val calculatorService = CalculatorService(driver)
 

@@ -16,7 +16,7 @@ class CalculatorBaseBlock {
     private val periodSlider: By =
         By.xpath("//*[@data-test-id='period']//div[contains(@class, 'mainCalculator__slider')]/span")
 
-    fun setInputValue(locator: WebElement, value: String) {
+    fun setInputValue(locator: WebElement, value: String){
         locator.click()
         locator.sendKeys("${Keys.CONTROL}", "a")
         locator.sendKeys("${Keys.DELETE}")

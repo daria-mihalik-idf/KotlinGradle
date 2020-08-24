@@ -26,24 +26,24 @@ class LandingPage(private val driver: WebDriver) {
         CalculatorBaseBlock().setInputValue(periodLocator, value)
     }
 
-    fun getPeriodValue(): String {
+    fun getPeriodValue(): String{
         return driver.findElement(periodInput).getAttribute("value")
     }
 
-    fun setAmountValue(value: String) {
+    fun setAmountValue(value: String){
         val periodLocator: WebElement = driver.findElement(amountInput)
         CalculatorBaseBlock().setInputValue(periodLocator, value)
     }
 
-    fun getAmountValue(): String {
+    fun getAmountValue(): String{
         return driver.findElement(amountInput).getAttribute("value")
     }
 
-    fun isGetCreditButtonPresent(): Boolean {
+    fun isGetCreditButtonPresent(): Boolean{
         return CalculatorBaseBlock().isGetCreditButtonPresent(driver)
     }
 
-    fun clickGetCreditButton(): RegistrationPage {
+    fun clickGetCreditButton(): RegistrationPage{
         CalculatorBaseBlock().clickGetCreditButton(driver)
         return RegistrationPage(driver)
     }

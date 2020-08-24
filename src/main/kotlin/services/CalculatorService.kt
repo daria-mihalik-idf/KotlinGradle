@@ -5,13 +5,13 @@ import landing.CalculatorBaseBlock
 import landing.LandingPage
 import landing.SliderType
 
-enum class SliderValue {
+enum class SliderValue{
     AMOUNT_MIN, AMOUNT_MAX, PERIOD_MIN, PERIOD_MAX
 }
 
-class CalculatorService(private val driver: WebDriver) {
+class CalculatorService(private val driver: WebDriver){
 
-    fun moveSlider(value: SliderValue, type: SliderType) {
+    fun moveSlider(value: SliderValue, type: SliderType){
         var offset = 0
         when (value) {
             SliderValue.AMOUNT_MAX -> offset = 400
@@ -22,7 +22,7 @@ class CalculatorService(private val driver: WebDriver) {
         CalculatorBaseBlock().moveSlider(driver, offset, 0, type)
     }
 
-    fun getCurrentValue(type: SliderType): String {
+    fun getCurrentValue(type: SliderType): String{
         val lp = LandingPage(driver)
         when (type) {
             SliderType.PERIOD -> return lp.getPeriodValue()

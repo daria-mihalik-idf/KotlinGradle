@@ -4,7 +4,7 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
-class RegistrationPage(driver: WebDriver) {
+class RegistrationPage(driver: WebDriver){
     private var driver: WebDriver = driver
     private val rootRegistrationPageElement: By = By.cssSelector("[data-step-name]")
 
