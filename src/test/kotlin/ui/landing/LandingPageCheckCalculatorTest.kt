@@ -1,14 +1,13 @@
-package landing
+package ui.landing
 
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import services.CalculatorService
 import services.SliderValue
+import ui.UiBaseTest
 import ui.pages.registration.RegistrationPage
 
 
-class LandingPageCheckCalculatorTest : CalculatorBaseTest() {
+class LandingPageCheckCalculatorTest : UiBaseTest() {
     private val minPeriodValue = "7"
     private val maxPeriodValue = "30"
     private val minAmountValue = "1,000"
@@ -47,7 +46,7 @@ class LandingPageCheckCalculatorTest : CalculatorBaseTest() {
             landingPage.calculator.getCurrentValue(SliderType.AMOUNT),
             "Min amount is incorrect"
         )
-        Assertions.assertTrue(landingPage.calculator.isGetCreditButtonPresent(), "getCreditButton wasn't displayed")
+        Assertions.assertTrue(landingPage.calculator.isCalculatorBlockPresent(), "getCreditButton wasn't displayed")
 
         landingPage.calculator.clickGetCreditButton()
         val registrationPage = RegistrationPage(driver)

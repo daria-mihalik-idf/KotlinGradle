@@ -1,9 +1,9 @@
 package services
 
 import org.openqa.selenium.WebDriver
-import landing.CalculatorBaseBlock
-import landing.LandingPage
-import landing.SliderType
+import ui.landing.CalculatorBlock
+import ui.landing.LandingPage
+import ui.landing.SliderType
 
 enum class SliderValue{
     AMOUNT_MIN, AMOUNT_MAX, PERIOD_MIN, PERIOD_MAX
@@ -19,7 +19,7 @@ class CalculatorService(private val driver: WebDriver){
             SliderValue.PERIOD_MAX -> offset = 300
             SliderValue.PERIOD_MIN -> offset = -400
         }
-        CalculatorBaseBlock(driver).moveSlider(driver, offset, 0, type)
+        CalculatorBlock(driver).moveSlider(offset, 0, type)
     }
 
     fun getCurrentValue(type: SliderType): String{
