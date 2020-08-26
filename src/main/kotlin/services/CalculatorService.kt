@@ -19,14 +19,14 @@ class CalculatorService(private val driver: WebDriver){
             SliderValue.PERIOD_MAX -> offset = 300
             SliderValue.PERIOD_MIN -> offset = -400
         }
-        CalculatorBaseBlock().moveSlider(driver, offset, 0, type)
+        CalculatorBaseBlock(driver).moveSlider(driver, offset, 0, type)
     }
 
     fun getCurrentValue(type: SliderType): String{
         val lp = LandingPage(driver)
         when (type) {
-            SliderType.PERIOD -> return lp.getPeriodValue()
-            else -> return lp.getAmountValue()
+            SliderType.PERIOD -> return lp.calculator.getPeriodValue()
+            else -> return lp.calculator.getAmountValue()
         }
     }
 }

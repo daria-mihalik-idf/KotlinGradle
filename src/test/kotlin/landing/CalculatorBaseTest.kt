@@ -12,17 +12,14 @@ import java.util.concurrent.TimeUnit
 
 abstract class CalculatorBaseTest {
     lateinit var driver: WebDriver
-    lateinit var applicationConfig: ApplicationConfig
+    val applicationConfig = ConfigProviderManager().setFileType(FileType.YAML).getConfig()
 
     @BeforeEach
     fun init() {
-        applicationConfig = ConfigProviderManager().setFileType(FileType.YAML).getConfig()
         driver = ChromeDriver()
         System.setProperty("webdriver.chrome.driver", "C:\\SeleniumDriver\\chromedriver.exe")
         driver.manage().window().size = Dimension(1600, 900)
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS)
-        driver.get(applicationConfig.getBaseUrlWithAuthorization())
-        driver.get(applicationConfig.getBaseUrl())
     }
 
     @AfterEach
