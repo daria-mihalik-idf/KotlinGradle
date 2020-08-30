@@ -1,4 +1,4 @@
-package ui.landing
+package ui.pages.landing
 
 import org.openqa.selenium.By
 import org.openqa.selenium.Keys
@@ -20,17 +20,15 @@ class CalculatorBlock(private val driver: WebDriver) {
     private val periodInput: By = By.cssSelector("[data-test-id='calculator_days']")
     private val amountInput: By = By.cssSelector("[data-test-id='calculator_amount']")
 
+
     fun isCalculatorBlockPresent(): Boolean {
         val calculatorLocator: WebElement = driver.findElement(calculator)
-        val getCreditButtonLocator: WebElement = driver.findElement(getCreditButton)
-        return calculatorLocator.isDisplayed && getCreditButtonLocator.isDisplayed
+        return calculatorLocator.isDisplayed
     }
 
-    private fun setInputValue(locator: WebElement, value: String) {
-        locator.click()
-        locator.sendKeys("${Keys.CONTROL}", "a")
-        locator.sendKeys("${Keys.DELETE}")
-        locator.sendKeys(value)
+    fun isGetCreditButtonPresent(): Boolean {
+        val getCreditButtonLocator: WebElement = driver.findElement(getCreditButton)
+        return getCreditButtonLocator.isDisplayed
     }
 
     fun moveSlider(xOffset: Int, yOffset: Int, type: SliderType) {
@@ -46,8 +44,11 @@ class CalculatorBlock(private val driver: WebDriver) {
         driver.findElement(getCreditButton).click()
     }
 
-    fun setValue(locator: WebElement, value: String) {
-        setInputValue(locator, value)
+    private fun setInputValue(locator: WebElement, value: String) {
+        locator.click()
+        locator.sendKeys("${Keys.CONTROL}", "a")
+        locator.sendKeys("${Keys.DELETE}")
+        locator.sendKeys(value)
     }
 
     fun setPeriodValue(value: String) {
@@ -70,23 +71,5 @@ class CalculatorBlock(private val driver: WebDriver) {
 
     fun clickGetCreditButton() {
         clickGetCreditBtn()
-    }
-
-    fun moveSlider(value: SliderValue, type: SliderType) {
-        var offset = 0
-        offset = when (value) {
-            SliderValue.AMOUNT_MAX -> 400
-            SliderValue.AMOUNT_MIN -> -500
-            SliderValue.PERIOD_MAX -> 300
-            SliderValue.PERIOD_MIN -> -400
-        }
-        CalculatorBlock(driver).moveSlider(offset, 0, type)
-    }
-
-    fun getCurrentValue(type: SliderType): String {
-        return when (type) {
-            SliderType.PERIOD -> getPeriodValue()
-            else -> getAmountValue()
-        }
     }
 }

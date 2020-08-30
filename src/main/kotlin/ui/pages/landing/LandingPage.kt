@@ -4,6 +4,7 @@ import config.ApplicationConfig
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
+import ui.pages.landing.CalculatorBlock
 
 class LandingPage(private val driver: WebDriver) {
     private val landingPageTitle: By = By.xpath("//*[text()='Préstamos en línea']")
