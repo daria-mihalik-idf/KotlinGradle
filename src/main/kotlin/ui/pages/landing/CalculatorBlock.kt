@@ -1,15 +1,8 @@
 package ui.pages.landing
 
-import org.openqa.selenium.By
-import org.openqa.selenium.Keys
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.*
 import org.openqa.selenium.interactions.Actions
 import services.SliderValue
-
-enum class SliderType() {
-    AMOUNT, PERIOD
-}
 
 class CalculatorBlock(private val driver: WebDriver) {
     private val calculator: By = By.className("hero__calculator")
@@ -31,11 +24,12 @@ class CalculatorBlock(private val driver: WebDriver) {
         return getCreditButtonLocator.isDisplayed
     }
 
-    fun moveSlider(xOffset: Int, yOffset: Int, type: SliderType) {
+    fun moveSlider(xOffset: Int, yOffset: Int, type: SliderValue) {
         val actions = Actions(driver)
         val locator = when (type) {
-            SliderType.AMOUNT -> driver.findElement(amountSlider)
-            SliderType.PERIOD -> driver.findElement(periodSlider)
+            SliderValue.AMOUNT -> driver.findElement(amountSlider)
+            SliderValue.PERIOD -> driver.findElement(periodSlider)
+            else -> throw NotFoundException()
         }
         actions.dragAndDropBy(locator, xOffset, yOffset).release().build().perform()
     }
