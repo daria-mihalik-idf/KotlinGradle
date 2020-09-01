@@ -1,24 +1,20 @@
 package services
 
-import config.ApplicationConfig
-import org.openqa.selenium.NotFoundException
 import org.openqa.selenium.WebDriver
 import ui.pages.landing.CalculatorBlock
+import ui.pages.landing.SliderType
+import ui.pages.landing.SliderValue
 
-enum class SliderValue {
-    AMOUNT_MIN, AMOUNT_MAX, PERIOD_MIN, PERIOD_MAX, AMOUNT, PERIOD
-}
 
-class CalculatorService(private val driver: WebDriver, applicationConfig: ApplicationConfig) {
+class CalculatorService(driver: WebDriver) {
     private val calculatorBlock = CalculatorBlock(driver)
-    private val landingPageUrl = applicationConfig.getBaseUrl() + applicationConfig.landingEndpoint
-
-    fun openLandingPage() {
-        driver.get(landingPageUrl)
-    }
 
     fun isCalculatorElementsDisplayed(): Boolean {
         return calculatorBlock.isCalculatorBlockPresent() && calculatorBlock.isGetCreditButtonPresent()
+    }
+
+    fun clickGetCreditButton() {
+        calculatorBlock.clickGetCreditButton()
     }
 
     fun setCalculatorValue(value: String, type: SliderValue) {
@@ -28,21 +24,19 @@ class CalculatorService(private val driver: WebDriver, applicationConfig: Applic
         }
     }
 
-    fun getCurrentValue(type: SliderValue): String {
+    fun getCurrentValue(type: SliderType): String {
         return when (type) {
-            SliderValue.PERIOD -> calculatorBlock.getPeriodValue()
-            SliderValue.AMOUNT -> calculatorBlock.getAmountValue()
-            else -> throw NotFoundException("No such field")
+            SliderType.PERIOD -> calculatorBlock.getPeriodValue()
+            SliderType.AMOUNT -> calculatorBlock.getAmountValue()
         }
     }
 
-    fun moveCalculatorSlider(value: SliderValue, type: SliderValue) {
+    fun moveCalculatorSlider(value: SliderValue, type: SliderType) {
         var offset = when (value) {
             SliderValue.AMOUNT_MAX -> 400
             SliderValue.AMOUNT_MIN -> -500
             SliderValue.PERIOD_MAX -> 300
             SliderValue.PERIOD_MIN -> -400
-            else -> throw NotFoundException("No such value")
         }
         calculatorBlock.moveSlider(offset, 0, type)
     }

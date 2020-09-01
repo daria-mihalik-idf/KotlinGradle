@@ -2,11 +2,10 @@ package ui.landing
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import services.CalculatorService
-import services.SliderValue
+import services.*
 import ui.UiBaseTest
-import ui.pages.landing.LandingPage
-import ui.pages.registration.RegistrationPage
+import ui.pages.landing.SliderType
+import ui.pages.landing.SliderValue
 
 class LandingPageCheckCalculatorTest : UiBaseTest() {
     private val minPeriodValue = "7"
@@ -16,80 +15,80 @@ class LandingPageCheckCalculatorTest : UiBaseTest() {
 
     @Test
     fun `LP - Verify Calculator And Apply for Loan`() {
-        val calculatorService = CalculatorService(driver, applicationConfig)
-        val landingPage = LandingPage(driver)
+        val calculator = CalculatorService(driver)
+        val landingPage = LandingPageService(driver, applicationConfig)
 
-        calculatorService.openLandingPage()
-        Assertions.assertTrue(landingPage.isOpened(), "LP wasn't opened")
+        landingPage.openLandingPage()
+        Assertions.assertTrue(landingPage.isOpened(), "Landing Page wasn't opened")
 
-        calculatorService.setCalculatorValue(maxPeriodValue, SliderValue.PERIOD_MAX)
+        calculator.setCalculatorValue(maxPeriodValue, SliderValue.PERIOD_MAX)
         Assertions.assertEquals(
             maxPeriodValue,
-            calculatorService.getCurrentValue(SliderValue.PERIOD),
+            calculator.getCurrentValue(SliderType.PERIOD),
             "Landing Page calculator max period value is incorrect"
         )
 
-        calculatorService.setCalculatorValue(minPeriodValue, SliderValue.PERIOD_MIN)
+        calculator.setCalculatorValue(minPeriodValue, SliderValue.PERIOD_MIN)
         Assertions.assertEquals(
             minPeriodValue,
-            calculatorService.getCurrentValue(SliderValue.PERIOD),
+            calculator.getCurrentValue(SliderType.PERIOD),
             "Landing Page calculator min period value is incorrect"
         )
 
-        calculatorService.setCalculatorValue(maxAmountValue, SliderValue.AMOUNT_MAX)
+        calculator.setCalculatorValue(maxAmountValue, SliderValue.AMOUNT_MAX)
         Assertions.assertEquals(
             maxAmountValue,
-            calculatorService.getCurrentValue(SliderValue.AMOUNT),
+            calculator.getCurrentValue(SliderType.AMOUNT),
             "Landing Page calculator max amount value is incorrect"
         )
 
-        calculatorService.setCalculatorValue(minAmountValue, SliderValue.AMOUNT_MIN)
+        calculator.setCalculatorValue(minAmountValue, SliderValue.AMOUNT_MIN)
         Assertions.assertEquals(
             minAmountValue,
-            calculatorService.getCurrentValue(SliderValue.AMOUNT),
+            calculator.getCurrentValue(SliderType.AMOUNT),
             "Landing Page calculator min amount value is incorrect"
         )
-        Assertions.assertTrue(calculatorService.isCalculatorElementsDisplayed(), "getCreditButton wasn't displayed")
+        Assertions.assertTrue(calculator.isCalculatorElementsDisplayed(), "getCreditButton wasn't displayed on calculator")
 
         landingPage.calculator.clickGetCreditButton()
-        val registrationPage = RegistrationPage(driver)
+        val registrationPage = RegistrationPageService(driver)
 
-        Assertions.assertTrue(registrationPage.isRegistrationPageOpened(), "registration page wasn't opened")
+        Assertions.assertTrue(registrationPage.isRegistrationPageOpened(), "Registration page wasn't opened")
     }
 
     @Test
     fun `LP - Calculator Check`() {
-        val calculatorService = CalculatorService(driver, applicationConfig)
-        val landingPage = LandingPage(driver)
+        val calculator = CalculatorService(driver)
+        val landingPage = LandingPageService(driver, applicationConfig)
 
-        calculatorService.openLandingPage()
-        Assertions.assertTrue(landingPage.isOpened(), "LP wasn't opened")
+        landingPage.openLandingPage()
+        Assertions.assertTrue(landingPage.isOpened(), "Landing Page wasn't opened")
 
-        calculatorService.moveCalculatorSlider(SliderValue.AMOUNT_MAX, SliderValue.AMOUNT)
+        calculator.moveCalculatorSlider(SliderValue.AMOUNT_MAX, SliderType.AMOUNT)
         Assertions.assertEquals(
             maxAmountValue,
-            calculatorService.getCurrentValue(SliderValue.AMOUNT),
+            calculator.getCurrentValue(SliderType.AMOUNT),
             "Landing Page calculator max amount value is incorrect"
         )
 
-        calculatorService.moveCalculatorSlider(SliderValue.AMOUNT_MIN, SliderValue.AMOUNT)
+        calculator.moveCalculatorSlider(SliderValue.AMOUNT_MIN, SliderType.AMOUNT)
         Assertions.assertEquals(
             minAmountValue,
-            calculatorService.getCurrentValue(SliderValue.AMOUNT),
+            calculator.getCurrentValue(SliderType.AMOUNT),
             "Landing Page calculator min amount value is incorrect"
         )
 
-        calculatorService.moveCalculatorSlider(SliderValue.PERIOD_MAX, SliderValue.PERIOD)
+        calculator.moveCalculatorSlider(SliderValue.PERIOD_MAX, SliderType.PERIOD)
         Assertions.assertEquals(
             maxPeriodValue,
-            calculatorService.getCurrentValue(SliderValue.PERIOD),
+            calculator.getCurrentValue(SliderType.PERIOD),
             "Landing Page calculator max period value is incorrect"
         )
 
-        calculatorService.moveCalculatorSlider(SliderValue.PERIOD_MIN, SliderValue.PERIOD)
+        calculator.moveCalculatorSlider(SliderValue.PERIOD_MIN, SliderType.PERIOD)
         Assertions.assertEquals(
             minPeriodValue,
-            calculatorService.getCurrentValue(SliderValue.PERIOD),
+            calculator.getCurrentValue(SliderType.PERIOD),
             "Landing Page calculator min amount value is incorrect"
         )
     }
