@@ -10,9 +10,12 @@ data class ApplicationConfig(
     val password: Int,
     val landingEndpoint: String?,
     val registrationUrl: String,
+    val loginUrl: String,
     @JsonProperty("type")
     val fileType: String,
-    val testType: String?
+    val testType: String?,
+    val loginMail: String,
+    val loginPassword: String
 ) {
     private val httpsPrefix: String = "https://"
 
