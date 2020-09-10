@@ -1,7 +1,7 @@
-host: qa-delivery-mx-master.moneyman.ru
-user: moneyman
-password: 1005
+host: /setHost
+user: /setUser
+password: setPassword
 landingEndpoint: "/"
 type: YAML
-registrationUrl: client-area/index.html#/registration
-loginPrivateAreaPageUrl: private-area/static/#/login
+registrationUrl: /setRegistrationEndpoint
+loginPrivateAreaPageUrl: /setPrivateAreaEndpoint
