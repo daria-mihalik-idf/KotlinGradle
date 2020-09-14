@@ -1,8 +1,9 @@
 package ui.landing
 
+import core.User
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import services.PrivateAreaPageService
+import services.PrivateAreaService
 import ui.UiBaseTest
 
 class PrivateAreaLoginTest : UiBaseTest() {
@@ -11,12 +12,13 @@ class PrivateAreaLoginTest : UiBaseTest() {
 
     @Test
     fun logInPrivateArea() {
-        val privateAreaPage = PrivateAreaPageService(driver, applicationConfig)
+        val validCredentials = User(mail, password)
+        val privateAreaPage = PrivateAreaService(driver, applicationConfig)
 
         privateAreaPage.privateAreaLoginPage.openLoginPage()
         Assertions.assertTrue(privateAreaPage.privateAreaLoginPage.isOpened(), "Login Page wasn't opened")
 
-        privateAreaPage.privateAreaLoginPage.logInPrivateArea(mail,password)
+        privateAreaPage.privateAreaLoginPage.logInPrivateArea(validCredentials)
         Assertions.assertTrue(privateAreaPage.isPrivateAreaOpened(), "Private Area Page wasn't opened")
     }
 }

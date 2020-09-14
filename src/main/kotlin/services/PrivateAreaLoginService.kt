@@ -1,12 +1,12 @@
 package services
 
 import config.ApplicationConfig
+import core.User
 import org.openqa.selenium.WebDriver
-import ui.pages.login.InputField
 import ui.pages.login.PrivateAreaLoginPage
 
 
-class PrivateAreaLoginPageService(driver: WebDriver, applicationConfig: ApplicationConfig) {
+class PrivateAreaLoginService(driver: WebDriver, applicationConfig: ApplicationConfig) {
     private val privateAreaLoginPage = PrivateAreaLoginPage(driver, applicationConfig)
 
     fun openLoginPage() {
@@ -17,10 +17,10 @@ class PrivateAreaLoginPageService(driver: WebDriver, applicationConfig: Applicat
         return privateAreaLoginPage.isLoginOpened()
     }
 
-    fun logInPrivateArea(mail: String, password: String) {
+    fun logInPrivateArea(user: User) {
         privateAreaLoginPage.apply {
-            fillInput(InputField.LOGIN_INPUT, mail)
-            fillInput(InputField.PASSWORD_INPUT, password)
+            fillInputLogin(user.mail)
+            fillInputPassword(user.password)
             clickSubmitButton()
         }
     }

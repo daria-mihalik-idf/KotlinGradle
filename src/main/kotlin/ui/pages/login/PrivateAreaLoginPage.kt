@@ -8,7 +8,7 @@ import java.io.FileInputStream
 import java.util.*
 
 class PrivateAreaLoginPage(private val driver: WebDriver, applicationConfig: ApplicationConfig) {
-    private val privateAreaTitle = By.xpath("//*[text()='Accede a tu cuenta']")
+    private val privateAreaTitle = By.xpath("//h3[@class=\"ng-binding\"]")
     private val loginPageUrl = "${applicationConfig.getBaseUrl()}${applicationConfig.loginPrivateAreaPageUrl}"
     private val loginInput: By = By.cssSelector("[name='login']")
     private val passwordInput: By = By.cssSelector("[name='password']")
@@ -23,12 +23,14 @@ class PrivateAreaLoginPage(private val driver: WebDriver, applicationConfig: App
         return privateAreaTitleLocator.isDisplayed
     }
 
-    fun fillInput(type: InputField, userData: String) {
-        when (type) {
-            InputField.LOGIN_INPUT -> driver.findElement(loginInput).sendKeys(userData)
-            InputField.PASSWORD_INPUT -> driver.findElement(passwordInput).sendKeys(userData)
+    fun fillInputLogin(userData: String) {
+            driver.findElement(loginInput).sendKeys(userData)
         }
-    }
+
+    fun fillInputPassword(userData: String) {
+            driver.findElement(passwordInput).sendKeys(userData)
+        }
+
 
     fun clickSubmitButton() {
         val submitButtonLocator: WebElement = driver.findElement(submitButton)
