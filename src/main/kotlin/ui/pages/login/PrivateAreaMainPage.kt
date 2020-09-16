@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
 class PrivateAreaMainPage(val driver: WebDriver) {
-    private val loanDetail = By.xpath("//*[@name=\"ongoingLoan\"]")
-    private val loanHistory = By.xpath("//*[@name=\"historyOfLoans\"]")
-    private val bonus = By.xpath("//*[@name=\"bonuses\"]")
-    private val passwordData = By.xpath("//*[@name=\"changeYourPassword\"]")
+    private val loanDetail = By.xpath("//*[@name='ongoingLoan']")
+    private val loanHistory = By.xpath("//*[@name='historyOfLoans']")
+    private val bonus = By.xpath("//*[@name='bonuses']")
+    private val passwordData = By.xpath("//*[@name='changeYourPassword']")
 
     fun isPrivateAreaOpened(): Boolean {
         val loanDetailLocator: WebElement = driver.findElement(loanDetail)
