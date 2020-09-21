@@ -5,34 +5,34 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
-class MmConfigJsonProviderTest{
-    @JsonIgnoreProperties
-    @Test
-    fun configValCheck() {
-        val config = ConfigProviderManager().setFileType(InputFile.JSON).getConfig()
+class MmConfigJsonProviderTest {
+  @JsonIgnoreProperties
+  @Test
+  fun configValCheck() {
+    val config = ConfigProviderManager().setFileType(FileType.JSON).getConfig()
 
-        config.apply {
-            assertAll(
-                {
-                    Assertions.assertEquals(password, 1005)
-                },
-                {
-                    Assertions.assertEquals(user, "moneyman")
-                },
-                {
-                    Assertions.assertEquals(host, "qa-delivery-mx-master.moneyman.ru")
-                },
-                {
-                    Assertions.assertEquals(landingEndpoint, "/")
-                },
-                {
-                    Assertions.assertEquals(fileType, "JSON")
-                },
-                {
-                    Assertions.assertEquals(testType, null)
-                }
-            )
-        }
+    config.apply {
+      assertAll(
+          {
+              Assertions.assertEquals(password, 1005)
+          },
+          {
+              Assertions.assertEquals(user, "moneyman")
+          },
+          {
+              Assertions.assertEquals(host, "qa-delivery-mx-master.moneyman.ru")
+          },
+          {
+              Assertions.assertEquals(landingEndpoint, "/")
+          },
+          {
+              Assertions.assertEquals(fileType, "JSON")
+          },
+          {
+              Assertions.assertEquals(testType, null)
+          }
+      )
     }
+  }
 }
 

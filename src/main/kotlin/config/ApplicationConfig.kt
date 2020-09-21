@@ -15,15 +15,15 @@ data class ApplicationConfig(
     val fileType: String,
     val testType: String?
 ) {
-    private val httpsPrefix: String = "https://"
+  private val httpsPrefix: String = "https://"
 
-    fun getBaseUrlWithAuthorization(): String {
-        return "$httpsPrefix$user:$password@$host"
-    }
+  fun getBaseUrlWithAuthorization(): String {
+    return "$httpsPrefix$user:$password@$host"
+  }
 
-    fun getBaseUrl(): String {
-        return "$httpsPrefix$host/"
-    }
+  fun getBaseUrl(): String {
+    return "$httpsPrefix$host/"
+  }
 }
 
 
