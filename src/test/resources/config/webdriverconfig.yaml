@@ -1,0 +1,4 @@
+browserType: "chrome"
+screenResolutionWidth: 1600
+screenResolutionHeight: 900
+timeouts: 10
