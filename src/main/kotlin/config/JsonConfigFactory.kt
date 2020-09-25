@@ -6,11 +6,6 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 
 class JsonConfigFactory : DefaultConfigProviderFactory() {
   override val filePath = "config/config2.json"
-  override val webDriverConfigPath: String = "config/webdriverconfig.yaml"
-
-  override fun getWebDriverConfig(): WebDriverConfig {
-    TODO("Not yet implemented")
-  }
 
   override fun getConfig(): ApplicationConfig {
     return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {

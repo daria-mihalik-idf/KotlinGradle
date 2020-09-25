@@ -1,8 +1,7 @@
 package ui
 
-import config.ApplicationConfig
-import config.ConfigProviderManager
-import config.FileType
+import config.*
+import core.Browser
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.openqa.selenium.Dimension
@@ -14,16 +13,20 @@ import java.util.concurrent.TimeUnit
 abstract class UiBaseTest {
   lateinit var driver: WebDriver
   lateinit var applicationConfig: ApplicationConfig
+  private lateinit var webDriverConfig: WebDriverConfig
 
   @BeforeEach
   fun init() {
-    var webDriverConfig = ConfigProviderManager().setFileType(FileType.YAML).getWebDriverConfig()
-    when (webDriverConfig.browserType) {
-      "firefox" -> {
+    webDriverConfig = WebDriverConfigProviderManager().setFileType(FileType.YAML).getWebDriverConfig()
+  }
+
+  fun selectBrowser(browser: Browser) {
+    when (browser) {
+      Browser.FIREFOX -> {
         driver = FirefoxDriver()
         System.setProperty("webdriver.gecko.driver", "C:\\SeleniumDriver\\geckodriver.exe")
       }
-      "chrome" -> {
+      Browser.CHROME -> {
         driver = ChromeDriver()
         System.setProperty("webdriver.chrome.driver", "C:\\SeleniumDriver\\chromedriver.exe")
       }
