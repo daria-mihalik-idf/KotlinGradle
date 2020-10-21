@@ -1,4 +1,6 @@
-package config
+package core.driver
+
+import config.FileType
 
 class WebDriverConfigProviderManager {
   fun setFileType(file: FileType): DefaultWebDriverConfigFactory {

@@ -1,5 +1,5 @@
 package config
 
 interface ConfigProvider {
-  fun getConfig(): ApplicationConfig
+  fun getConfig(value: String): ApplicationConfig
 }

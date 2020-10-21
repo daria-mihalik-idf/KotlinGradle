@@ -1,4 +1,4 @@
-package config
+package core.driver
 
 data class WebDriverConfig(
     var browserType: String,

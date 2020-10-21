@@ -1,4 +1,4 @@
-package ui.landing
+package ui.privateArea
 
 import core.User
 import org.junit.jupiter.api.Assertions
@@ -12,6 +12,8 @@ class PrivateAreaLoginTest : UiBaseTest() {
 
   @Test
   fun logInPrivateArea() {
+    selectBrowser()
+
     val validCredentials = User(mail, password)
     val privateAreaPage = PrivateAreaService(driver, applicationConfig)
 
