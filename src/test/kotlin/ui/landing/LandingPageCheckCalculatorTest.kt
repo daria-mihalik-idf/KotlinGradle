@@ -15,6 +15,8 @@ class LandingPageCheckCalculatorTest : UiBaseTest() {
 
   @Test
   fun `LP - Verify Calculator And Apply for Loan`() {
+    selectBrowser()
+
     val landingPage = LandingPageService(driver, applicationConfig)
 
     landingPage.openLandingPage()
@@ -58,6 +60,8 @@ class LandingPageCheckCalculatorTest : UiBaseTest() {
 
   @Test
   fun `LP - Calculator Check`() {
+    selectBrowser()
+
     val landingPage = LandingPageService(driver, applicationConfig)
 
     landingPage.openLandingPage()

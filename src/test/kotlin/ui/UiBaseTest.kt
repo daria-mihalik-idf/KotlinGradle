@@ -1,28 +1,32 @@
 package ui
 
-import config.ApplicationConfig
-import config.ConfigProviderManager
-import config.FileType
-import org.junit.jupiter.api.AfterAll
+import config.*
+import core.driver.WebDriverConfig
+import core.driver.WebDriverConfigProviderManager
+import core.driver.WebDriverFactory
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.chrome.ChromeDriver
 import java.util.concurrent.TimeUnit
 
 abstract class UiBaseTest {
   lateinit var driver: WebDriver
   lateinit var applicationConfig: ApplicationConfig
+  private lateinit var webDriverConfig: WebDriverConfig
+  private val filePath: String = "config/config.yaml"
 
   @BeforeEach
   fun init() {
-    driver = ChromeDriver()
-    System.setProperty("webdriver.chrome.driver", "C:\\SeleniumDriver\\chromedriver.exe")
-    driver.manage().window().size = Dimension(1600, 900)
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS)
-    applicationConfig = ConfigProviderManager().setFileType(FileType.YAML).getConfig()
+    webDriverConfig = WebDriverConfigProviderManager().setFileType(FileType.YAML).getWebDriverConfig()
+    driver = WebDriverFactory(webDriverConfig).getDriver()
+  }
+
+  fun selectBrowser() {
+    driver.manage().window().size = Dimension(webDriverConfig.screenResolutionWidth,
+        webDriverConfig.screenResolutionHeight)
+    driver.manage().timeouts().implicitlyWait(webDriverConfig.timeouts, TimeUnit.SECONDS)
+    applicationConfig = ConfigProviderManager().setFileType(FileType.YAML).getConfig(filePath)
     driver.get(applicationConfig.getBaseUrlWithAuthorization())
   }
 
