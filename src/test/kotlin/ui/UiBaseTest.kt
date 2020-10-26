@@ -3,7 +3,7 @@ package ui
 import config.*
 import core.driver.WebDriverConfig
 import core.driver.WebDriverConfigProviderManager
-import core.driver.WebDriverFactory
+import core.driver.WebDriverManagerFactory
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.openqa.selenium.Dimension
@@ -19,7 +19,7 @@ abstract class UiBaseTest {
   @BeforeEach
   fun init() {
     webDriverConfig = WebDriverConfigProviderManager().setFileType(FileType.YAML).getWebDriverConfig()
-    driver = WebDriverFactory(webDriverConfig).getDriver()
+    driver = WebDriverManagerFactory().getManager(webDriverConfig).createDriver()
   }
 
   fun selectBrowser() {
