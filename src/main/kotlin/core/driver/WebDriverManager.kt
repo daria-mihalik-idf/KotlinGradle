@@ -1,8 +1,14 @@
 package core.driver
 
-import org.openqa.selenium.WebDriver
-
-abstract class WebDriverManager {
-  abstract fun createDriver(): WebDriver
+class WebDriverManager {
+  fun getManager(webDriverConfig: WebDriverConfig): WebDriverFactory {
+    return when (webDriverConfig.browserType) {
+      "CHROME" -> ChromeDriverFactory(webDriverConfig)
+      "FIREFOX" -> FirefoxDriverFactory(webDriverConfig)
+      else -> throw IllegalArgumentException("Web Driver Factory not defined for browser ${
+        webDriverConfig
+            .browserType
+      }")
+    }
+  }
 }
-
