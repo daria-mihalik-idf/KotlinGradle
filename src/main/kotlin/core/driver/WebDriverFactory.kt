@@ -1,16 +1,17 @@
 package core.driver
 
 import org.openqa.selenium.Dimension
+import org.openqa.selenium.MutableCapabilities
 import org.openqa.selenium.WebDriver
+import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 import java.util.concurrent.TimeUnit
 
 abstract class WebDriverFactory(private var webDriverConfig: WebDriverConfig) {
-  abstract fun createDriver(capabilities: DesiredCapabilities): WebDriver
+  abstract val browserPackage: String
+  abstract val browserPath: String
 
-  fun setSystemProperties(browserPackage: String, browserPath: String) {
-    System.setProperty(browserPackage, browserPath)
-  }
+  abstract fun getDriver(): WebDriver
 
   fun configureBrowser(driver: WebDriver) {
     driver.manage().window().size = Dimension(webDriverConfig.screenResolutionWidth,
@@ -18,6 +19,14 @@ abstract class WebDriverFactory(private var webDriverConfig: WebDriverConfig) {
     driver.manage().timeouts().implicitlyWait(webDriverConfig.timeouts, TimeUnit.SECONDS)
   }
 
-  abstract fun setCapabilities(capabilityType: String, value: Boolean): DesiredCapabilities
+  fun configureDriverPath() {
+    System.setProperty(browserPackage, browserPath)
+  }
+
+  fun getGeneralCapabilities(): DesiredCapabilities {
+    val capabilities = DesiredCapabilities()
+    capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
+    return capabilities
+  }
 }
 

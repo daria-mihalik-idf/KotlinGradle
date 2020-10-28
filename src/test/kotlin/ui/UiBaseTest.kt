@@ -22,9 +22,7 @@ abstract class UiBaseTest {
   @BeforeEach
   fun init() {
     webDriverConfig = WebDriverConfigProviderManager().setFileType(FileType.YAML).getWebDriverConfig()
-    webDriverFactory = WebDriverManager().getManager(webDriverConfig)
-    capabilities = webDriverFactory.setCapabilities(CapabilityType.ACCEPT_SSL_CERTS, true)
-    driver = webDriverFactory.createDriver(capabilities)
+    driver = WebDriverManager(webDriverConfig).getManager().getDriver()
   }
 
   fun selectBrowser() {

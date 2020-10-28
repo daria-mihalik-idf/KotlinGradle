@@ -1,7 +1,8 @@
 package core.driver
 
-class WebDriverManager {
-  fun getManager(webDriverConfig: WebDriverConfig): WebDriverFactory {
+class WebDriverManager(private var webDriverConfig: WebDriverConfig) {
+
+  fun getManager(): WebDriverFactory {
     return when (webDriverConfig.browserType) {
       "CHROME" -> ChromeDriverFactory(webDriverConfig)
       "FIREFOX" -> FirefoxDriverFactory(webDriverConfig)
