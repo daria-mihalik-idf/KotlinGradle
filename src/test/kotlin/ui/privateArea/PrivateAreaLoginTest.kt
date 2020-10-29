@@ -7,7 +7,7 @@ import services.PrivateAreaService
 import ui.UiBaseTest
 
 class PrivateAreaLoginTest : UiBaseTest() {
-  private val mail = "ta-wAOSveXUID-4831015052@mail.ru"
+  private val mail = "trrg90000@mail.ru"
   private val password = "11111111"
 
   @Test

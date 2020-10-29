@@ -9,7 +9,7 @@ class MmConfigJsonProviderTest {
   @JsonIgnoreProperties
   @Test
   fun configValCheck() {
-    val config = ConfigProviderManager().setFileType(FileType.JSON).getConfig()
+    val config = ConfigProviderManager().setFileType(FileType.JSON).getConfig("config/config2.json")
 
     config.apply {
       assertAll(

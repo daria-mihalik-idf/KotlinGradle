@@ -1,23 +1,34 @@
 package core.driver
 
+import org.openqa.selenium.Dimension
+import org.openqa.selenium.MutableCapabilities
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.remote.CapabilityType
+import org.openqa.selenium.remote.DesiredCapabilities
+import java.util.concurrent.TimeUnit
 
-class WebDriverFactory(webDriverConfig: WebDriverConfig) {
-  var browserType = webDriverConfig.browserType
+abstract class WebDriverFactory(private var webDriverConfig: WebDriverConfig) {
+  abstract val browserPackage: String
+  abstract val browserPath: String
 
-  fun getDriver(): WebDriver {
-    return when (browserType) {
-      "CHROME" -> {
-        System.setProperty("webdriver.chrome.driver", "C:\\SeleniumDriver\\chromedriver.exe")
-        ChromeDriver()
-      }
-      "FIREFOX" -> {
-        System.setProperty("webdriver.gecko.driver", "C:\\SeleniumDriver\\geckodriver.exe")
-        FirefoxDriver()
-      }
-      else -> throw IllegalArgumentException("Unknown browser")
-    }
+  abstract fun getDriver(): WebDriver
+
+  fun configureBrowser(driver: WebDriver) {
+    driver.manage().window().size = Dimension(webDriverConfig.screenResolutionWidth,
+        webDriverConfig.screenResolutionHeight)
+    driver.manage().timeouts().implicitlyWait(webDriverConfig.timeouts, TimeUnit.SECONDS)
   }
+
+  fun configureDriverPath() {
+    System.setProperty(browserPackage, browserPath)
+  }
+
+  fun getGeneralCapabilities(): DesiredCapabilities {
+    val capabilities = DesiredCapabilities()
+    capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
+    return capabilities
+  }
+
+  protected abstract fun configureDriverCapabilities(): MutableCapabilities
 }
+
