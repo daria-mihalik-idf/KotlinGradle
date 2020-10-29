@@ -6,9 +6,7 @@ class WebDriverManager(private var webDriverConfig: WebDriverConfig) {
     return when (webDriverConfig.browserType) {
       "CHROME" -> ChromeDriverFactory(webDriverConfig)
       "FIREFOX" -> FirefoxDriverFactory(webDriverConfig)
-      else -> throw IllegalArgumentException("Web Driver Factory not defined for browser ${
-        webDriverConfig.browserType
-      }")
+      else -> throw IllegalArgumentException("WebDriverFactory not defined for browser ${webDriverConfig.browserType}")
     }
   }
 }
