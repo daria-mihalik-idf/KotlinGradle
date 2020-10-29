@@ -28,5 +28,7 @@ abstract class WebDriverFactory(private var webDriverConfig: WebDriverConfig) {
     capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
     return capabilities
   }
+
+  protected abstract fun configureDriverCapabilities(): MutableCapabilities
 }
 

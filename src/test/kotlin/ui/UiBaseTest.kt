@@ -8,7 +8,6 @@ import core.driver.WebDriverManager
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 
 abstract class UiBaseTest {
@@ -22,7 +21,7 @@ abstract class UiBaseTest {
   @BeforeEach
   fun init() {
     webDriverConfig = WebDriverConfigProviderManager().setFileType(FileType.YAML).getWebDriverConfig()
-    driver = WebDriverManager(webDriverConfig).getManager().getDriver()
+    driver = WebDriverManager(webDriverConfig).getDriverFactory().getDriver()
   }
 
   fun selectBrowser() {
