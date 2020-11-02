@@ -1,4 +1,4 @@
-browserType: "CHROME"
+browserType: "FIREFOX"
 screenResolutionWidth: 1600
 screenResolutionHeight: 900
 timeouts: 10
