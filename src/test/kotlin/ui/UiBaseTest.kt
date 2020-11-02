@@ -17,7 +17,8 @@ abstract class UiBaseTest {
   @BeforeEach
   fun init() {
     webDriverConfig = WebDriverConfigProviderManager().setFileType(FileType.YAML).getWebDriverConfig()
-    driver = WebDriverManager(webDriverConfig).getDriver()
+    WebDriverManager.setConfig(webDriverConfig)
+    driver = WebDriverManager.getWebDriver()
   }
 
   fun selectBrowser() {
@@ -27,6 +28,6 @@ abstract class UiBaseTest {
 
   @AfterEach
   fun quitSession() {
-    driver.quit()
+    WebDriverManager.quitDriver()
   }
 }
