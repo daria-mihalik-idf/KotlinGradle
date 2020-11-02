@@ -28,6 +28,6 @@ abstract class UiBaseTest {
 
   @AfterEach
   fun quitSession() {
-    WebDriverManager.quitDriver()
+    WebDriverManager.removeDriver()
   }
 }

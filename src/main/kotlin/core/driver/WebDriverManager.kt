@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver
 
 object WebDriverManager {
   private var webDriverConfig: WebDriverConfig? = null
-  var driver: WebDriver? = null
+  private var driver: WebDriver? = null
 
   fun getWebDriver(): WebDriver {
     if (driver == null) {
@@ -17,9 +17,11 @@ object WebDriverManager {
     webDriverConfig = config
   }
 
-  fun quitDriver() {
-    driver?.quit()
-    driver = null
+  fun removeDriver() {
+    driver?.also {
+      it.quit()
+      driver= null
+    }
   }
 
   private fun initDriver() {
