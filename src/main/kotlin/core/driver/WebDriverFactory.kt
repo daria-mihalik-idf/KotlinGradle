@@ -1,5 +1,6 @@
 package core.driver
 
+import core.Browser
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.MutableCapabilities
 import org.openqa.selenium.WebDriver
@@ -26,8 +27,18 @@ abstract class WebDriverFactory(private var webDriverConfig: WebDriverConfig) {
   fun getGeneralCapabilities(): DesiredCapabilities {
     val capabilities = DesiredCapabilities()
     capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
+    capabilities.setCapability("applicationName", webDriverConfig.gridNodIdName)
     return capabilities
   }
+
+  fun getDriverFactory(): WebDriverFactory {
+    return when (webDriverConfig.browserType) {
+      "CHROME" -> ChromeDriverFactory(webDriverConfig)
+      "FIREFOX" -> FirefoxDriverFactory(webDriverConfig)
+      else -> throw IllegalArgumentException("WebDriverFactory not defined for browser ${webDriverConfig.browserType}")
+    }
+  }
+
 
   protected abstract fun configureDriverCapabilities(): MutableCapabilities
 }
