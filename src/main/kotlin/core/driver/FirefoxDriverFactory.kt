@@ -11,11 +11,11 @@ class FirefoxDriverFactory(webDriverConfig: WebDriverConfig) : WebDriverFactory(
   override fun getDriver(): WebDriver {
     val driver = FirefoxDriver(configureDriverCapabilities())
     configureDriverPath()
-    configureBrowser(driver)
+    configDefaultDriverConfig(driver)
     return driver
   }
 
-  override fun configureDriverCapabilities(): FirefoxOptions {
+  public override fun configureDriverCapabilities(): FirefoxOptions {
     val options = FirefoxOptions()
      options.merge(getGeneralCapabilities())
     return options

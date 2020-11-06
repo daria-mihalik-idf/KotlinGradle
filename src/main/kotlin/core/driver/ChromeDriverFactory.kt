@@ -9,13 +9,13 @@ class ChromeDriverFactory(webDriverConfig: WebDriverConfig) : WebDriverFactory(w
   override val browserPath = "C:\\SeleniumDriver\\chromedriver.exe"
 
   override fun getDriver(): WebDriver {
-   val driver = ChromeDriver(configureDriverCapabilities())
+    val driver = ChromeDriver(configureDriverCapabilities())
     configureDriverPath()
-    configureBrowser(driver)
+    configDefaultDriverConfig(driver)
     return driver
   }
 
-  override fun configureDriverCapabilities(): ChromeOptions {
+  public override fun configureDriverCapabilities(): ChromeOptions {
     val options = ChromeOptions()
     options.merge(getGeneralCapabilities())
     return options

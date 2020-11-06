@@ -14,7 +14,7 @@ abstract class WebDriverFactory(protected var webDriverConfig: WebDriverConfig) 
 
   abstract fun getDriver(): WebDriver
 
-  fun configureBrowser(driver: WebDriver) {
+  fun configDefaultDriverConfig(driver: WebDriver) {
     driver.manage().window().size = Dimension(webDriverConfig.screenResolutionWidth,
         webDriverConfig.screenResolutionHeight)
     driver.manage().timeouts().implicitlyWait(webDriverConfig.timeouts, TimeUnit.SECONDS)
@@ -28,14 +28,6 @@ abstract class WebDriverFactory(protected var webDriverConfig: WebDriverConfig) 
     val capabilities = DesiredCapabilities()
     capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
     return capabilities
-  }
-
-  fun getDriverFactory(): WebDriverFactory {
-    return when (webDriverConfig.browserType) {
-      "CHROME" -> ChromeDriverFactory(webDriverConfig)
-      "FIREFOX" -> FirefoxDriverFactory(webDriverConfig)
-      else -> throw IllegalArgumentException("WebDriverFactory not defined for browser ${webDriverConfig.browserType}")
-    }
   }
 
   protected abstract fun configureDriverCapabilities(): MutableCapabilities

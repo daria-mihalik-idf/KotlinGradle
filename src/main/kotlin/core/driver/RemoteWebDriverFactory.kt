@@ -1,31 +1,27 @@
 package core.driver
 
-import org.openqa.selenium.Platform
+import core.Browser
+import org.openqa.selenium.MutableCapabilities
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.remote.RemoteWebDriver
+import java.net.URL
 
 class RemoteWebDriverFactory(webDriverConfig: WebDriverConfig) : WebDriverFactory(webDriverConfig) {
 
   override val browserPackage: String = ""
   override val browserPath: String = ""
+  private val hubUrl: String = "http://${webDriverConfig.webDriverHost}:${webDriverConfig.webDriverPort}/wd/hub"
 
   override fun getDriver(): WebDriver {
-    getDriverFactory()
-    val driver = RemoteWebDriver(configureDriverCapabilities())
-    configureDriverPath()
-    configureBrowser(driver)
+    val driver = RemoteWebDriver(URL(hubUrl), configureDriverCapabilities())
+    configDefaultDriverConfig(driver)
     return driver
   }
 
-  override fun configureDriverCapabilities(): DesiredCapabilities {
-    val caps = DesiredCapabilities()
-//    caps.platform = Platform.WIN10
-    caps.setCapability("hub", configureHub())
-    return caps
-  }
-
-  private fun configureHub(): String {
-    return "http://${webDriverConfig.webDriverHost}:${webDriverConfig.webDriverPort}/wd/hub"
+  override fun configureDriverCapabilities(): MutableCapabilities {
+    return when (webDriverConfig.browserType) {
+      Browser.CHROME -> ChromeDriverFactory(webDriverConfig).configureDriverCapabilities()
+      Browser.FIREFOX -> FirefoxDriverFactory(webDriverConfig).configureDriverCapabilities()
+    }
   }
 }
