@@ -1,5 +1,5 @@
 package core.driver
 
 enum class DriverType {
-    REMOTE, LOCAL
+     LOCAL,REMOTE
   }

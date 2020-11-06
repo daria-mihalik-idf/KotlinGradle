@@ -8,7 +8,8 @@ import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.remote.RemoteWebDriver
 import java.net.URL
 
-class RemoteWebDriverFactory(webDriverConfig: WebDriverConfig) : WebDriverFactory(webDriverConfig){
+class RemoteWebDriverFactory(webDriverConfig: WebDriverConfig) : WebDriverFactory(webDriverConfig) {
+
   lateinit var driverConfig: WebDriverConfig
   override val browserPackage: String = ""
   override val browserPath: String = ""
@@ -18,24 +19,17 @@ class RemoteWebDriverFactory(webDriverConfig: WebDriverConfig) : WebDriverFactor
     val driver = RemoteWebDriver(configureDriverCapabilities())
     configureDriverPath()
     configureBrowser(driver)
-    return driver  }
+    return driver
+  }
 
   override fun configureDriverCapabilities(): DesiredCapabilities {
     val caps = DesiredCapabilities()
     caps.platform = Platform.WIN10
     caps.browserName = driverConfig.browserType
-    caps.setCapability("hub",configureHost())
+    caps.setCapability("hub", configureHost())
     caps.setCapability("applicationName", driverConfig.gridNodIdName)
     return caps
   }
-
-
-//  fun getDefaultCapabilities(): WebDriver {
-//    val caps = DesiredCapabilities()
-//    caps.platform = Platform.WIN10
-//    caps.browserName = driverConfig.browserType
-//    return RemoteWebDriver(URL(configureHost()), caps)
-//  }
 
   private fun configureHost(): String {
     return if (driverConfig.isRemoteDriver()) {

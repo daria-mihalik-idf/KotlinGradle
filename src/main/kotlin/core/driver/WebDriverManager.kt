@@ -1,6 +1,5 @@
 package core.driver
 
-import core.Browser
 import org.openqa.selenium.WebDriver
 
 object WebDriverManager {
