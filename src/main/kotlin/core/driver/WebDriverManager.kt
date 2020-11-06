@@ -25,10 +25,11 @@ object WebDriverManager {
   }
 
   private fun initDriver() {
-    driver = when (webDriverConfig!!.browserType) {
+    driver = if (webDriverConfig!!.driverType == DriverType.REMOTE) {
+      RemoteWebDriverFactory(webDriverConfig!!).getDriver()
+    } else when (webDriverConfig!!.browserType) {
       "CHROME" -> ChromeDriverFactory(webDriverConfig!!).getDriver()
       "FIREFOX" -> FirefoxDriverFactory(webDriverConfig!!).getDriver()
-      "REMOTE" -> RemoteWebDriverFactory(webDriverConfig!!).getDriver()
       else -> throw IllegalArgumentException(
           "WebDriverFactory not defined for browser ${webDriverConfig!!.browserType}")
     }

@@ -8,7 +8,7 @@ import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 import java.util.concurrent.TimeUnit
 
-abstract class WebDriverFactory(private var webDriverConfig: WebDriverConfig) {
+abstract class WebDriverFactory(protected var webDriverConfig: WebDriverConfig) {
   abstract val browserPackage: String
   abstract val browserPath: String
 
@@ -27,7 +27,6 @@ abstract class WebDriverFactory(private var webDriverConfig: WebDriverConfig) {
   fun getGeneralCapabilities(): DesiredCapabilities {
     val capabilities = DesiredCapabilities()
     capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
-    capabilities.setCapability("applicationName", webDriverConfig.gridNodIdName)
     return capabilities
   }
 

@@ -7,12 +7,8 @@ data class WebDriverConfig(
     var timeouts: Long,
     var driverType: DriverType,
     var webDriverHost: String,
-    var webDriverPort: String,
-    var gridNodIdName: String
-
-) {
-  fun isRemoteDriver(): Boolean = DriverType.REMOTE == driverType
-}
+    var webDriverPort: String
+)
 
 
 
