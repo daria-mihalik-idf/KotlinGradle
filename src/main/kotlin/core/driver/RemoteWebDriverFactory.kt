@@ -8,13 +8,11 @@ import java.net.URL
 
 class RemoteWebDriverFactory(webDriverConfig: WebDriverConfig) : WebDriverFactory(webDriverConfig) {
 
-  override val browserPackage: String = ""
-  override val browserPath: String = ""
   private val hubUrl: String = "http://${webDriverConfig.webDriverHost}:${webDriverConfig.webDriverPort}/wd/hub"
 
   override fun getDriver(): WebDriver {
     val driver = RemoteWebDriver(URL(hubUrl), configureDriverCapabilities())
-    configDefaultDriverConfig(driver)
+    setupDefaultDriverConfig(driver)
     return driver
   }
 
@@ -22,6 +20,7 @@ class RemoteWebDriverFactory(webDriverConfig: WebDriverConfig) : WebDriverFactor
     return when (webDriverConfig.browserType) {
       Browser.CHROME -> ChromeDriverFactory(webDriverConfig).configureDriverCapabilities()
       Browser.FIREFOX -> FirefoxDriverFactory(webDriverConfig).configureDriverCapabilities()
+      else -> throw IllegalArgumentException("Unknown browser type ${webDriverConfig.browserType}")
     }
   }
 }

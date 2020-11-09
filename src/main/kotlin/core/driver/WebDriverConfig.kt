@@ -11,9 +11,3 @@ data class WebDriverConfig(
     var webDriverHost: String,
     var webDriverPort: String
 )
-
-
-
-
-
-
