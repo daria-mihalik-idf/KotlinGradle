@@ -1,4 +1,7 @@
-browserType: "FIREFOX"
+browserType: "CHROME"
 screenResolutionWidth: 1600
 screenResolutionHeight: 900
 timeouts: 10
+driverType: "REMOTE"
+webDriverPort: 4444
+webDriverHost: "192.168.100.39"

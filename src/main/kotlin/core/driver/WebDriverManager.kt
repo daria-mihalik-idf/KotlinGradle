@@ -1,5 +1,6 @@
 package core.driver
 
+import core.Browser
 import org.openqa.selenium.WebDriver
 
 object WebDriverManager {
@@ -20,16 +21,18 @@ object WebDriverManager {
   fun removeDriver() {
     driver?.also {
       it.quit()
-      driver= null
+      driver = null
     }
   }
 
   private fun initDriver() {
-    driver = when (webDriverConfig!!.browserType) {
-      "CHROME" -> ChromeDriverFactory(webDriverConfig!!).getDriver()
-      "FIREFOX" -> FirefoxDriverFactory(webDriverConfig!!).getDriver()
-      else -> throw IllegalArgumentException(
-          "WebDriverFactory not defined for browser ${webDriverConfig!!.browserType}")
+    driver = when (webDriverConfig!!.driverType) {
+      DriverType.REMOTE -> RemoteWebDriverFactory(webDriverConfig!!).getDriver()
+      DriverType.LOCAL -> when (webDriverConfig!!.browserType) {
+        Browser.CHROME -> ChromeDriverFactory(webDriverConfig!!).getDriver()
+        Browser.FIREFOX -> FirefoxDriverFactory(webDriverConfig!!).getDriver()
+        else -> throw IllegalArgumentException("Unknown browser type ${webDriverConfig!!.browserType}")
+      }
     }
   }
 }
