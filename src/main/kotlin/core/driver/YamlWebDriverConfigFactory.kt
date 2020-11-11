@@ -3,12 +3,13 @@ package core.driver
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import core.configProvider.ConfigProvider
 
-class YamlWebDriverConfigFactory : DefaultWebDriverConfigFactory() {
-  override val webDriverConfigPath: String = "config/webdriverconfig.yaml"
+class YamlWebDriverConfigFactory : ConfigProvider {
+  override val filePath: String = "config/webdriverconfig.yaml"
 
-  override fun getWebDriverConfig(): WebDriverConfig {
-    return Thread.currentThread().contextClassLoader.getResourceAsStream(webDriverConfigPath)?.use {
+  override fun getConfig(): WebDriverConfig {
+    return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {
       ObjectMapper(YAMLFactory())
           .registerModule(KotlinModule())
           .readValue(it, WebDriverConfig::class.java)

@@ -1,6 +1,6 @@
 package ui.pages.landing
 
-import config.ApplicationConfig
+import core.config.ApplicationConfig
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
