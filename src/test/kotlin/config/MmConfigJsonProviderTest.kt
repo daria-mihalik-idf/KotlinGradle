@@ -1,6 +1,9 @@
 package config
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import core.config.ApplicationConfig
+import core.config.ApplicationConfigProviderManager
+import core.config.FileType
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -9,7 +12,7 @@ class MmConfigJsonProviderTest {
   @JsonIgnoreProperties
   @Test
   fun configValCheck() {
-    val config = ConfigProviderManager().setFileType(FileType.JSON).getConfig("config/config2.json")
+    val config: ApplicationConfig = ApplicationConfigProviderManager().getConfig(FileType.JSON)
 
     config.apply {
       assertAll(

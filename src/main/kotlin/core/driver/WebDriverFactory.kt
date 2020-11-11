@@ -1,6 +1,5 @@
 package core.driver
 
-import core.Browser
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.MutableCapabilities
 import org.openqa.selenium.WebDriver

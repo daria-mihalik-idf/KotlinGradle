@@ -1,13 +1,16 @@
-package config
+package core.config
 
 import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import core.configProvider.ConfigProvider
 
-class JsonConfigFactory : DefaultConfigProviderFactory() {
+class JsonConfigFactory : ConfigProvider {
 
-  override fun getConfig(value: String): ApplicationConfig {
-    return Thread.currentThread().contextClassLoader.getResourceAsStream(value)?.use {
+  override val filePath: String = "config/config2.json"
+
+  override fun getConfig(): ApplicationConfig {
+    return Thread.currentThread().contextClassLoader.getResourceAsStream(filePath)?.use {
       ObjectMapper(JsonFactory())
           .registerModule(KotlinModule())
           .readValue(it, ApplicationConfig::class.java)

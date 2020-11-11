@@ -1,6 +1,6 @@
 package services
 
-import config.ApplicationConfig
+import core.config.ApplicationConfig
 import org.openqa.selenium.WebDriver
 import ui.pages.landing.LandingPage
 

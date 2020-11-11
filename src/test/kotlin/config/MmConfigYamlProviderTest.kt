@@ -1,5 +1,8 @@
 package config
 
+import core.config.ApplicationConfig
+import core.config.ApplicationConfigProviderManager
+import core.config.FileType
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -7,8 +10,7 @@ import org.junit.jupiter.api.assertAll
 class MmConfigYamlProviderTest {
   @Test
   fun configValCheck() {
-    val config = ConfigProviderManager().setFileType(FileType.YAML).getConfig("config/config.yaml")
-
+    val config: ApplicationConfig = ApplicationConfigProviderManager().getConfig(FileType.YAML)
     config.apply {
       assertAll(
           {

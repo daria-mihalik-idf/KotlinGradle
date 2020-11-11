@@ -1,6 +1,8 @@
 package ui
 
-import config.*
+import core.config.ApplicationConfig
+import core.config.ApplicationConfigProviderManager
+import core.config.FileType
 import core.driver.WebDriverConfig
 import core.driver.WebDriverConfigProviderManager
 import core.driver.WebDriverManager
@@ -12,17 +14,16 @@ abstract class UiBaseTest {
   lateinit var driver: WebDriver
   lateinit var applicationConfig: ApplicationConfig
   private lateinit var webDriverConfig: WebDriverConfig
-  private val filePath: String = "config/config.yaml"
 
   @BeforeEach
   fun init() {
-    webDriverConfig = WebDriverConfigProviderManager().setFileType(FileType.YAML).getWebDriverConfig()
+    webDriverConfig = WebDriverConfigProviderManager().getConfig(FileType.YAML)
     WebDriverManager.setConfig(webDriverConfig)
     driver = WebDriverManager.getWebDriver()
   }
 
   fun selectBrowser() {
-    applicationConfig = ConfigProviderManager().setFileType(FileType.YAML).getConfig(filePath)
+    applicationConfig = ApplicationConfigProviderManager().getConfig(FileType.YAML)
     driver.get(applicationConfig.getBaseUrlWithAuthorization())
   }
 
