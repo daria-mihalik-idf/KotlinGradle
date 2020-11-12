@@ -2,6 +2,9 @@ package ui.pages.landing
 
 import org.openqa.selenium.*
 import org.openqa.selenium.interactions.Actions
+import ui.elements.ButtonElement
+import ui.elements.CommonElement
+import ui.elements.InputElement
 
 class CalculatorBlock(private val driver: WebDriver) {
   private val calculator: By = By.className("hero__calculator")
@@ -13,50 +16,39 @@ class CalculatorBlock(private val driver: WebDriver) {
   private val amountInput: By = By.cssSelector("[data-test-id='calculator_amount']")
 
   fun isCalculatorBlockPresent(): Boolean {
-    val calculatorLocator: WebElement = driver.findElement(calculator)
-    return calculatorLocator.isDisplayed
+    return ButtonElement.isElementPresent(driver, calculator)
   }
 
   fun isGetCreditButtonPresent(): Boolean {
-    val getCreditButtonLocator: WebElement = driver.findElement(getCreditButton)
-    return getCreditButtonLocator.isDisplayed
+    return ButtonElement.isElementPresent(driver, getCreditButton)
   }
 
   fun moveSlider(xOffset: Int, yOffset: Int, type: SliderType) {
     val actions = Actions(driver)
     val locator = when (type) {
-        SliderType.AMOUNT -> driver.findElement(amountSlider)
-        SliderType.PERIOD -> driver.findElement(periodSlider)
+      SliderType.AMOUNT -> CommonElement.getElement(driver, amountSlider)
+      SliderType.PERIOD -> CommonElement.getElement(driver, periodSlider)
     }
     actions.dragAndDropBy(locator, xOffset, yOffset).release().build().perform()
   }
 
   fun clickGetCreditButton() {
-    driver.findElement(getCreditButton).click()
-  }
-
-  private fun setInputValue(locator: WebElement, value: String) {
-    locator.click()
-    locator.sendKeys("${Keys.CONTROL}", "a")
-    locator.sendKeys("${Keys.DELETE}")
-    locator.sendKeys(value)
+    ButtonElement.clickButton(driver, getCreditButton)
   }
 
   fun setPeriodValue(value: String) {
-    val periodLocator: WebElement = driver.findElement(periodInput)
-    setInputValue(periodLocator, value)
+    InputElement.setInputValue(periodInput, value, driver)
   }
 
   fun getPeriodValue(): String {
-    return driver.findElement(periodInput).getAttribute("value")
+    return CommonElement.getElementValue(driver, periodInput)
   }
 
   fun setAmountValue(value: String) {
-    val periodLocator: WebElement = driver.findElement(amountInput)
-    setInputValue(periodLocator, value)
+    InputElement.setInputValue(amountInput, value, driver)
   }
 
   fun getAmountValue(): String {
-    return driver.findElement(amountInput).getAttribute("value")
+    return CommonElement.getElementValue(driver, amountInput)
   }
 }

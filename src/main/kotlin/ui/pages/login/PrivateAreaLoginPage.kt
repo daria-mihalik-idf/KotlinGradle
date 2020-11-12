@@ -4,6 +4,8 @@ import core.config.ApplicationConfig
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
+import ui.elements.ButtonElement
+import ui.elements.InputElement
 import java.io.FileInputStream
 import java.util.*
 
@@ -19,22 +21,18 @@ class PrivateAreaLoginPage(private val driver: WebDriver, applicationConfig: App
   }
 
   fun isLoginOpened(): Boolean {
-    val privateAreaTitleLocator: WebElement = driver.findElement(privateAreaTitle)
-    return privateAreaTitleLocator.isDisplayed
+    return ButtonElement.isElementPresent(driver, privateAreaTitle)
   }
 
   fun fillInputLogin(userData: String) {
-    driver.findElement(loginInput).sendKeys(userData)
+    InputElement.inputElement(driver, loginInput, userData)
   }
 
   fun fillInputPassword(userData: String) {
-    driver.findElement(passwordInput).sendKeys(userData)
+    InputElement.inputElement(driver, passwordInput, userData)
   }
 
   fun clickSubmitButton() {
-    val submitButtonLocator: WebElement = driver.findElement(submitButton)
-    submitButtonLocator.click()
+    ButtonElement.clickButton(driver, submitButton)
   }
 }
-
-

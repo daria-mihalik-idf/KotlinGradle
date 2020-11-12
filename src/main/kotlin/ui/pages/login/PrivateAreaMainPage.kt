@@ -3,6 +3,8 @@ package ui.pages.login
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
+import ui.elements.ButtonElement
+import ui.elements.CommonElement
 
 class PrivateAreaMainPage(val driver: WebDriver) {
   private val loanDetail = By.xpath("//*[@name='ongoingLoan']")
@@ -11,11 +13,7 @@ class PrivateAreaMainPage(val driver: WebDriver) {
   private val passwordData = By.xpath("//*[@name='changeYourPassword']")
 
   fun isPrivateAreaOpened(): Boolean {
-    val loanDetailLocator: WebElement = driver.findElement(loanDetail)
-    val loanHistoryLocator: WebElement = driver.findElement(loanHistory)
-    val bonusLocator: WebElement = driver.findElement(bonus)
-    val passwordDataLocator: WebElement = driver.findElement(passwordData)
-    return loanDetailLocator.isDisplayed && loanHistoryLocator.isDisplayed && bonusLocator.isDisplayed
-        && passwordDataLocator.isDisplayed
+    return ButtonElement.isElementPresent(driver, loanDetail) && ButtonElement.isElementPresent(driver, loanHistory) &&
+        ButtonElement.isElementPresent(driver, bonus) && ButtonElement.isElementPresent(driver, passwordData)
   }
 }

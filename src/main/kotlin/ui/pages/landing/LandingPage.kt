@@ -4,6 +4,7 @@ import core.config.ApplicationConfig
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
+import ui.elements.ButtonElement
 
 class LandingPage(private val driver: WebDriver, applicationConfig: ApplicationConfig) {
   private val landingPageUrl = applicationConfig.getBaseUrl() + applicationConfig.landingEndpoint
@@ -15,7 +16,6 @@ class LandingPage(private val driver: WebDriver, applicationConfig: ApplicationC
   }
 
   fun isOpened(): Boolean {
-    val landingPageTitleLocator: WebElement = driver.findElement(landingPageTitle)
-    return landingPageTitleLocator.isDisplayed && calculator.isCalculatorBlockPresent()
+    return ButtonElement.isElementPresent(driver, landingPageTitle) && calculator.isCalculatorBlockPresent()
   }
 }
