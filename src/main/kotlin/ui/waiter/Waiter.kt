@@ -6,9 +6,15 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.ui.FluentWait
 import java.time.Duration
 
-class Waiter(val driver: WebDriver) {
+interface Waiter {
 
-  fun waitUntilElementDisappeared(locator: By, timeout: Long, pollingTimeout: Long) {
+  companion object {
+    const val SEC_TIMEOUT: Long = 1
+    const val TWENTY_SEC_TIMEOUT: Long = 20
+  }
+
+  fun waitUntilElementDisappeared(driver: WebDriver, locator: By, timeout: Long = TWENTY_SEC_TIMEOUT,
+      pollingTimeout: Long = SEC_TIMEOUT) {
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
@@ -16,24 +22,12 @@ class Waiter(val driver: WebDriver) {
         .until { !it.findElement(locator).isDisplayed }
   }
 
-  fun waitUntilElementDisappeared(locator: By) {
-    waitUntilElementDisappeared(locator, TEN_SEC_TIMEOUT, SEC_TIMEOUT)
-  }
-
-  fun waitUntilElementAppear(locator: By, timeout: Long, pollingTimeout: Long) {
+  fun waitUntilElementAppear(driver: WebDriver, locator: By, timeout: Long = TWENTY_SEC_TIMEOUT,
+      pollingTimeout: Long = SEC_TIMEOUT) {
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
         .ignoring(NoSuchElementException::class.java)
         .until { it.findElement(locator).isDisplayed }
-  }
-
-  fun waitUntilElementAppear(locator: By) {
-    waitUntilElementAppear(locator, TEN_SEC_TIMEOUT, SEC_TIMEOUT)
-  }
-
-  companion object {
-    const val SEC_TIMEOUT: Long = 1
-    const val TEN_SEC_TIMEOUT: Long = 10
   }
 }

@@ -15,11 +15,11 @@ object InputElement {
     element.sendKeys(value)
   }
 
-  fun inputElement(driver: WebDriver, element: By, value: String) {
+  fun setInputElement(driver: WebDriver, element: By, value: String) {
     driver.findElement(element).sendKeys(value)
   }
 
-  fun getElementValue(driver: WebDriver, locator: By): String {
+  fun getInputValue(driver: WebDriver, locator: By): String {
     return driver.findElement(locator).getAttribute("value")
   }
 }

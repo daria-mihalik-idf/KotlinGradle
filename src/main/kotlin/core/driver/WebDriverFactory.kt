@@ -23,5 +23,3 @@ abstract class WebDriverFactory(protected var webDriverConfig: WebDriverConfig) 
 
   abstract fun configureDriverCapabilities(): MutableCapabilities
 }
-
-
