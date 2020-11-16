@@ -6,15 +6,13 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.ui.FluentWait
 import java.time.Duration
 
-interface Waiter {
+object Waiter {
 
-  companion object {
-    const val SEC_TIMEOUT: Long = 1
-    const val TWENTY_SEC_TIMEOUT: Long = 20
-  }
+  private const val DEFAULT_POLLING_TIMEOUT: Long = 1
+  private const val DEFAULT_WAIT_TIMEOUT: Long = 20
 
-  fun waitUntilElementDisappeared(driver: WebDriver, locator: By, timeout: Long = TWENTY_SEC_TIMEOUT,
-      pollingTimeout: Long = SEC_TIMEOUT) {
+  fun waitUntilElementDisappeared(driver: WebDriver, locator: By, timeout: Long = DEFAULT_WAIT_TIMEOUT,
+      pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT) {
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
@@ -22,8 +20,8 @@ interface Waiter {
         .until { !it.findElement(locator).isDisplayed }
   }
 
-  fun waitUntilElementAppear(driver: WebDriver, locator: By, timeout: Long = TWENTY_SEC_TIMEOUT,
-      pollingTimeout: Long = SEC_TIMEOUT) {
+  fun waitUntilElementAppear(driver: WebDriver, locator: By, timeout: Long = DEFAULT_WAIT_TIMEOUT,
+      pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT) {
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))

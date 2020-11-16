@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver
 import ui.elements.ButtonElement
 import ui.waiter.Waiter
 
-class LandingPage(private val driver: WebDriver, applicationConfig: ApplicationConfig) : Waiter {
+class LandingPage(private val driver: WebDriver, applicationConfig: ApplicationConfig)  {
   private val landingPageUrl = applicationConfig.getBaseUrl() + applicationConfig.landingEndpoint
   private val landingPageTitle: By = By.xpath("//*[@class='header_body_text']//h1")
   private val calculator: CalculatorBlock = CalculatorBlock(driver)
@@ -16,7 +16,7 @@ class LandingPage(private val driver: WebDriver, applicationConfig: ApplicationC
   }
 
   fun isOpened(): Boolean {
-    waitUntilElementAppear(driver, calculator.creditButton)
+    Waiter.waitUntilElementAppear(driver, calculator.creditButton)
     return ButtonElement.isElementDisplayed(driver, landingPageTitle)
   }
 }
