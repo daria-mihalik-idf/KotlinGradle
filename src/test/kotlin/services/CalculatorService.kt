@@ -9,7 +9,7 @@ class CalculatorService(driver: WebDriver) {
   private val calculatorBlock = CalculatorBlock(driver)
 
   fun isCalculatorElementsDisplayed(): Boolean {
-    return calculatorBlock.isCalculatorBlockPresent() && calculatorBlock.isCreditButtonPresent()
+    return calculatorBlock.isCalculatorBlockDisplayed() && calculatorBlock.isCreditButtonDisplayed()
   }
 
   fun clickGetCreditButton() {

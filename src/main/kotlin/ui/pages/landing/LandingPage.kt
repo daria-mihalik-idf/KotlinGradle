@@ -9,15 +9,14 @@ import ui.waiter.Waiter
 class LandingPage(private val driver: WebDriver, applicationConfig: ApplicationConfig) {
   private val landingPageUrl = applicationConfig.getBaseUrl() + applicationConfig.landingEndpoint
   private val landingPageTitle: By = By.xpath("//*[@class='header_body_text']//h1")
-  private val creditButton: By = By.cssSelector("[data-test-id='calculator_submit']")
-  private val calculator = CalculatorBlock(driver)
+  private val calculator: CalculatorBlock = CalculatorBlock(driver)
 
   fun openLandingPage() {
     driver.get(landingPageUrl)
   }
 
   fun isOpened(): Boolean {
-    Waiter(driver).waitUntilElementAppear(creditButton)
-    return ButtonElement.isElementDisplayed(driver, landingPageTitle) && calculator.isCalculatorBlockPresent()
+    Waiter(driver).waitUntilElementAppear(calculator.creditButton)
+    return ButtonElement.isElementDisplayed(driver, landingPageTitle) && calculator.isCalculatorBlockDisplayed()
   }
 }

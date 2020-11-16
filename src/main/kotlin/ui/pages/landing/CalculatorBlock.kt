@@ -6,18 +6,18 @@ import ui.waiter.Waiter
 
 class CalculatorBlock(private val driver: WebDriver) {
   private val calculator: By = By.className("hero__calculator")
-  private val creditButton: By = By.cssSelector("[data-test-id='calculator_submit']")
+  val creditButton: By = By.cssSelector("[data-test-id='calculator_submit']")
   private val amountSlider: By = By.cssSelector("[data-test-id='amount'] [class*='slider-handle']")
   private val periodSlider: By =
       By.xpath("//*[@data-test-id='period']//div[contains(@class, 'mainCalculator__slider')]/span")
   private val periodInput: By = By.cssSelector("[data-test-id='calculator_days']")
   private val amountInput: By = By.cssSelector("[data-test-id='calculator_amount']")
 
-  fun isCalculatorBlockPresent(): Boolean {
+  fun isCalculatorBlockDisplayed(): Boolean {
     return ButtonElement.isElementDisplayed(driver, calculator)
   }
 
-  fun isCreditButtonPresent(): Boolean {
+  fun isCreditButtonDisplayed(): Boolean {
     return ButtonElement.isElementDisplayed(driver, creditButton)
   }
 
@@ -39,7 +39,7 @@ class CalculatorBlock(private val driver: WebDriver) {
   }
 
   fun getPeriodValue(): String {
-    return CommonElement.getElementValue(driver, periodInput)
+    return InputElement.getElementValue(driver, periodInput)
   }
 
   fun setAmountValue(value: String) {
@@ -47,6 +47,6 @@ class CalculatorBlock(private val driver: WebDriver) {
   }
 
   fun getAmountValue(): String {
-    return CommonElement.getElementValue(driver, amountInput)
+    return InputElement.getElementValue(driver, amountInput)
   }
 }

@@ -18,4 +18,8 @@ object InputElement {
   fun inputElement(driver: WebDriver, element: By, value: String) {
     driver.findElement(element).sendKeys(value)
   }
+
+  fun getElementValue(driver: WebDriver, locator: By): String {
+    return driver.findElement(locator).getAttribute("value")
+  }
 }
