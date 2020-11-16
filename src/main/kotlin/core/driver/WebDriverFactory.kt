@@ -1,8 +1,6 @@
 package core.driver
 
-import org.openqa.selenium.Dimension
-import org.openqa.selenium.MutableCapabilities
-import org.openqa.selenium.WebDriver
+import org.openqa.selenium.*
 import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 import java.util.concurrent.TimeUnit
