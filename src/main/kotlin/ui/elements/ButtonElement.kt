@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver
 
 object ButtonElement {
 
-  fun clickButton(driver: WebDriver, buttonLocator: By) {
-    driver.findElement(buttonLocator).click()
+  fun clickButton(driver: WebDriver, locator: By) {
+    driver.findElement(locator).click()
   }
 
-  fun isElementPresent(driver: WebDriver, buttonLocator: By): Boolean {
-    return driver.findElement(buttonLocator).isDisplayed
+  fun isElementDisplayed(driver: WebDriver, locator: By): Boolean {
+    return driver.findElement(locator).isDisplayed
   }
 }

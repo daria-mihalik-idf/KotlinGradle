@@ -6,8 +6,9 @@ import org.openqa.selenium.WebDriver
 
 object InputElement {
 
-  fun setInputValue(locator: By, value: String, driver: WebDriver) {
-    var element = driver.findElement(locator)
+  fun setInputValueInPrefilledField(driver: WebDriver, locator: By, value: String) {
+
+    val element = driver.findElement(locator)
     element.click()
     element.sendKeys("${Keys.CONTROL}", "a")
     element.sendKeys("${Keys.DELETE}")

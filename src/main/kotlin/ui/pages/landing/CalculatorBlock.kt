@@ -1,14 +1,12 @@
 package ui.pages.landing
 
 import org.openqa.selenium.*
-import org.openqa.selenium.interactions.Actions
-import ui.elements.ButtonElement
-import ui.elements.CommonElement
-import ui.elements.InputElement
+import ui.elements.*
+import ui.waiter.Waiter
 
 class CalculatorBlock(private val driver: WebDriver) {
   private val calculator: By = By.className("hero__calculator")
-  private val getCreditButton: By = By.cssSelector("[data-test-id='calculator_submit']")
+  private val creditButton: By = By.cssSelector("[data-test-id='calculator_submit']")
   private val amountSlider: By = By.cssSelector("[data-test-id='amount'] [class*='slider-handle']")
   private val periodSlider: By =
       By.xpath("//*[@data-test-id='period']//div[contains(@class, 'mainCalculator__slider')]/span")
@@ -16,28 +14,28 @@ class CalculatorBlock(private val driver: WebDriver) {
   private val amountInput: By = By.cssSelector("[data-test-id='calculator_amount']")
 
   fun isCalculatorBlockPresent(): Boolean {
-    return ButtonElement.isElementPresent(driver, calculator)
+    return ButtonElement.isElementDisplayed(driver, calculator)
   }
 
-  fun isGetCreditButtonPresent(): Boolean {
-    return ButtonElement.isElementPresent(driver, getCreditButton)
+  fun isCreditButtonPresent(): Boolean {
+    return ButtonElement.isElementDisplayed(driver, creditButton)
   }
 
   fun moveSlider(xOffset: Int, yOffset: Int, type: SliderType) {
-    val actions = Actions(driver)
     val locator = when (type) {
-      SliderType.AMOUNT -> CommonElement.getElement(driver, amountSlider)
-      SliderType.PERIOD -> CommonElement.getElement(driver, periodSlider)
+      SliderType.AMOUNT -> amountSlider
+      SliderType.PERIOD -> periodSlider
     }
-    actions.dragAndDropBy(locator, xOffset, yOffset).release().build().perform()
+    ActionElement.dragAndDrop(driver, locator, xOffset, yOffset)
   }
 
   fun clickGetCreditButton() {
-    ButtonElement.clickButton(driver, getCreditButton)
+    ButtonElement.clickButton(driver, creditButton)
+    Waiter(driver).waitUntilElementDisappeared(creditButton)
   }
 
   fun setPeriodValue(value: String) {
-    InputElement.setInputValue(periodInput, value, driver)
+    InputElement.setInputValueInPrefilledField(driver, periodInput, value)
   }
 
   fun getPeriodValue(): String {
@@ -45,7 +43,7 @@ class CalculatorBlock(private val driver: WebDriver) {
   }
 
   fun setAmountValue(value: String) {
-    InputElement.setInputValue(amountInput, value, driver)
+    InputElement.setInputValueInPrefilledField(driver, amountInput, value)
   }
 
   fun getAmountValue(): String {
