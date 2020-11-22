@@ -17,7 +17,7 @@ class PrivateAreaLoginTest : UiBaseTest() {
     val validCredentials = User(mail, password)
     val privateAreaPage = PrivateAreaService(driver, applicationConfig)
 
-    privateAreaPage.privateAreaLoginPage.openLoginPage()
+    privateAreaPage.privateAreaLoginPage.openPage()
     Assertions.assertTrue(privateAreaPage.privateAreaLoginPage.isOpened(), "Login Page wasn't opened")
 
     privateAreaPage.privateAreaLoginPage.logInPrivateArea(validCredentials)
