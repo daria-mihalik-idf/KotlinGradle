@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver
 import ui.pages.BasePage
 import ui.pages.login.PrivateAreaLoginPage
 
-class PrivateAreaLoginService(driver: WebDriver, applicationConfig: ApplicationConfig) : BasePage() {
+class PrivateAreaLoginService(driver: WebDriver, applicationConfig: ApplicationConfig){
   private val privateAreaLoginPage = PrivateAreaLoginPage(driver, applicationConfig)
 
-  override fun openPage() {
+   fun openPage() {
     privateAreaLoginPage.openPage()
   }
 

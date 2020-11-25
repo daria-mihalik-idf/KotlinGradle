@@ -1,18 +1,18 @@
 package ui.waiter
 
-import logger.Logger
+import logger.TestLogger
 import org.openqa.selenium.*
 import org.openqa.selenium.support.ui.FluentWait
 import java.time.Duration
 
 object Waiter {
-  private const val DEFAULT_POLLING_TIMEOUT: Long = 3
-  private const val DEFAULT_WAIT_TIMEOUT: Long = 10
-  private const val PAGE_LOAD_WAIT_TIMEOUT: Long = 15
+  private const val DEFAULT_POLLING_TIMEOUT_SECONDS: Long = 3
+  private const val DEFAULT_WAIT_TIMEOUT_SECONDS: Long = 10
+  private const val PAGE_LOAD_WAIT_TIMEOUT_SECONDS: Long = 15
 
-  fun waitUntilElementDisappeared(driver: WebDriver, locator: By, timeout: Long = DEFAULT_WAIT_TIMEOUT,
-      pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT) {
-    Logger.getLogger().info("Wait until the element $locator  disappears")
+  fun waitUntilElementDisappeared(driver: WebDriver, locator: By, timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,
+      pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
+    TestLogger.getLogger().info("Wait until the element $locator  disappears")
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
@@ -21,8 +21,8 @@ object Waiter {
   }
 
   fun waitUntilElementAppear(driver: WebDriver, locator: By, timeout: Long =
-      DEFAULT_WAIT_TIMEOUT, pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT) {
-    Logger.getLogger().info("Wait until the element $locator appears")
+      DEFAULT_WAIT_TIMEOUT_SECONDS, pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
+    TestLogger.getLogger().info("Wait until the element $locator appears")
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
@@ -30,21 +30,31 @@ object Waiter {
         .until { it.findElement(locator).isDisplayed }
   }
 
-  fun waitUntilPageWillBeOpened(driver: WebDriver, locator: By, url: String, timeout: Long =
-      DEFAULT_WAIT_TIMEOUT, pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT) {
-    Logger.getLogger().info("Wait until the page $locator opens")
+//  fun waitUntilUrlOpened(driver: WebDriver, locator: By, url: String, timeout: Long =
+//      DEFAULT_WAIT_TIMEOUT_SECONDS, pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
+//    TestLogger.getLogger().info("Wait until the page $url opened")
+//    FluentWait<WebDriver>(driver)
+//        .withTimeout(Duration.ofSeconds(timeout))
+//        .pollingEvery(Duration.ofSeconds(pollingTimeout))
+//        .ignoring(NoSuchElementException::class.java)
+//        .until { it.findElement(locator).isDisplayed }
+//  }
+
+  fun waitUntilPageOpened(driver: WebDriver, locator: By, timeout: Long =
+      DEFAULT_WAIT_TIMEOUT_SECONDS, pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
+    TestLogger.getLogger().info("Wait until the page $locator opens")
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
         .ignoring(NoSuchElementException::class.java)
-        .until { it.findElement(locator).isDisplayed && url == driver.currentUrl }
+        .until { it.findElement(locator).isDisplayed }
   }
 
-  fun jsWaitForPageToLoad(driver: WebDriver, timeout: Long = DEFAULT_WAIT_TIMEOUT,
-      pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT) {
+  fun jsWaitForPageToLoad(driver: WebDriver, timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,
+      pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
     val js = driver as JavascriptExecutor
     val jsCommand = "return document.readyState"
-    Logger.getLogger().info("Wait for JS scripts is fully loaded")
+    TestLogger.getLogger().info("Wait for JS scripts is fully executed")
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
@@ -55,9 +65,9 @@ object Waiter {
         }
   }
 
-  fun waitPageDomLoad(driver: WebDriver, timeout: Long = PAGE_LOAD_WAIT_TIMEOUT,
-      pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT) {
-    Logger.getLogger().info("Wait for page dom model is fully loaded")
+  fun waitPageDomLoad(driver: WebDriver, timeout: Long = PAGE_LOAD_WAIT_TIMEOUT_SECONDS,
+      pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
+    TestLogger.getLogger().info("Wait for page dom model is fully loaded")
     var domPreviousState: Long = 0
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
@@ -66,7 +76,7 @@ object Waiter {
         .until {
           fun isPageDomModelFullyLoaded(): Boolean {
             val domCurrentState: Long = getElementsCountByDOM(driver)
-            Logger.getLogger().info("Dom elements - previous: $domPreviousState | current: $domCurrentState")
+            TestLogger.getLogger().info("Dom elements - previous: $domPreviousState | current: $domCurrentState")
             return if (domPreviousState == domCurrentState && isPageHasDocumentReadyState(driver)) {
               true
             } else {
@@ -86,7 +96,7 @@ object Waiter {
   private fun isPageHasDocumentReadyState(driver: WebDriver): Boolean {
     val js = driver as JavascriptExecutor
     val result = "complete" == js.executeScript("return document.readyState")
-    Logger.getLogger().info("Document.readyState: $result")
+    TestLogger.getLogger().info("Document.readyState: $result")
     return result
   }
 }

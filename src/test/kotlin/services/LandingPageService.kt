@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver
 import ui.pages.BasePage
 import ui.pages.landing.LandingPage
 
-class LandingPageService(driver: WebDriver, applicationConfig: ApplicationConfig) : BasePage() {
+class LandingPageService(driver: WebDriver, applicationConfig: ApplicationConfig) {
   private val landingPage = LandingPage(driver, applicationConfig)
   val calculator = CalculatorService(driver)
 
-  override fun openPage() {
+   fun openPage() {
     landingPage.openPage()
   }
 

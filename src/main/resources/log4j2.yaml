@@ -7,6 +7,11 @@ Configuration:
       target: SYSTEM_OUT
       PatternLayout:
         Pattern: "%highlight{%d{yyyy:MM:dd HH:mm:ss.SSS}[%-5level][%-10t]%-10.10logger{1.} : %msg}%xEx%n"
+  File:
+    name: File_Appender
+    fileName: ${log-path}/logfile.log
+    PatternLayout:
+    pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
 
   Loggers:
     Root:
