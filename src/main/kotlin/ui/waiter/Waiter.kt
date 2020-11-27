@@ -30,16 +30,6 @@ object Waiter {
         .until { it.findElement(locator).isDisplayed }
   }
 
-  fun waitUntilUrlOpened(driver: WebDriver, url: String, timeout: Long =
-      DEFAULT_WAIT_TIMEOUT_SECONDS, pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
-    TestLogger.getLogger().info("Wait until the url $url opens")
-    FluentWait<WebDriver>(driver)
-        .withTimeout(Duration.ofSeconds(timeout))
-        .pollingEvery(Duration.ofSeconds(pollingTimeout))
-        .ignoring(NoSuchElementException::class.java)
-        .until { url == driver.currentUrl }
-  }
-
   fun jsWaitForPageToLoad(driver: WebDriver, timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,
       pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
     val js = driver as JavascriptExecutor
