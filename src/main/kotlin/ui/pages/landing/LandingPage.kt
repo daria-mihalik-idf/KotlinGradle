@@ -15,10 +15,8 @@ class LandingPage(private val driver: WebDriver, applicationConfig: ApplicationC
 
   override fun openPage() {
     Navigation.openUrl(driver, landingPageUrl)
-    Waiter.waitPageDomLoad(driver)
-    Waiter.waitUntilPageOpened(driver, landingPageTitle)
-    calculator.waitCalculatorBlockDisplayed()
     Waiter.jsWaitForPageToLoad(driver)
+    calculator.waitCalculatorBlockDisplayed()
   }
 
   fun isOpened(): Boolean {

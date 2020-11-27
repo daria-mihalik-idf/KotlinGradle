@@ -30,24 +30,14 @@ object Waiter {
         .until { it.findElement(locator).isDisplayed }
   }
 
-//  fun waitUntilUrlOpened(driver: WebDriver, locator: By, url: String, timeout: Long =
-//      DEFAULT_WAIT_TIMEOUT_SECONDS, pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
-//    TestLogger.getLogger().info("Wait until the page $url opened")
-//    FluentWait<WebDriver>(driver)
-//        .withTimeout(Duration.ofSeconds(timeout))
-//        .pollingEvery(Duration.ofSeconds(pollingTimeout))
-//        .ignoring(NoSuchElementException::class.java)
-//        .until { it.findElement(locator).isDisplayed }
-//  }
-
-  fun waitUntilPageOpened(driver: WebDriver, locator: By, timeout: Long =
+  fun waitUntilUrlOpened(driver: WebDriver, url: String, timeout: Long =
       DEFAULT_WAIT_TIMEOUT_SECONDS, pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
-    TestLogger.getLogger().info("Wait until the page $locator opens")
+    TestLogger.getLogger().info("Wait until the url $url opens")
     FluentWait<WebDriver>(driver)
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
         .ignoring(NoSuchElementException::class.java)
-        .until { it.findElement(locator).isDisplayed }
+        .until { url == driver.currentUrl }
   }
 
   fun jsWaitForPageToLoad(driver: WebDriver, timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,
@@ -95,8 +85,8 @@ object Waiter {
 
   private fun isPageHasDocumentReadyState(driver: WebDriver): Boolean {
     val js = driver as JavascriptExecutor
-    val result = "complete" == js.executeScript("return document.readyState")
-    TestLogger.getLogger().info("Document.readyState: $result")
-    return result
+    val isDocumentStateReady: Boolean = "complete" == js.executeScript("return document.readyState")
+    TestLogger.getLogger().info("Document.readyState: $isDocumentStateReady")
+    return isDocumentStateReady
   }
 }
