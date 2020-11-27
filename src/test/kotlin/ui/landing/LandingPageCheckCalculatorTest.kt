@@ -19,7 +19,7 @@ class LandingPageCheckCalculatorTest : UiBaseTest() {
 
     val landingPage = LandingPageService(driver, applicationConfig)
 
-    landingPage.openLandingPage()
+    landingPage.openPage()
     Assertions.assertTrue(landingPage.isOpened(), "Landing Page wasn't opened")
 
     landingPage.calculator.setCalculatorValue(maxPeriodValue, SliderValue.PERIOD_MAX)
@@ -64,7 +64,7 @@ class LandingPageCheckCalculatorTest : UiBaseTest() {
 
     val landingPage = LandingPageService(driver, applicationConfig)
 
-    landingPage.openLandingPage()
+    landingPage.openPage()
     Assertions.assertTrue(landingPage.isOpened(), "Landing Page wasn't opened")
 
     landingPage.calculator.moveCalculatorSlider(SliderValue.AMOUNT_MAX, SliderType.AMOUNT)
@@ -96,4 +96,3 @@ class LandingPageCheckCalculatorTest : UiBaseTest() {
     )
   }
 }
-

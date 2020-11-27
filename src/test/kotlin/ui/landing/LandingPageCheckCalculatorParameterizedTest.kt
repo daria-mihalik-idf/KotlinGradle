@@ -16,8 +16,7 @@ class LandingPageCheckCalculatorParameterizedTest : UiBaseTest() {
     selectBrowser()
     val landingPage = LandingPageService(driver, applicationConfig)
 
-    landingPage.openLandingPage()
+    landingPage.openPage()
     Assertions.assertTrue(landingPage.isOpened(), "Landing Page wasn't opened")
   }
 }
-

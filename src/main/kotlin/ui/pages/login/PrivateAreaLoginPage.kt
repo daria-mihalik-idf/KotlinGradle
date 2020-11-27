@@ -20,11 +20,11 @@ class PrivateAreaLoginPage(private val driver: WebDriver, applicationConfig: App
   }
 
   fun fillInputLogin(userData: String) {
-    InputElement.setInputElement(driver, loginInput, userData)
+    InputElement.setInputElementValue(driver, loginInput, userData)
   }
 
   fun fillInputPassword(userData: String) {
-    InputElement.setInputElement(driver, passwordInput, userData)
+    InputElement.setInputElementValue(driver, passwordInput, userData)
   }
 
   fun clickSubmitButton() {
