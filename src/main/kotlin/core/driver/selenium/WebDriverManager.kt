@@ -1,6 +1,8 @@
-package core.driver
+package core.driver.selenium
 
 import core.Browser
+import core.driver.DriverType
+import core.driver.WebDriverConfig
 import org.openqa.selenium.WebDriver
 
 object WebDriverManager {

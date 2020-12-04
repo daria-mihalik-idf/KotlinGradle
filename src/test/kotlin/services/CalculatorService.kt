@@ -23,7 +23,7 @@ class CalculatorService(driver: WebDriver) {
     }
   }
 
-  fun getCurrentValue(type: SliderType): String {
+  fun getCurrentValue(type: SliderType): String? {
     return when (type) {
       SliderType.PERIOD -> calculatorBlock.getPeriodValue()
       SliderType.AMOUNT -> calculatorBlock.getAmountValue()
@@ -40,6 +40,3 @@ class CalculatorService(driver: WebDriver) {
     calculatorBlock.moveSlider(offset, 0, type)
   }
 }
-
-
-

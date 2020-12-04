@@ -1,14 +1,12 @@
 package ui.elements
 
+import com.codeborne.selenide.Selenide
 import logger.TestLogger
-import org.openqa.selenium.WebDriver
-import ui.waiter.Waiter
 
 object Navigation {
 
-  fun openUrl(driver: WebDriver, url: String) {
+  fun openUrl(url: String) {
     TestLogger.getLogger().info("Open Page $url")
-    driver.get(url)
-    Waiter.waitPageDomLoad(driver)
+    Selenide.open(url)
   }
 }

@@ -12,7 +12,6 @@ class PrivateAreaLoginTest : UiBaseTest() {
 
   @Test
   fun logInPrivateArea() {
-    selectBrowser()
 
     val validCredentials = User(mail, password)
     val privateAreaPage = PrivateAreaService(driver, applicationConfig)

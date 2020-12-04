@@ -8,6 +8,6 @@ class RegistrationPage(private val driver: WebDriver) {
   private val rootRegistrationPageElement: By = By.cssSelector("[data-step-name]")
 
   fun isRegistrationPageOpened(): Boolean {
-    return ButtonElement.isElementDisplayed(driver, rootRegistrationPageElement)
+    return ButtonElement.isElementDisplayed(rootRegistrationPageElement)
   }
 }

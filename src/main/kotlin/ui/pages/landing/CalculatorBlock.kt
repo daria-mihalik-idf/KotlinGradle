@@ -14,7 +14,7 @@ class CalculatorBlock(private val driver: WebDriver) {
   private val amountInput: By = By.cssSelector("[data-test-id='calculator_amount']")
 
   fun isCalculatorBlockDisplayed(): Boolean {
-    return ButtonElement.isElementDisplayed(driver, calculator)
+    return ButtonElement.isElementDisplayed(calculator)
   }
 
   fun waitCalculatorBlockDisplayed() {
@@ -22,7 +22,7 @@ class CalculatorBlock(private val driver: WebDriver) {
   }
 
   fun isCreditButtonDisplayed(): Boolean {
-    return ButtonElement.isElementDisplayed(driver, creditButton)
+    return ButtonElement.isElementDisplayed(creditButton)
   }
 
   fun moveSlider(xOffset: Int, yOffset: Int, type: SliderType) {
@@ -30,27 +30,27 @@ class CalculatorBlock(private val driver: WebDriver) {
       SliderType.AMOUNT -> amountSlider
       SliderType.PERIOD -> periodSlider
     }
-    ActionElement.dragAndDrop(driver, locator, xOffset, yOffset)
+    ActionElement.dragAndDrop(locator, xOffset, yOffset)
   }
 
   fun clickGetCreditButton() {
-    ButtonElement.clickButton(driver, creditButton)
+    ButtonElement.clickButton(creditButton)
     Waiter.waitUntilElementDisappeared(driver, creditButton)
   }
 
   fun setPeriodValue(value: String) {
-    InputElement.setInputValueInPrefilledField(driver, periodInput, value)
+    InputElement.setInputValueInPrefilledField(periodInput, value)
   }
 
-  fun getPeriodValue(): String {
-    return InputElement.getInputValue(driver, periodInput)
+  fun getPeriodValue(): String? {
+    return InputElement.getInputValue(periodInput)
   }
 
   fun setAmountValue(value: String) {
-    InputElement.setInputValueInPrefilledField(driver, amountInput, value)
+    InputElement.setInputValueInPrefilledField(amountInput, value)
   }
 
-  fun getAmountValue(): String {
-    return InputElement.getInputValue(driver, amountInput)
+  fun getAmountValue(): String? {
+    return InputElement.getInputValue(amountInput)
   }
 }

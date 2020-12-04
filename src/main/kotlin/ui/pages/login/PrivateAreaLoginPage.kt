@@ -16,22 +16,22 @@ class PrivateAreaLoginPage(private val driver: WebDriver, applicationConfig: App
   private val submitButton: By = By.cssSelector("button[name='login-btn']")
 
   fun isLoginOpened(): Boolean {
-    return ButtonElement.isElementDisplayed(driver, privateAreaTitle)
+    return ButtonElement.isElementDisplayed(privateAreaTitle)
   }
 
   fun fillInputLogin(userData: String) {
-    InputElement.setInputElementValue(driver, loginInput, userData)
+    InputElement.setInputElementValue(loginInput, userData)
   }
 
   fun fillInputPassword(userData: String) {
-    InputElement.setInputElementValue(driver, passwordInput, userData)
+    InputElement.setInputElementValue(passwordInput, userData)
   }
 
   fun clickSubmitButton() {
-    ButtonElement.clickButton(driver, submitButton)
+    ButtonElement.clickButton(submitButton)
   }
 
   override fun openPage() {
-    Navigation.openUrl(driver, loginPageUrl)
+    Navigation.openUrl(loginPageUrl)
   }
 }

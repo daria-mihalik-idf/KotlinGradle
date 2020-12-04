@@ -9,6 +9,6 @@ class PrivateAreaMainPage(val driver: WebDriver) {
   private val loanHistory = By.xpath("//*[@name='historyOfLoans']")
 
   fun isPrivateAreaOpened(): Boolean {
-    return ButtonElement.isElementDisplayed(driver, loanDetail) && ButtonElement.isElementDisplayed(driver, loanHistory)
+    return ButtonElement.isElementDisplayed(loanDetail) && ButtonElement.isElementDisplayed(loanHistory)
   }
 }

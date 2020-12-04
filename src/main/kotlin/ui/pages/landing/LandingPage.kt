@@ -14,12 +14,12 @@ class LandingPage(private val driver: WebDriver, applicationConfig: ApplicationC
   private val calculator: CalculatorBlock = CalculatorBlock(driver)
 
   override fun openPage() {
-    Navigation.openUrl(driver, landingPageUrl)
+    Navigation.openUrl(landingPageUrl)
     Waiter.jsWaitForPageToLoad(driver)
     calculator.waitCalculatorBlockDisplayed()
   }
 
   fun isOpened(): Boolean {
-    return ButtonElement.isElementDisplayed(driver, landingPageTitle)
+    return ButtonElement.isElementDisplayed(landingPageTitle)
   }
 }
