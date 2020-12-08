@@ -13,7 +13,8 @@ class FirefoxSelenideDriverFactory(webDriverConfig: WebDriverConfig) : DefaultSe
   override val browserPath = "C:\\SeleniumDriver\\geckodriver.exe"
 
   override fun startDriver() {
-    Configuration.browser = Browser.FIREFOX.toString()
+    Configuration.browser = Browser.FIREFOX.browserName
+    Configuration.browserVersion = webDriverConfig.firefoxVersion
     Configuration.browserCapabilities = getGeneralCapabilities().merge(FirefoxOptions())
     configureDriverPath()
     setupSelenideDefaultDriverConfig()

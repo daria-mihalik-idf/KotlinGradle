@@ -1,12 +1,11 @@
 package services
 
-import org.openqa.selenium.WebDriver
 import ui.pages.landing.CalculatorBlock
 import ui.pages.landing.SliderType
 import ui.pages.landing.SliderValue
 
-class CalculatorService(driver: WebDriver) {
-  private val calculatorBlock = CalculatorBlock(driver)
+class CalculatorService() {
+  private val calculatorBlock = CalculatorBlock()
 
   fun isCalculatorElementsDisplayed(): Boolean {
     return calculatorBlock.isCalculatorBlockDisplayed() && calculatorBlock.isCreditButtonDisplayed()

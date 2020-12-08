@@ -11,8 +11,13 @@ abstract class DefaultSelenideWebDriverFactory(protected var webDriverConfig: We
   abstract fun startDriver()
 
   fun setupSelenideDefaultDriverConfig() {
-    Configuration.browserSize = webDriverConfig.browserScreenSize
+    Configuration.browserSize = getScreenResolution()
     Configuration.timeout = webDriverConfig.timeouts
+    Configuration.headless = webDriverConfig.headlessMode
+  }
+
+  private fun getScreenResolution(): String {
+    return "${webDriverConfig.screenResolutionWidth}x${webDriverConfig.screenResolutionHeight}"
   }
 
   fun getGeneralCapabilities(): DesiredCapabilities {

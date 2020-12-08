@@ -4,7 +4,7 @@ import org.openqa.selenium.*
 import ui.elements.*
 import ui.waiter.Waiter
 
-class CalculatorBlock(private val driver: WebDriver) {
+class CalculatorBlock {
   private val calculator: By = By.className("hero__calculator")
   private val creditButton: By = By.cssSelector("[data-test-id='calculator_submit']")
   private val amountSlider: By = By.cssSelector("[data-test-id='amount'] [class*='slider-handle']")
@@ -18,7 +18,7 @@ class CalculatorBlock(private val driver: WebDriver) {
   }
 
   fun waitCalculatorBlockDisplayed() {
-    Waiter.waitUntilElementAppear(driver, creditButton)
+    Waiter.waitUntilElementAppear(creditButton)
   }
 
   fun isCreditButtonDisplayed(): Boolean {
@@ -35,7 +35,7 @@ class CalculatorBlock(private val driver: WebDriver) {
 
   fun clickGetCreditButton() {
     ButtonElement.clickButton(creditButton)
-    Waiter.waitUntilElementDisappeared(driver, creditButton)
+    Waiter.waitUntilElementDisappeared(creditButton)
   }
 
   fun setPeriodValue(value: String) {

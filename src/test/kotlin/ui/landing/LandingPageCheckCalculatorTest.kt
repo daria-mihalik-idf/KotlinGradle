@@ -16,7 +16,7 @@ class LandingPageCheckCalculatorTest : UiBaseTest() {
   @Test
   fun `LP - Verify Calculator And Apply for Loan`() {
 
-    val landingPage = LandingPageService(driver, applicationConfig)
+    val landingPage = LandingPageService(applicationConfig)
 
     landingPage.openPage()
     Assertions.assertTrue(landingPage.isOpened(), "Landing Page wasn't opened")
@@ -52,7 +52,7 @@ class LandingPageCheckCalculatorTest : UiBaseTest() {
         "getCreditButton wasn't displayed on calculator")
 
     landingPage.calculator.clickGetCreditButton()
-    val registrationPage = RegistrationPageService(driver)
+    val registrationPage = RegistrationPageService()
 
     Assertions.assertTrue(registrationPage.isRegistrationPageOpened(), "Registration page wasn't opened")
   }
@@ -60,7 +60,7 @@ class LandingPageCheckCalculatorTest : UiBaseTest() {
   @Test
   fun `LP - Calculator Check`() {
 
-    val landingPage = LandingPageService(driver, applicationConfig)
+    val landingPage = LandingPageService(applicationConfig)
 
     landingPage.openPage()
     Assertions.assertTrue(landingPage.isOpened(), "Landing Page wasn't opened")

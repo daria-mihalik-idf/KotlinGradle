@@ -9,7 +9,6 @@ object ActionElement {
 
   fun dragAndDrop(locator: By, xOffset: Int, yOffset: Int) {
     TestLogger.getLogger().info("Move slider $locator from $xOffset to $yOffset")
-    val value = `$`(locator)
-    actions().dragAndDropBy(value, xOffset, yOffset).release().build().perform()
+    actions().dragAndDropBy(`$`(locator), xOffset, yOffset).release().build().perform()
   }
 }

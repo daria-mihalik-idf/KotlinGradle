@@ -2,14 +2,12 @@ package services
 
 import core.config.ApplicationConfig
 import core.User
-import org.openqa.selenium.WebDriver
-import ui.pages.BasePage
 import ui.pages.login.PrivateAreaLoginPage
 
-class PrivateAreaLoginService(driver: WebDriver, applicationConfig: ApplicationConfig){
-  private val privateAreaLoginPage = PrivateAreaLoginPage(driver, applicationConfig)
+class PrivateAreaLoginService(applicationConfig: ApplicationConfig) {
+  private val privateAreaLoginPage = PrivateAreaLoginPage(applicationConfig)
 
-   fun openPage() {
+  fun openPage() {
     privateAreaLoginPage.openPage()
   }
 

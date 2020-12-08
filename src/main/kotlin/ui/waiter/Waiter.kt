@@ -1,5 +1,6 @@
 package ui.waiter
 
+import com.codeborne.selenide.WebDriverRunner
 import logger.TestLogger
 import org.openqa.selenium.*
 import org.openqa.selenium.support.ui.FluentWait
@@ -10,32 +11,32 @@ object Waiter {
   private const val DEFAULT_WAIT_TIMEOUT_SECONDS: Long = 10
   private const val PAGE_LOAD_WAIT_TIMEOUT_SECONDS: Long = 15
 
-  fun waitUntilElementDisappeared(driver: WebDriver, locator: By, timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,
+  fun waitUntilElementDisappeared(locator: By, timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,
       pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
     TestLogger.getLogger().info("Wait until the element $locator  disappears")
-    FluentWait<WebDriver>(driver)
+    FluentWait<WebDriver>(WebDriverRunner.getWebDriver())
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
         .ignoring(NoSuchElementException::class.java)
         .until { !it.findElement(locator).isDisplayed }
   }
 
-  fun waitUntilElementAppear(driver: WebDriver, locator: By, timeout: Long =
+  fun waitUntilElementAppear(locator: By, timeout: Long =
       DEFAULT_WAIT_TIMEOUT_SECONDS, pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
     TestLogger.getLogger().info("Wait until the element $locator appears")
-    FluentWait<WebDriver>(driver)
+    FluentWait<WebDriver>(WebDriverRunner.getWebDriver())
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
         .ignoring(NoSuchElementException::class.java)
         .until { it.findElement(locator).isDisplayed }
   }
 
-  fun jsWaitForPageToLoad(driver: WebDriver, timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,
+  fun jsWaitForPageToLoad(timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,
       pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
-    val js = driver as JavascriptExecutor
+    val js = WebDriverRunner.getWebDriver() as JavascriptExecutor
     val jsCommand = "return document.readyState"
     TestLogger.getLogger().info("Wait for JS scripts is fully executed")
-    FluentWait<WebDriver>(driver)
+    FluentWait<WebDriver>(WebDriverRunner.getWebDriver())
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
         .ignoring(NoSuchElementException::class.java)
@@ -45,19 +46,19 @@ object Waiter {
         }
   }
 
-  fun waitPageDomLoad(driver: WebDriver, timeout: Long = PAGE_LOAD_WAIT_TIMEOUT_SECONDS,
+  fun waitPageDomLoad(timeout: Long = PAGE_LOAD_WAIT_TIMEOUT_SECONDS,
       pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
     TestLogger.getLogger().info("Wait for page dom model is fully loaded")
     var domPreviousState: Long = 0
-    FluentWait<WebDriver>(driver)
+    FluentWait<WebDriver>(WebDriverRunner.getWebDriver())
         .withTimeout(Duration.ofSeconds(timeout))
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
         .ignoring(WebDriverException::class.java)
         .until {
           fun isPageDomModelFullyLoaded(): Boolean {
-            val domCurrentState: Long = getElementsCountByDOM(driver)
+            val domCurrentState: Long = getElementsCountByDOM()
             TestLogger.getLogger().info("Dom elements - previous: $domPreviousState | current: $domCurrentState")
-            return if (domPreviousState == domCurrentState && isPageHasDocumentReadyState(driver)) {
+            return if (domPreviousState == domCurrentState && isPageHasDocumentReadyState()) {
               true
             } else {
               domPreviousState = domCurrentState
@@ -68,13 +69,13 @@ object Waiter {
         }
   }
 
-  private fun getElementsCountByDOM(driver: WebDriver): Long {
-    val js = driver as JavascriptExecutor
+  private fun getElementsCountByDOM(): Long {
+    val js = WebDriverRunner.getWebDriver() as JavascriptExecutor
     return js.executeScript("return document.getElementsByTagName('*').length") as Long
   }
 
-  private fun isPageHasDocumentReadyState(driver: WebDriver): Boolean {
-    val js = driver as JavascriptExecutor
+  private fun isPageHasDocumentReadyState(): Boolean {
+    val js = WebDriverRunner.getWebDriver() as JavascriptExecutor
     val isDocumentStateReady: Boolean = "complete" == js.executeScript("return document.readyState")
     TestLogger.getLogger().info("Document.readyState: $isDocumentStateReady")
     return isDocumentStateReady

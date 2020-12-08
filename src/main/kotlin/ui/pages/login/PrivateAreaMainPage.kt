@@ -1,10 +1,9 @@
 package ui.pages.login
 
 import org.openqa.selenium.By
-import org.openqa.selenium.WebDriver
 import ui.elements.ButtonElement
 
-class PrivateAreaMainPage(val driver: WebDriver) {
+class PrivateAreaMainPage {
   private val loanDetail = By.xpath("//*[@name='ongoingLoan']")
   private val loanHistory = By.xpath("//*[@name='historyOfLoans']")
 

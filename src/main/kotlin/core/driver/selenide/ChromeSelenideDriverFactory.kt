@@ -13,7 +13,8 @@ class ChromeSelenideDriverFactory(webDriverConfig: WebDriverConfig) : DefaultSel
   override val browserPath = "C:\\SeleniumDriver\\chromedriver.exe"
 
   override fun startDriver() {
-    Configuration.browser = Browser.CHROME.toString()
+    Configuration.browser = Browser.CHROME.browserName
+    Configuration.browserVersion = webDriverConfig.chromeVersion
     Configuration.browserCapabilities = getGeneralCapabilities().merge(ChromeOptions())
     configureDriverPath()
     setupSelenideDefaultDriverConfig()
