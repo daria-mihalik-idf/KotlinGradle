@@ -1,5 +1,6 @@
 package ui.waiter
 
+import com.codeborne.selenide.Selenide.executeJavaScript
 import com.codeborne.selenide.WebDriverRunner
 import logger.TestLogger
 import org.openqa.selenium.*
@@ -33,7 +34,6 @@ object Waiter {
 
   fun jsWaitForPageToLoad(timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,
       pollingTimeout: Long = DEFAULT_POLLING_TIMEOUT_SECONDS) {
-    val js = WebDriverRunner.getWebDriver() as JavascriptExecutor
     val jsCommand = "return document.readyState"
     TestLogger.getLogger().info("Wait for JS scripts is fully executed")
     FluentWait<WebDriver>(WebDriverRunner.getWebDriver())
@@ -41,7 +41,10 @@ object Waiter {
         .pollingEvery(Duration.ofSeconds(pollingTimeout))
         .ignoring(NoSuchElementException::class.java)
         .until {
-          js.executeScript(jsCommand).toString() == "complete" && js.executeScript("return jQuery.active == 0")
+          executeJavaScript<Long>(jsCommand).toString() == "complete" && executeJavaScript<Long>(
+              "return jQuery.active " +
+                  "==" +
+                  " 0")
               .toString().toBoolean()
         }
   }
@@ -70,13 +73,12 @@ object Waiter {
   }
 
   private fun getElementsCountByDOM(): Long {
-    val js = WebDriverRunner.getWebDriver() as JavascriptExecutor
-    return js.executeScript("return document.getElementsByTagName('*').length") as Long
+    return executeJavaScript<Long>("return document.getElementsByTagName('*').length")
+        ?: throw IllegalStateException("Executed script returns null")
   }
 
   private fun isPageHasDocumentReadyState(): Boolean {
-    val js = WebDriverRunner.getWebDriver() as JavascriptExecutor
-    val isDocumentStateReady: Boolean = "complete" == js.executeScript("return document.readyState")
+    val isDocumentStateReady: Boolean = "complete" == executeJavaScript("return document.readyState")
     TestLogger.getLogger().info("Document.readyState: $isDocumentStateReady")
     return isDocumentStateReady
   }

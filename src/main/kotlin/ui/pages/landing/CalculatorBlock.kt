@@ -1,5 +1,6 @@
 package ui.pages.landing
 
+import com.codeborne.selenide.Selenide.`$`
 import org.openqa.selenium.*
 import ui.elements.*
 import ui.waiter.Waiter
@@ -14,7 +15,7 @@ class CalculatorBlock {
   private val amountInput: By = By.cssSelector("[data-test-id='calculator_amount']")
 
   fun isCalculatorBlockDisplayed(): Boolean {
-    return ButtonElement.isElementDisplayed(calculator)
+    return `$`(calculator).isDisplayed
   }
 
   fun waitCalculatorBlockDisplayed() {
@@ -22,7 +23,7 @@ class CalculatorBlock {
   }
 
   fun isCreditButtonDisplayed(): Boolean {
-    return ButtonElement.isElementDisplayed(creditButton)
+    return `$`(creditButton).isDisplayed
   }
 
   fun moveSlider(xOffset: Int, yOffset: Int, type: SliderType) {

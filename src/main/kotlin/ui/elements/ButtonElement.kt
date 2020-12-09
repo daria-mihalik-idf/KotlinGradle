@@ -10,8 +10,4 @@ object ButtonElement {
     TestLogger.getLogger().info("Click button: $buttonLocator")
     `$`(buttonLocator).click()
   }
-
-  fun isElementDisplayed(locator: By): Boolean {
-    return `$`(locator).isDisplayed
-  }
 }

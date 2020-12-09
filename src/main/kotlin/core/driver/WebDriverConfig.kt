@@ -13,4 +13,9 @@ data class WebDriverConfig(
     var webDriverHost: String,
     var webDriverPort: String,
     var headlessMode: Boolean
-)
+) {
+  fun getScreenResolution(): String {
+    return "${screenResolutionWidth}x${screenResolutionHeight}"
+  }
+}
+

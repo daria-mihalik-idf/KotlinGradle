@@ -2,27 +2,18 @@ package core.driver.selenide
 
 import com.codeborne.selenide.Configuration
 import core.Browser
-import core.driver.DriverPathConfiguration
 import core.driver.WebDriverConfig
-import org.openqa.selenium.chrome.ChromeOptions
+import io.github.bonigarcia.wdm.WebDriverManager
 
-class ChromeSelenideDriverFactory(webDriverConfig: WebDriverConfig) : DefaultSelenideWebDriverFactory(webDriverConfig),
-    DriverPathConfiguration {
+class ChromeSelenideDriverFactory(webDriverConfig: WebDriverConfig) : DefaultSelenideWebDriverFactory(webDriverConfig) {
 
-  override val browserPackage = "webdriver.chrome.driver"
-  override val browserPath = "C:\\SeleniumDriver\\chromedriver.exe"
-
-  override fun startDriver() {
+  override fun configDriver() {
     Configuration.browser = Browser.CHROME.browserName
-    Configuration.browserVersion = webDriverConfig.chromeVersion
-    Configuration.browserCapabilities = getGeneralCapabilities().merge(ChromeOptions())
-    configureDriverPath()
     setupSelenideDefaultDriverConfig()
+    configDriverBinary()
   }
 
-  override fun configureDriverCapabilities(): ChromeOptions {
-    val options = ChromeOptions()
-    options.merge(getGeneralCapabilities())
-    return options
+  private fun configDriverBinary() {
+    WebDriverManager.chromedriver().driverVersion(webDriverConfig.chromeVersion).setup()
   }
 }

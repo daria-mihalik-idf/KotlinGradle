@@ -2,27 +2,19 @@ package core.driver.selenide
 
 import com.codeborne.selenide.Configuration
 import core.Browser
-import core.driver.DriverPathConfiguration
 import core.driver.WebDriverConfig
-import org.openqa.selenium.firefox.FirefoxOptions
+import io.github.bonigarcia.wdm.WebDriverManager
 
-class FirefoxSelenideDriverFactory(webDriverConfig: WebDriverConfig) : DefaultSelenideWebDriverFactory(webDriverConfig),
-    DriverPathConfiguration {
+class FirefoxSelenideDriverFactory(webDriverConfig: WebDriverConfig) :
+    DefaultSelenideWebDriverFactory(webDriverConfig) {
 
-  override val browserPackage = "webdriver.gecko.driver"
-  override val browserPath = "C:\\SeleniumDriver\\geckodriver.exe"
-
-  override fun startDriver() {
+  override fun configDriver() {
     Configuration.browser = Browser.FIREFOX.browserName
-    Configuration.browserVersion = webDriverConfig.firefoxVersion
-    Configuration.browserCapabilities = getGeneralCapabilities().merge(FirefoxOptions())
-    configureDriverPath()
     setupSelenideDefaultDriverConfig()
+    configDriverBinary()
   }
 
-  override fun configureDriverCapabilities(): FirefoxOptions {
-    val options = FirefoxOptions()
-    options.merge(getGeneralCapabilities())
-    return options
+  private fun configDriverBinary() {
+    WebDriverManager.firefoxdriver().driverVersion(webDriverConfig.firefoxVersion).setup()
   }
 }

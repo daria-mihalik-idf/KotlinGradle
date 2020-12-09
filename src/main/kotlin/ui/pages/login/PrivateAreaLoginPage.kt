@@ -1,8 +1,8 @@
 package ui.pages.login
 
+import com.codeborne.selenide.Selenide.`$`
 import core.config.ApplicationConfig
 import org.openqa.selenium.By
-import org.openqa.selenium.WebDriver
 import ui.elements.ButtonElement
 import ui.elements.InputElement
 import ui.elements.Navigation
@@ -16,7 +16,7 @@ class PrivateAreaLoginPage(applicationConfig: ApplicationConfig) : BasePage() {
   private val submitButton: By = By.cssSelector("button[name='login-btn']")
 
   fun isLoginOpened(): Boolean {
-    return ButtonElement.isElementDisplayed(privateAreaTitle)
+    return `$`(privateAreaTitle).isDisplayed
   }
 
   fun fillInputLogin(userData: String) {

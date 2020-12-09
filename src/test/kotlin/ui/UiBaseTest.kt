@@ -21,7 +21,7 @@ abstract class UiBaseTest {
   @BeforeEach
   fun init() {
     webDriverConfig = WebDriverConfigProviderManager().getConfig(FileType.YAML)
-    SelenideDriverManager.getDriverFactory(webDriverConfig).startDriver()
+    SelenideDriverManager.getDriverFactory(webDriverConfig).configDriver()
     selectBrowser()
   }
 

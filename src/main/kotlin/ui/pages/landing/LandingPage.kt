@@ -1,8 +1,8 @@
 package ui.pages.landing
 
+import com.codeborne.selenide.Selenide.`$`
 import core.config.ApplicationConfig
 import org.openqa.selenium.By
-import ui.elements.ButtonElement
 import ui.elements.Navigation
 import ui.pages.BasePage
 import ui.waiter.Waiter
@@ -19,6 +19,6 @@ class LandingPage(applicationConfig: ApplicationConfig) : BasePage() {
   }
 
   fun isOpened(): Boolean {
-    return ButtonElement.isElementDisplayed(landingPageTitle)
+    return `$`(landingPageTitle).isDisplayed
   }
 }
