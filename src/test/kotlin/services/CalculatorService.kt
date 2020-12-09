@@ -1,12 +1,11 @@
 package services
 
-import org.openqa.selenium.WebDriver
 import ui.pages.landing.CalculatorBlock
 import ui.pages.landing.SliderType
 import ui.pages.landing.SliderValue
 
-class CalculatorService(driver: WebDriver) {
-  private val calculatorBlock = CalculatorBlock(driver)
+class CalculatorService() {
+  private val calculatorBlock = CalculatorBlock()
 
   fun isCalculatorElementsDisplayed(): Boolean {
     return calculatorBlock.isCalculatorBlockDisplayed() && calculatorBlock.isCreditButtonDisplayed()
@@ -23,7 +22,7 @@ class CalculatorService(driver: WebDriver) {
     }
   }
 
-  fun getCurrentValue(type: SliderType): String {
+  fun getCurrentValue(type: SliderType): String? {
     return when (type) {
       SliderType.PERIOD -> calculatorBlock.getPeriodValue()
       SliderType.AMOUNT -> calculatorBlock.getAmountValue()
@@ -40,6 +39,3 @@ class CalculatorService(driver: WebDriver) {
     calculatorBlock.moveSlider(offset, 0, type)
   }
 }
-
-
-

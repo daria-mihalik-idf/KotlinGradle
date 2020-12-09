@@ -1,5 +1,6 @@
 package core
 
-enum class Browser {
-  CHROME,FIREFOX, IE
+enum class Browser(val browserName: String) {
+  CHROME("chrome"),
+  FIREFOX("firefox")
 }

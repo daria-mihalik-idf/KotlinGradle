@@ -1,7 +1,11 @@
-browserType: "CHROME"
+browserType: "FIREFOX"
+chromeVersion: "87.0.4280.20"
+firefoxVersion: "0.26.0"
 screenResolutionWidth: 1600
 screenResolutionHeight: 900
 timeouts: 10
 driverType: "LOCAL"
 webDriverPort: 4444
 webDriverHost: "192.168.100.39"
+headlessMode: false
+

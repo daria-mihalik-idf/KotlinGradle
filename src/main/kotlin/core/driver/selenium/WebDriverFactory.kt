@@ -1,5 +1,6 @@
-package core.driver
+package core.driver.selenium
 
+import core.driver.WebDriverConfig
 import org.openqa.selenium.*
 import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities

@@ -1,12 +1,11 @@
 package services
 
 import core.config.ApplicationConfig
-import org.openqa.selenium.WebDriver
 import ui.pages.login.PrivateAreaMainPage
 
-class PrivateAreaService(driver: WebDriver, applicationConfig: ApplicationConfig) {
-  private val privateAreaPage = PrivateAreaMainPage(driver)
-  val privateAreaLoginPage = PrivateAreaLoginService(driver, applicationConfig)
+class PrivateAreaService(applicationConfig: ApplicationConfig) {
+  private val privateAreaPage = PrivateAreaMainPage()
+  val privateAreaLoginPage = PrivateAreaLoginService(applicationConfig)
 
   fun isPrivateAreaOpened(): Boolean {
     return privateAreaPage.isPrivateAreaOpened()

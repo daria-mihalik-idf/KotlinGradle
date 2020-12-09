@@ -1,13 +1,14 @@
 package ui.pages.registration
 
+import com.codeborne.selenide.Selenide
+import com.codeborne.selenide.Selenide.`$`
 import org.openqa.selenium.By
-import org.openqa.selenium.WebDriver
 import ui.elements.ButtonElement
 
-class RegistrationPage(private val driver: WebDriver) {
+class RegistrationPage {
   private val rootRegistrationPageElement: By = By.cssSelector("[data-step-name]")
 
   fun isRegistrationPageOpened(): Boolean {
-    return ButtonElement.isElementDisplayed(driver, rootRegistrationPageElement)
+    return `$`(rootRegistrationPageElement).isDisplayed
   }
 }

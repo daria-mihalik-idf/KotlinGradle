@@ -1,6 +1,5 @@
 package core.driver
 
-import core.configProvider.ConfigProvider
 import core.config.FileType
 
 class WebDriverConfigProviderManager {
