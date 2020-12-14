@@ -2,10 +2,12 @@ package core.driver.selenide
 
 import com.codeborne.selenide.Configuration
 import core.Browser
+import core.configProvider.WebDriverConfigProvider
 import core.driver.WebDriverConfig
 import io.github.bonigarcia.wdm.WebDriverManager
 
 class ChromeSelenideDriverFactory(webDriverConfig: WebDriverConfig) : DefaultSelenideWebDriverFactory(webDriverConfig) {
+  override var webDriver = WebDriverConfigProvider().getWebDriverConfig()
 
   override fun configDriver() {
     Configuration.browser = Browser.CHROME.browserName
@@ -14,6 +16,6 @@ class ChromeSelenideDriverFactory(webDriverConfig: WebDriverConfig) : DefaultSel
   }
 
   private fun configDriverBinary() {
-    WebDriverManager.chromedriver().driverVersion(webDriverConfig.chromeVersion).setup()
+    WebDriverManager.chromedriver().driverVersion(webDriver.chromeVersion).setup()
   }
 }
