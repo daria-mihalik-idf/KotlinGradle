@@ -7,7 +7,6 @@ import core.driver.WebDriverConfig
 import io.github.bonigarcia.wdm.WebDriverManager
 
 class ChromeSelenideDriverFactory(webDriverConfig: WebDriverConfig) : DefaultSelenideWebDriverFactory(webDriverConfig) {
-  override var webDriver = WebDriverConfigProvider().getWebDriverConfig()
 
   override fun configDriver() {
     Configuration.browser = Browser.CHROME.browserName

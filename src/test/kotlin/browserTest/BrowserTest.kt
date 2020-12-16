@@ -1,10 +1,10 @@
 package browserTest
 
+import com.codeborne.selenide.Selenide
 import core.Browser
 import core.systemProperties.CustomSystemProperties
 import core.configProvider.WebDriverConfigProvider
 import core.driver.WebDriverConfig
-import core.driver.selenium.WebDriverManager
 import org.junit.jupiter.api.*
 
 class BrowserTest {
@@ -14,8 +14,7 @@ class BrowserTest {
   private val browserType = Browser.FIREFOX
   private val webDriverHost = "192.168.100.39"
   private val webDriverPort = "4444"
-
-  //  private val driverType = "LOCAL"
+  private val webDriverType = "LOCAL"
   private val chromeVersion = "87.0.4280.20"
 
   @BeforeEach
@@ -24,20 +23,25 @@ class BrowserTest {
   }
 
   @AfterEach
-  fun quitSession() {
-    WebDriverManager.removeDriver()
+  fun clearProperty() {
+    CustomSystemProperties.BROWSER_HEADLESS.clear()
+    CustomSystemProperties.BROWSER_TYPE.clear()
+    CustomSystemProperties.WEBDRIVER_HOST.clear()
+    CustomSystemProperties.WEBDRIVER_PORT.clear()
+    CustomSystemProperties.CHROME_BROWSER.clear()
+    CustomSystemProperties.WEBDRIVER_TYPE.clear()
+
+    Selenide.closeWebDriver()
   }
 
   @Test
   fun checkCustomSystemPropertiesWork() {
-
     CustomSystemProperties.BROWSER_HEADLESS.set(headlessMode)
     CustomSystemProperties.BROWSER_TYPE.set(browserType.browserName)
     CustomSystemProperties.WEBDRIVER_HOST.set(webDriverHost)
     CustomSystemProperties.WEBDRIVER_PORT.set(webDriverPort)
     CustomSystemProperties.CHROME_BROWSER.set(chromeVersion)
-
-    webDriverConfig = WebDriverConfigProvider().getWebDriverConfig()
+    CustomSystemProperties.WEBDRIVER_TYPE.set(webDriverType)
 
     assertAll(
         {

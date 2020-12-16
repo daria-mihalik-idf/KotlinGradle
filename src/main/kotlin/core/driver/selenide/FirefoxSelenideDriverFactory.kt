@@ -8,7 +8,6 @@ import io.github.bonigarcia.wdm.WebDriverManager
 
 class FirefoxSelenideDriverFactory(webDriverConfig: WebDriverConfig) :
     DefaultSelenideWebDriverFactory(webDriverConfig) {
-  override var webDriver = WebDriverConfigProvider().getWebDriverConfig()
 
   override fun configDriver() {
     Configuration.browser = Browser.FIREFOX.browserName

@@ -5,7 +5,7 @@ import core.configProvider.WebDriverConfigProvider
 import core.driver.WebDriverConfig
 
 abstract class DefaultSelenideWebDriverFactory(protected var webDriverConfig: WebDriverConfig) {
-  open var webDriver = WebDriverConfigProvider().getWebDriverConfig()
+   var webDriver = WebDriverConfigProvider().getWebDriverConfig()
 
   fun setupSelenideDefaultDriverConfig() {
     Configuration.browserSize = webDriverConfig.getScreenResolution()
