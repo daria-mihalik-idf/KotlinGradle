@@ -15,6 +15,6 @@ class FirefoxSelenideDriverFactory(webDriverConfig: WebDriverConfig) :
   }
 
   private fun configDriverBinary() {
-    WebDriverManager.firefoxdriver().driverVersion(webDriverConfig.firefoxVersion).setup()
+    WebDriverManager.firefoxdriver().driverVersion(driverConfig.firefoxVersion).setup()
   }
 }

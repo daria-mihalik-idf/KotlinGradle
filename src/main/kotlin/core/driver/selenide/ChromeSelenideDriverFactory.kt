@@ -14,6 +14,6 @@ class ChromeSelenideDriverFactory(webDriverConfig: WebDriverConfig) : DefaultSel
   }
 
   private fun configDriverBinary() {
-    WebDriverManager.chromedriver().driverVersion(webDriverConfig.chromeVersion).setup()
+    WebDriverManager.chromedriver().driverVersion(driverConfig.chromeVersion).setup()
   }
 }
