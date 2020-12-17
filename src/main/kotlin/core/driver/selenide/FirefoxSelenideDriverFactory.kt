@@ -2,7 +2,6 @@ package core.driver.selenide
 
 import com.codeborne.selenide.Configuration
 import core.Browser
-import core.configProvider.WebDriverConfigProvider
 import core.driver.WebDriverConfig
 import io.github.bonigarcia.wdm.WebDriverManager
 
@@ -16,6 +15,6 @@ class FirefoxSelenideDriverFactory(webDriverConfig: WebDriverConfig) :
   }
 
   private fun configDriverBinary() {
-    WebDriverManager.firefoxdriver().driverVersion(webDriver.firefoxVersion).setup()
+    WebDriverManager.firefoxdriver().driverVersion(driverConfig.firefoxVersion).setup()
   }
 }

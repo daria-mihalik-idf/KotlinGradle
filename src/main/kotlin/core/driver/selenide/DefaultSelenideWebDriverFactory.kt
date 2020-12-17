@@ -5,12 +5,12 @@ import core.configProvider.WebDriverConfigProvider
 import core.driver.WebDriverConfig
 
 abstract class DefaultSelenideWebDriverFactory(protected var webDriverConfig: WebDriverConfig) {
-   var webDriver = WebDriverConfigProvider().getWebDriverConfig()
+   var driverConfig = WebDriverConfigProvider().getWebDriverConfig()
 
   fun setupSelenideDefaultDriverConfig() {
     Configuration.browserSize = webDriverConfig.getScreenResolution()
     Configuration.timeout = webDriverConfig.timeouts
-    Configuration.headless = webDriver.headlessMode
+    Configuration.headless = driverConfig.headlessMode
   }
 
   abstract fun configDriver()
