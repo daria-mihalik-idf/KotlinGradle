@@ -24,7 +24,7 @@ class CalculatorBlock {
   }
 
   fun waitCalculatorBlockDisplayed() {
-    CustomWaiter.waitForElementTextLoad(creditButton, mainButtonText)
+    CustomWaiter.waitAttributeContainsText(creditButton, creditButtonAttribute, creditButtonAttributeText)
   }
 
   fun isCreditButtonDisplayed(): Boolean {
