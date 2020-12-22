@@ -3,11 +3,16 @@ package ui.pages.landing
 import com.codeborne.selenide.Selenide.`$`
 import org.openqa.selenium.*
 import ui.elements.*
+import ui.waiter.CustomWaiter
 import ui.waiter.Waiter
 
 class CalculatorBlock {
   private val calculator: By = By.className("hero__calculator")
   private val creditButton: By = By.cssSelector("[data-test-id='calculator_submit']")
+  private val creditButtonAttributeText = "calculator_submit"
+  private val creditButtonAttribute = "data-test-id"
+  private val mainButtonText = "¡Solicita tu Préstamo!"
+
   private val amountSlider: By = By.cssSelector("[data-test-id='amount'] [class*='slider-handle']")
   private val periodSlider: By =
       By.xpath("//*[@data-test-id='period']//div[contains(@class, 'mainCalculator__slider')]/span")
@@ -19,7 +24,7 @@ class CalculatorBlock {
   }
 
   fun waitCalculatorBlockDisplayed() {
-    Waiter.waitUntilElementAppear(creditButton)
+    CustomWaiter.waitAttributeContainsText(creditButton, creditButtonAttribute, creditButtonAttributeText)
   }
 
   fun isCreditButtonDisplayed(): Boolean {
