@@ -11,6 +11,10 @@ data class ApplicationConfig(
     val landingEndpoint: String?,
     val registrationUrl: String,
     val loginPrivateAreaPageUrl: String,
+    val crmLoginPageUrl: String,
+    val crmLoginMail: String,
+    val crmLoginPassword: String,
+    val crmCaptchaValue: String,
     @JsonProperty("type")
     val fileType: String,
     val testType: String?
@@ -18,7 +22,7 @@ data class ApplicationConfig(
   private val httpsPrefix: String = "https://"
 
   fun getBaseUrlWithAuthorization(): String {
-    return "$httpsPrefix$user:$password@$host"
+    return "$httpsPrefix$user:$password@$host/"
   }
 
   fun getBaseUrl(): String {
