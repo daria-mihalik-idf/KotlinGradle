@@ -7,11 +7,11 @@ import ui.pages.crm.CrmLoginPage
 class CrmLoginService(applicationConfig: ApplicationConfig) {
   private val crmLoginPage = CrmLoginPage(applicationConfig)
 
-  fun openPage() {
+  fun openCrmLoginPage() {
     crmLoginPage.openPage()
   }
 
-  fun isOpened(): Boolean {
+  fun isCrmLoginPageOpened(): Boolean {
     return crmLoginPage.isCrmLoginPageOpened()
   }
 

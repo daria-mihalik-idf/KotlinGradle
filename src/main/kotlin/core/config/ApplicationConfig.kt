@@ -14,7 +14,6 @@ data class ApplicationConfig(
     val loginPrivateAreaPageUrl: String,
     val crmLoginPageUrl: String,
     val crmLoginData: CrmUser,
-    val crmBorrowerPage: String,
     @JsonProperty("type")
     val fileType: String,
     val testType: String?
@@ -29,7 +28,3 @@ data class ApplicationConfig(
     return "$httpsPrefix$host/"
   }
 }
-
-
-
-

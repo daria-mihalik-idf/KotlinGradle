@@ -16,10 +16,10 @@ class PrivateAreaLoginTest : UiBaseTest() {
     val validCredentials = User(mail, password)
     val privateAreaPage = PrivateAreaService(applicationConfig)
 
-    privateAreaPage.privateAreaLoginPage.openPage()
-    Assertions.assertTrue(privateAreaPage.privateAreaLoginPage.isOpened(), "Login Page wasn't opened")
+    privateAreaPage.privateAreaLoginService.openPage()
+    Assertions.assertTrue(privateAreaPage.privateAreaLoginService.isOpened(), "Login Page wasn't opened")
 
-    privateAreaPage.privateAreaLoginPage.logInPrivateArea(validCredentials)
+    privateAreaPage.privateAreaLoginService.logInPrivateArea(validCredentials)
     Assertions.assertTrue(privateAreaPage.isPrivateAreaOpened(), "Private Area Page wasn't opened")
   }
 }

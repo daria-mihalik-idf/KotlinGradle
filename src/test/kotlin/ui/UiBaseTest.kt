@@ -5,7 +5,7 @@ import core.config.ApplicationConfig
 import core.config.ApplicationConfigProviderManager
 import core.config.FileType
 import core.driver.WebDriverConfig
-import core.driver.WebDriverConfigProviderManager
+import core.driver.selenium.WebDriverConfigProviderManager
 import core.driver.selenide.SelenideDriverManager
 import core.driver.selenium.WebDriverManager
 import org.junit.jupiter.api.AfterEach
@@ -14,17 +14,13 @@ import org.junit.jupiter.api.BeforeEach
 
 abstract class UiBaseTest {
   lateinit var applicationConfig: ApplicationConfig
-  private lateinit var webDriverConfig: WebDriverConfig
-
-  @BeforeAll
-  fun configureUrl() {
-    applicationConfig = ApplicationConfigProviderManager().getConfig(FileType.YAML)
-  }
+  lateinit var webDriverConfig: WebDriverConfig
 
   @BeforeEach
   fun init() {
     webDriverConfig = WebDriverConfigProviderManager().getConfig(FileType.YAML)
     SelenideDriverManager.getDriverFactory(webDriverConfig).configDriver()
+    applicationConfig = ApplicationConfigProviderManager().getConfig(FileType.YAML)
     Selenide.open(applicationConfig.getBaseUrlWithAuthorization())
   }
 

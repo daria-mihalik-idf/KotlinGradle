@@ -7,26 +7,26 @@ import services.CrmMainService
 import ui.UiBaseTest
 
 class CrmBorrowersPageTest : UiBaseTest() {
-  private val crmBorrowersService = CrmBorrowersService()
 
   @Test
   fun crmBorrowersPageIsAccessible() {
     val validCredentials = applicationConfig.crmLoginData
     val crmMainService = CrmMainService(applicationConfig)
+    val crmBorrowersService = CrmBorrowersService()
 
-    crmMainService.crmLoginPage.openPage()
-    Assertions.assertTrue(crmMainService.crmLoginPage.isCrmLoginPageOpened(), "")
+    crmMainService.crmLoginService.openCrmLoginPage()
+    Assertions.assertTrue(crmMainService.crmLoginService.isCrmLoginPageOpened(), "")
 
-    crmMainService.crmLoginPage.logInCrm(validCredentials)
+    crmMainService.crmLoginService.logInCrm(validCredentials)
     Assertions.assertTrue(crmMainService.isCrmMainPageOpened(), "Crm Main Page wasn't opened")
 
 
-    crmBorrowersService.crmBorrowersPage.apply {
+    crmBorrowersService.apply {
       openPage()
-      Assertions.assertTrue(crmBorrowersService.crmBorrowersPage.isCrmBorrowersPageOpened(),
+      Assertions.assertTrue(crmBorrowersService.isCrmBorrowersPageOpened(),
           "Crm Borrowers Page wasn't opened")
       searchBorrowerById()
-      Assertions.assertTrue(crmBorrowersService.crmBorrowersPage.isBorrowersSearchResultPresent(),
+      Assertions.assertTrue(crmBorrowersService.isBorrowersSearchResultPresent(),
           "Search result not found")
     }
   }

@@ -10,12 +10,13 @@ class CrmLoginTest : UiBaseTest() {
   @Test
   fun logInCrm() {
     val validCredentials = applicationConfig.crmLoginData
-    val crmMainPage = CrmMainService(applicationConfig)
+    val crmMainService = CrmMainService(applicationConfig)
 
-    crmMainPage.crmLoginPage.openPage()
-    Assertions.assertTrue(crmMainPage.crmLoginPage.isCrmLoginPageOpened(), "")
 
-    crmMainPage.crmLoginPage.logInCrm(validCredentials)
-    Assertions.assertTrue(crmMainPage.isCrmMainPageOpened(), "Crm Main Page wasn't opened")
+    crmMainService.crmLoginService.openCrmLoginPage()
+    Assertions.assertTrue(crmMainService.crmLoginService.isCrmLoginPageOpened(), "")
+
+    crmMainService.crmLoginService.logInCrm(validCredentials)
+    Assertions.assertTrue(crmMainService.isCrmMainPageOpened(), "Crm Main Page wasn't opened")
   }
 }
