@@ -2,6 +2,7 @@ package core.config
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import core.CrmUser
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ApplicationConfig(
@@ -12,9 +13,8 @@ data class ApplicationConfig(
     val registrationUrl: String,
     val loginPrivateAreaPageUrl: String,
     val crmLoginPageUrl: String,
-    val crmLoginMail: String,
-    val crmLoginPassword: String,
-    val crmCaptchaValue: String,
+    val crmLoginData: CrmUser,
+    val crmBorrowerPage: String,
     @JsonProperty("type")
     val fileType: String,
     val testType: String?

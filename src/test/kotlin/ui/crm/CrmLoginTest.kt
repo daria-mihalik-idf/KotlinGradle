@@ -1,6 +1,5 @@
 package ui.crm
 
-import core.CrmUser
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import services.CrmMainService
@@ -10,15 +9,13 @@ class CrmLoginTest : UiBaseTest() {
 
   @Test
   fun logInCrm() {
-    val validCredentials = CrmUser(applicationConfig.crmLoginMail, applicationConfig.crmLoginPassword, applicationConfig
-        .crmCaptchaValue)
-    val crmMainService = CrmMainService(applicationConfig)
+    val validCredentials = applicationConfig.crmLoginData
+    val crmMainPage = CrmMainService(applicationConfig)
 
-    crmMainService.crmLoginPage.openPage()
-    Assertions.assertTrue(crmMainService.crmLoginPage.isOpened(), "")
+    crmMainPage.crmLoginPage.openPage()
+    Assertions.assertTrue(crmMainPage.crmLoginPage.isCrmLoginPageOpened(), "")
 
-    crmMainService.crmLoginPage.logInCrm(validCredentials)
-    Assertions.assertTrue(crmMainService.isCrmMainPageOpened(), "Crm Main Page wasn't opened")
+    crmMainPage.crmLoginPage.logInCrm(validCredentials)
+    Assertions.assertTrue(crmMainPage.isCrmMainPageOpened(), "Crm Main Page wasn't opened")
   }
 }
-
