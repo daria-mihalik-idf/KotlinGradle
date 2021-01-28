@@ -2,6 +2,7 @@ package services
 
 import core.CrmUser
 import core.config.ApplicationConfig
+import org.junit.jupiter.api.Assertions
 import ui.pages.crm.CrmLoginPage
 
 class CrmLoginService(applicationConfig: ApplicationConfig) {
@@ -11,8 +12,8 @@ class CrmLoginService(applicationConfig: ApplicationConfig) {
     crmLoginPage.openPage()
   }
 
-  fun isCrmLoginPageOpened(): Boolean {
-    return crmLoginPage.isCrmLoginPageOpened()
+  fun verifyCrmLoginPageOpened() {
+    Assertions.assertTrue(crmLoginPage.verifyCrmLoginPageOpened(), "Crm login page wasn't opened")
   }
 
   fun logInCrm(crmUser: CrmUser) {

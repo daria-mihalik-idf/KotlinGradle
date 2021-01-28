@@ -1,33 +1,35 @@
 package ui.crm
 
-import org.junit.jupiter.api.Assertions
+import core.CrmUser
 import org.junit.jupiter.api.Test
 import services.CrmBorrowersService
+import services.CrmLoginService
 import services.CrmMainService
 import ui.UiBaseTest
 
 class CrmBorrowersPageTest : UiBaseTest() {
+  private val borrowerId: String = "28256"
 
   @Test
   fun crmBorrowersPageIsAccessible() {
-    val validCredentials = applicationConfig.crmLoginData
-    val crmMainService = CrmMainService(applicationConfig)
+    val validCredentials: CrmUser = applicationConfig.crmLoginData
+    val crmMainService = CrmMainService()
     val crmBorrowersService = CrmBorrowersService()
+    val crmLoginService = CrmLoginService(applicationConfig)
 
-    crmMainService.crmLoginService.openCrmLoginPage()
-    Assertions.assertTrue(crmMainService.crmLoginService.isCrmLoginPageOpened(), "")
+    crmLoginService.apply {
+      openCrmLoginPage()
+      verifyCrmLoginPageOpened()
+      logInCrm(validCredentials)
+    }
 
-    crmMainService.crmLoginService.logInCrm(validCredentials)
-    Assertions.assertTrue(crmMainService.isCrmMainPageOpened(), "Crm Main Page wasn't opened")
-
+    crmMainService.verifyCrmMainPageOpened()
 
     crmBorrowersService.apply {
       openPage()
-      Assertions.assertTrue(crmBorrowersService.isCrmBorrowersPageOpened(),
-          "Crm Borrowers Page wasn't opened")
-      searchBorrowerById()
-      Assertions.assertTrue(crmBorrowersService.isBorrowersSearchResultPresent(),
-          "Search result not found")
+      verifyCrmBorrowersPageOpened()
+      searchBorrowerById(borrowerId)
+      verifyBorrowersSearchResultPresent()
     }
   }
 }

@@ -8,34 +8,38 @@ import ui.pages.BasePage
 import ui.waiter.Waiter
 
 class CrmBorrowersPage : BasePage() {
-  private val borrowerId: String = "28256"
-
   private val resetPasswordButton: By = By.cssSelector("div.sc-giadOv>button:not(#blockBorrowers)")
   private val blockButton: By = By.id("blockBorrowers")
-  private val menuLocator1: By = By.id("mainNav")
+  private val menuDropdownLocator: By = By.id("mainNav")
   private val borrowerMenuLocator: By = By.cssSelector("a[href='/crm/#/borrowers']")
-  private val borrowersFilterInput: By = By.name("value")
+  val borrowersFilterInput: By = By.name("value")
   private val submitButton: By = By.cssSelector("button[type='submit']")
   private val borrowersSearchResult: By = By.cssSelector(".amount-records")
 
   override fun openPage() {
     Waiter.waitPageDomLoad()
-    ButtonElement.clickButton(menuLocator1)
+    ButtonElement.clickButton(menuDropdownLocator)
     Waiter.waitUntilElementAppear(borrowerMenuLocator)
     ButtonElement.clickButton(borrowerMenuLocator)
   }
 
-  fun isCrmBorrowersPageOpened(): Boolean {
+  fun verifyCrmBorrowersPageOpened(): Boolean {
     return `$`(resetPasswordButton).isDisplayed && `$`(blockButton).isDisplayed
   }
 
-  fun searchBorrowerById() {
+  fun clickOnFilterInput() {
     ButtonElement.clickButton(borrowersFilterInput)
-    InputElement.setInputElementValue(borrowersFilterInput, borrowerId)
+  }
+
+  fun setValueInFilterInput(userData: String) {
+    InputElement.setInputElementValue(borrowersFilterInput, userData)
+  }
+
+  fun clickOnSubmitButton() {
     ButtonElement.clickButton(submitButton)
   }
 
-  fun isBorrowersSearchResultPresent(): Boolean {
+  fun verifyBorrowersSearchResultPresent(): Boolean {
     Waiter.waitPageDomLoad()
     return `$`(borrowersSearchResult).isDisplayed
   }

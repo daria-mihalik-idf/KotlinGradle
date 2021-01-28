@@ -6,7 +6,7 @@ import org.openqa.selenium.By
 class CrmMainPage {
   private val menuLocator: By = By.id("main")
 
-  fun isCrmMainPageOpened(): Boolean {
+  fun verifyCrmMainPageOpened(): Boolean {
     return `$`(menuLocator).isDisplayed
   }
 }

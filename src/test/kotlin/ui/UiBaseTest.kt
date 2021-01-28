@@ -11,15 +11,21 @@ import core.driver.selenium.WebDriverManager
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.TestInstance
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 abstract class UiBaseTest {
   lateinit var applicationConfig: ApplicationConfig
   lateinit var webDriverConfig: WebDriverConfig
 
-  @BeforeEach
-  fun init() {
+  @BeforeAll
+  fun setupConfigurationForBrowser() {
     webDriverConfig = WebDriverConfigProviderManager().getConfig(FileType.YAML)
     SelenideDriverManager.getDriverFactory(webDriverConfig).configDriver()
+  }
+
+  @BeforeEach
+  fun init() {
     applicationConfig = ApplicationConfigProviderManager().getConfig(FileType.YAML)
     Selenide.open(applicationConfig.getBaseUrlWithAuthorization())
   }

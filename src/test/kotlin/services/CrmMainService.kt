@@ -1,13 +1,12 @@
 package services
 
-import core.config.ApplicationConfig
+import org.junit.jupiter.api.Assertions
 import ui.pages.crm.CrmMainPage
 
-class CrmMainService(applicationConfig: ApplicationConfig) {
+class CrmMainService {
   private val crmMainPage = CrmMainPage()
-  val crmLoginService = CrmLoginService(applicationConfig)
 
-  fun isCrmMainPageOpened(): Boolean {
-    return crmMainPage.isCrmMainPageOpened()
+  fun verifyCrmMainPageOpened() {
+    Assertions.assertTrue(crmMainPage.verifyCrmMainPageOpened(), "Crm Main Page wasn't opened")
   }
 }

@@ -20,7 +20,7 @@ class CrmLoginPage(applicationConfig: ApplicationConfig) : BasePage() {
     Navigation.openUrl(crmLoginPageUrl)
   }
 
-  fun isCrmLoginPageOpened(): Boolean {
+  fun verifyCrmLoginPageOpened(): Boolean {
     return `$`(crmLoginForm).isDisplayed
   }
 

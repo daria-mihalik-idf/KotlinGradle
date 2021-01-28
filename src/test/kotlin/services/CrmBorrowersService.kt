@@ -1,5 +1,6 @@
 package services
 
+import org.junit.jupiter.api.Assertions
 import ui.pages.crm.CrmBorrowersPage
 
 class CrmBorrowersService {
@@ -9,15 +10,21 @@ class CrmBorrowersService {
     crmBorrowersPage.openPage()
   }
 
-  fun isCrmBorrowersPageOpened(): Boolean {
-    return crmBorrowersPage.isCrmBorrowersPageOpened()
+  fun verifyCrmBorrowersPageOpened() {
+    Assertions.assertTrue(crmBorrowersPage.verifyCrmBorrowersPageOpened(),
+        "Crm Borrowers Page wasn't opened")
   }
 
-  fun searchBorrowerById() {
-    crmBorrowersPage.searchBorrowerById()
+  fun searchBorrowerById(userData: String) {
+    crmBorrowersPage.apply {
+      clickOnFilterInput()
+      setValueInFilterInput(userData)
+      clickOnSubmitButton()
+    }
   }
 
-  fun isBorrowersSearchResultPresent(): Boolean {
-    return crmBorrowersPage.isBorrowersSearchResultPresent()
+  fun verifyBorrowersSearchResultPresent() {
+    Assertions.assertTrue(crmBorrowersPage.verifyBorrowersSearchResultPresent(),
+        "Crm Borrowers Search result not found")
   }
 }
