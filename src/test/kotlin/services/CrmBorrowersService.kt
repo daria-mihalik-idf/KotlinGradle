@@ -6,7 +6,7 @@ import ui.pages.crm.CrmBorrowersPage
 class CrmBorrowersService {
   private val crmBorrowersPage = CrmBorrowersPage()
 
-  fun openPage() {
+  fun openCrmBorrowersPage() {
     crmBorrowersPage.openPage()
   }
 

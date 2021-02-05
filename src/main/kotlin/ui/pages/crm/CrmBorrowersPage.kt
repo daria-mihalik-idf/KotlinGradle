@@ -10,17 +10,14 @@ import ui.waiter.Waiter
 class CrmBorrowersPage : BasePage() {
   private val resetPasswordButton: By = By.cssSelector("div.sc-giadOv>button:not(#blockBorrowers)")
   private val blockButton: By = By.id("blockBorrowers")
-  private val menuDropdownLocator: By = By.id("mainNav")
-  private val borrowerMenuLocator: By = By.cssSelector("a[href='/crm/#/borrowers']")
-  val borrowersFilterInput: By = By.name("value")
+  private val borrowersFilterInput: By = By.name("value")
   private val submitButton: By = By.cssSelector("button[type='submit']")
   private val borrowersSearchResult: By = By.cssSelector(".amount-records")
+  private val crmHomePage:CrmHomePage = CrmHomePage()
 
   override fun openPage() {
-    Waiter.waitPageDomLoad()
-    ButtonElement.clickButton(menuDropdownLocator)
-    Waiter.waitUntilElementAppear(borrowerMenuLocator)
-    ButtonElement.clickButton(borrowerMenuLocator)
+    crmHomePage.clickMenuDropdown()
+    crmHomePage.clickBorrowersMenu()
   }
 
   fun verifyCrmBorrowersPageOpened(): Boolean {

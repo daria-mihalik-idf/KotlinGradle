@@ -4,7 +4,7 @@ import core.CrmUser
 import org.junit.jupiter.api.Test
 import services.CrmBorrowersService
 import services.CrmLoginService
-import services.CrmMainService
+import services.CrmHomeService
 import ui.UiBaseTest
 
 class CrmBorrowersPageTest : UiBaseTest() {
@@ -13,7 +13,7 @@ class CrmBorrowersPageTest : UiBaseTest() {
   @Test
   fun crmBorrowersPageIsAccessible() {
     val validCredentials: CrmUser = applicationConfig.crmLoginData
-    val crmMainService = CrmMainService()
+    val crmMainService = CrmHomeService()
     val crmBorrowersService = CrmBorrowersService()
     val crmLoginService = CrmLoginService(applicationConfig)
 
@@ -23,10 +23,10 @@ class CrmBorrowersPageTest : UiBaseTest() {
       logInCrm(validCredentials)
     }
 
-    crmMainService.verifyCrmMainPageOpened()
+    crmMainService.verifyCrmHomePageOpened()
 
     crmBorrowersService.apply {
-      openPage()
+      openCrmBorrowersPage()
       verifyCrmBorrowersPageOpened()
       searchBorrowerById(borrowerId)
       verifyBorrowersSearchResultPresent()
