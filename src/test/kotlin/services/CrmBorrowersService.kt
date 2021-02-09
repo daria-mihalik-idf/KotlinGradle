@@ -2,9 +2,13 @@ package services
 
 import org.junit.jupiter.api.Assertions
 import ui.pages.crm.CrmBorrowersPage
+import ui.pages.crm.CrmBorrowersSearchBlock
+import ui.pages.crm.CrmBorrowersSearchResultBlock
 
 class CrmBorrowersService {
   private val crmBorrowersPage = CrmBorrowersPage()
+  private val crmBorrowersSearchBlock = CrmBorrowersSearchBlock()
+  private val crmBorrowersSearchResult = CrmBorrowersSearchResultBlock()
 
   fun openCrmBorrowersPage() {
     crmBorrowersPage.openPage()
@@ -16,7 +20,7 @@ class CrmBorrowersService {
   }
 
   fun searchBorrowerById(userData: String) {
-    crmBorrowersPage.apply {
+    crmBorrowersSearchBlock.apply {
       clickOnFilterInput()
       setValueInFilterInput(userData)
       clickOnSubmitButton()
@@ -24,7 +28,7 @@ class CrmBorrowersService {
   }
 
   fun verifyBorrowersSearchResultPresent() {
-    Assertions.assertTrue(crmBorrowersPage.verifyBorrowersSearchResultPresent(),
+    Assertions.assertTrue(crmBorrowersSearchResult.verifyBorrowersSearchResultPresent(),
         "Crm Borrowers Search result not found")
   }
 }
