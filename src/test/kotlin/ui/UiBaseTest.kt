@@ -15,8 +15,9 @@ import org.junit.jupiter.api.TestInstance
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 abstract class UiBaseTest {
-  lateinit var applicationConfig: ApplicationConfig
-  lateinit var webDriverConfig: WebDriverConfig
+
+  protected lateinit var applicationConfig: ApplicationConfig
+  private lateinit var webDriverConfig: WebDriverConfig
 
   @BeforeAll
   fun init() {

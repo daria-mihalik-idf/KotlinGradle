@@ -8,6 +8,8 @@ class CrmBorrowersPage : BasePage() {
   private val resetPasswordButton: By = By.cssSelector("div.sc-giadOv>button:not(#blockBorrowers)")
   private val blockButton: By = By.id("blockBorrowers")
   private val crmNavigationMenu: CrmNavigationMenuBlock = CrmNavigationMenuBlock()
+  val crmBorrowersSearch: CrmBorrowersSearchBlock = CrmBorrowersSearchBlock()
+  val crmBorrowersSearchResult: CrmBorrowersSearchResultBlock = CrmBorrowersSearchResultBlock()
 
   override fun openPage() {
     crmNavigationMenu.clickMenuDropdown()
