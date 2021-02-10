@@ -11,7 +11,8 @@ class CrmBorrowersService {
   }
 
   fun verifyCrmBorrowersPageOpened() {
-    Assertions.assertTrue(crmBorrowersPage.verifyCrmBorrowersPageOpened(),
+    Assertions.assertTrue(
+        crmBorrowersPage.verifyCrmBorrowersPageOpened(),
         "Crm Borrowers Page wasn't opened")
   }
 
@@ -24,7 +25,8 @@ class CrmBorrowersService {
   }
 
   fun verifyBorrowersSearchResultPresent() {
-    Assertions.assertTrue(crmBorrowersPage.crmBorrowersSearchResult.verifyBorrowersSearchResultPresent(),
+    Assertions.assertTrue(
+        crmBorrowersPage.crmBorrowersSearchResult.verifyBorrowersSearchResultPresent(),
         "Crm Borrowers Search result not found")
   }
 }

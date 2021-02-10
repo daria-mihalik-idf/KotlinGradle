@@ -14,7 +14,6 @@ class LandingPage(applicationConfig: ApplicationConfig) : BasePage() {
 
   override fun openPage() {
     Navigation.openUrl(landingPageUrl)
-    Waiter.jsWaitForPageToLoad()
     calculator.waitCalculatorBlockDisplayed()
   }
 

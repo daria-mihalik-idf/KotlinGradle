@@ -1,4 +1,4 @@
-package ui.pages.login
+package ui.pages.privateArea
 
 import com.codeborne.selenide.Selenide.`$`
 import core.config.ApplicationConfig

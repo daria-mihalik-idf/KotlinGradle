@@ -1,4 +1,4 @@
-package core.driver
+package core.driver.selenium
 
 interface DriverPathConfiguration {
 

@@ -27,7 +27,7 @@ abstract class UiBaseTest {
   }
 
   @BeforeEach
-  fun openUrl() {
+  fun authoriseToDomain() {
     Selenide.open(applicationConfig.getBaseUrlWithAuthorization())
   }
 
