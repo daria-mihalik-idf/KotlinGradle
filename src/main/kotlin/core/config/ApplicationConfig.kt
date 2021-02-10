@@ -2,6 +2,7 @@ package core.config
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import core.CrmUser
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ApplicationConfig(
@@ -11,6 +12,8 @@ data class ApplicationConfig(
     val landingEndpoint: String?,
     val registrationUrl: String,
     val loginPrivateAreaPageUrl: String,
+    val crmLoginPageUrl: String,
+    val crmLoginData: CrmUser,
     @JsonProperty("type")
     val fileType: String,
     val testType: String?
@@ -18,14 +21,10 @@ data class ApplicationConfig(
   private val httpsPrefix: String = "https://"
 
   fun getBaseUrlWithAuthorization(): String {
-    return "$httpsPrefix$user:$password@$host"
+    return "$httpsPrefix$user:$password@$host/"
   }
 
   fun getBaseUrl(): String {
     return "$httpsPrefix$host/"
   }
 }
-
-
-
-
