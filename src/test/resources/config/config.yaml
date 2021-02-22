@@ -1,11 +1,12 @@
-host: /setHost
-user: /setUser
-password: setPassword
+host: qa-delivery-mx-master.moneyman.ru
+user: moneyman
+password: 1005
 landingEndpoint: "/"
 type: YAML
 registrationUrl: client-area/index.html#/registration
 loginPrivateAreaPageUrl: private-area/static/#/login
 crmLoginPageUrl: secure/new-admin/index.html#/login
+crmAuthUrl: secure/rest/sign/in
 crmBorrowerPage: crm/#/borrowers
 crmLoginData:
     crmLoginMail: admin

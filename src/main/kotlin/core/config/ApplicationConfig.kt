@@ -13,6 +13,7 @@ data class ApplicationConfig(
     val registrationUrl: String,
     val loginPrivateAreaPageUrl: String,
     val crmLoginPageUrl: String,
+    val crmAuthUrl: String,
     val crmLoginData: CrmUser,
     @JsonProperty("type")
     val fileType: String,
