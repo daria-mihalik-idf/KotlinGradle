@@ -1,4 +1,4 @@
-package core.http
+package core.http.interceptor
 
 import core.config.ApplicationConfig
 import okhttp3.Credentials
