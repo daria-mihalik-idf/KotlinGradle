@@ -12,3 +12,7 @@ crmLoginData:
     crmLoginMail: admin
     crmLoginPassword: 11111111
     crmCaptchaValue: 11111
+#WireMock
+wireMockConfig:
+    wireMockPort: 9091
+    wireMockHost: "localhost"

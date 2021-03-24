@@ -12,7 +12,6 @@ class RemoteSelenideWebDriverFactory(webDriverConfig: WebDriverConfig) :
     return when (webDriverConfig.browserType) {
       Browser.CHROME -> ChromeSelenideDriverFactory(webDriverConfig).configDriver()
       Browser.FIREFOX -> FirefoxSelenideDriverFactory(webDriverConfig).configDriver()
-      else -> throw IllegalArgumentException("Unknown browser type ${webDriverConfig.browserType}")
     }
   }
 

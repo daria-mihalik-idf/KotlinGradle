@@ -33,7 +33,6 @@ object WebDriverManager {
       DriverType.LOCAL -> when (webDriverConfig!!.browserType) {
         Browser.CHROME -> ChromeDriverFactory(webDriverConfig!!).getDriver()
         Browser.FIREFOX -> FirefoxDriverFactory(webDriverConfig!!).getDriver()
-        else -> throw IllegalArgumentException("Unknown browser type ${webDriverConfig!!.browserType}")
       }
     }
   }
