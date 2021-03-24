@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-abstract class WireMockBaseTest() {
+abstract class WireMockBaseTest {
   protected val config = ApplicationConfigProviderManager().getConfig(FileType.YAML)
   private lateinit var wireMockServer: WireMockServer
   private val log = TestLogger.getLogger()

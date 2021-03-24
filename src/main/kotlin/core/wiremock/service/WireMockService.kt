@@ -10,24 +10,26 @@ import logger.TestLogger
 
 class WireMockService(
     config: ApplicationConfig,
-    private val stubBuilder: StubBuilder = StubBuilder()
+    private val stubBuilder: StubBuilder = StubBuilder(),
+    private val wireMockClient: WireMock = WireMock(
+        config.wireMockConfig.wireMockHost,
+        config.wireMockConfig
+        .wireMockPort)
 ) : MockService {
-
   private val log = TestLogger.getLogger()
-  private val wireMockConfig = config.wireMockConfig
-  private val wireMockClient: WireMock = WireMock(wireMockConfig.wireMockHost, wireMockConfig.wireMockPort)
 
-  override fun verifyMock(mockConfig: MockConfig): Boolean {
+  override fun isStubExist(mockConfig: MockConfig): Boolean {
     val actualWireMockStubs = wireMockClient.allStubMappings().mappings.map { it.id }
     return actualWireMockStubs.contains(mockConfig.id)
   }
 
   override fun addStub(mockConfig: MockConfig) {
-    if (!verifyMock(mockConfig)) {
-      val mapping: MappingBuilder = stubBuilder.getStub(mockConfig)
+    if (!isStubExist(mockConfig)) {
+      val mapping: MappingBuilder = stubBuilder.getStubMapping(mockConfig)
       val stubMapping: StubMapping = wireMockClient.register(mapping)
-      mockConfig.id = stubMapping.id
-      mockConfig.stubMapping = stubMapping
+      mockConfig.apply {
+        id = stubMapping.id
+      }
     } else {
       log.error("Mock ${mockConfig.name}/${mockConfig.id} was already configured")
     }
@@ -35,9 +37,9 @@ class WireMockService(
 
   override fun removeStub(mockConfig: MockConfig) {
     wireMockClient.removeStubMapping(mockConfig.stubMapping)
-    assert(!verifyMock(mockConfig)) {
-      "Removing ${mockConfig.name}} was failed"
+    assert(!isStubExist(mockConfig)) {
+      "Removing ${mockConfig.name} failed"
     }
-    log.info("Mock ${mockConfig.name}} is removed")
+    log.info("Removing ${mockConfig.name}} failed")
   }
 }

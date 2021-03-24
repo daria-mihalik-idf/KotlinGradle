@@ -6,9 +6,9 @@ import com.github.tomakehurst.wiremock.client.WireMock
 import core.wiremock.config.MockConfig
 
 class StubBuilder {
-  private val filePath: String = "config/mockResponse.json"
+  private val filePath: String = "config/"
 
-  fun getStub(mockConfig: MockConfig): MappingBuilder {
+  fun getStubMapping(mockConfig: MockConfig): MappingBuilder {
     val mappingBuilder: MappingBuilder = WireMock
         .any(WireMock.urlMatching(mockConfig.url))
         .atPriority(mockConfig.priority)
@@ -18,17 +18,16 @@ class StubBuilder {
   }
 
   private fun buildResponseDefinition(mockConfig: MockConfig): ResponseDefinitionBuilder {
-
     val responseDefinitionBuilder: ResponseDefinitionBuilder = WireMock.aResponse()
     responseDefinitionBuilder
-        .withBody(convertFileToString())
+        .withBody(convertFileToString("mockResponse.json"))
         .withStatus(mockConfig.responseStatusCode)
         .withHeader("content-type", mockConfig.responseContentType)
     return responseDefinitionBuilder
   }
 
-  private fun convertFileToString(): String? {
-    return Thread.currentThread().contextClassLoader.getResourceAsStream(this.filePath)?.readBytes()
+  private fun convertFileToString(fileName: String): String? {
+    return Thread.currentThread().contextClassLoader.getResourceAsStream("${this.filePath}$fileName")?.readBytes()
         ?.toString(Charsets.UTF_8)
   }
 }

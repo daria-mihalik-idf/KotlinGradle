@@ -22,7 +22,6 @@ dependencies {
   implementation("org.apache.logging.log4j:log4j-core:2.11.2")
   implementation("com.codeborne:selenide:5.16.2")
   implementation("com.squareup.okhttp3:okhttp:4.9.1")
-  testImplementation("io.rest-assured:kotlin-extensions:4.3.3")
 }
 
 compileKotlin {

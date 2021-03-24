@@ -1,5 +1,6 @@
 package wiremock
 
+import core.wiremock.config.MockConfig
 import core.wiremock.service.WireMockService
 import core.wiremock.stubs.LogInCrmMockConfig
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -11,19 +12,19 @@ class WireMockServiceTest : WireMockBaseTest() {
 
   @Test
   fun verifySelectedMockAdded() {
-    val logInCrmMock: LogInCrmMockConfig = LogInCrmMockConfig()
+    val logInCrmMock: MockConfig = LogInCrmMockConfig()
     wireMockService.addStub(logInCrmMock)
-    val isMockAdded = wireMockService.verifyMock(logInCrmMock)
+    val isMockAdded = wireMockService.isStubExist(logInCrmMock)
     assertTrue(isMockAdded, "LoginCrmMock wasn't added")
   }
 
   @Test
   fun verifySelectedMockRemoved() {
-    val logInCrmMock: LogInCrmMockConfig = LogInCrmMockConfig()
+    val logInCrmMock: MockConfig = LogInCrmMockConfig()
     wireMockService.apply {
       addStub(logInCrmMock)
       removeStub(logInCrmMock)
     }
-    assertFalse(wireMockService.verifyMock(logInCrmMock), "LoginCrmMock wasn't removed")
+    assertFalse(wireMockService.isStubExist(logInCrmMock), "LoginCrmMock wasn't removed")
   }
 }
