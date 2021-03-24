@@ -21,7 +21,6 @@ class RemoteWebDriverFactory(webDriverConfig: WebDriverConfig) : WebDriverFactor
     return when (webDriverConfig.browserType) {
       Browser.CHROME -> ChromeDriverFactory(webDriverConfig).configureDriverCapabilities()
       Browser.FIREFOX -> FirefoxDriverFactory(webDriverConfig).configureDriverCapabilities()
-      else -> throw IllegalArgumentException("Unknown browser type ${webDriverConfig.browserType}")
     }
   }
 }

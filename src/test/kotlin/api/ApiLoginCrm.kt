@@ -12,9 +12,9 @@ class ApiLoginCrm {
 
   @Test
   fun checkCrmLogIn() {
-    val crmApiService: CrmLoginService = CrmLoginService(applicationConfig)
+    val crmApiService = CrmLoginService(applicationConfig)
 
-    val responseStatusCode:Int = crmApiService.logInCrm().getStatusCode()
+    val responseStatusCode:Int = crmApiService.logInCrm("").getStatusCode()
 
     Assertions.assertEquals(responseStatusCode, 200, "Invalid response code")
   }

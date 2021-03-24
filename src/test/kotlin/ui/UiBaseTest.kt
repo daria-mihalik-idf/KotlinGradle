@@ -5,7 +5,7 @@ import core.config.ApplicationConfig
 import core.config.ApplicationConfigProviderManager
 import core.config.FileType
 import core.driver.WebDriverConfig
-import core.driver.selenium.WebDriverConfigProviderManager
+import core.driver.WebDriverConfigProviderManager
 import core.driver.selenide.SelenideDriverManager
 import core.driver.selenium.WebDriverManager
 import org.junit.jupiter.api.AfterEach

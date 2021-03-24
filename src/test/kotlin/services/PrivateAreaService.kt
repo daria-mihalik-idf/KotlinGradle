@@ -1,7 +1,7 @@
 package services
 
 import core.config.ApplicationConfig
-import ui.pages.privateArea.PrivateAreaMainPage
+import ui.pages.login.PrivateAreaMainPage
 
 class PrivateAreaService(applicationConfig: ApplicationConfig) {
   private val privateAreaPage = PrivateAreaMainPage()

@@ -11,7 +11,7 @@ class LandingPageCheckCalculatorParameterizedTest : UiBaseTest() {
 
   @ParameterizedTest
   @EnumSource(Browser::class)
-  fun `LP - Verify Calculator And Apply for Loan`(browser: Browser) {
+  fun `LP - Verify Calculator And Apply for Loan`() {
     val landingPage = LandingPageService(applicationConfig)
 
     landingPage.openPage()
