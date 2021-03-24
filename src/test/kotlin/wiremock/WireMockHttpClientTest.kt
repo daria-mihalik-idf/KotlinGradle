@@ -22,7 +22,7 @@ class WireMockHttpClientTest : WireMockBaseTest() {
 
     assertAll(
         { Assertions.assertEquals(logInCrmMock.responseStatusCode, crmLoginResponse.response.code) },
-//        { Assertions.assertEquals(logInCrmMock.stubMapping?.response?.body, crmLoginResponse) }
+        { Assertions.assertEquals(logInCrmMock.stubMapping?.response?.body, crmLoginResponse.response.body?.string()) }
     )
   }
 }

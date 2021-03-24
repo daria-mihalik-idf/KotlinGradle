@@ -1,5 +1,7 @@
 {
-  "login": "admin",
-  "password": "11111111",
-  "captcha": "11111"
+  "id": 1,
+  "userName": "admin",
+  "localizedRole": "Administrator",
+  "roleId": 10,
+  "error": null
 }

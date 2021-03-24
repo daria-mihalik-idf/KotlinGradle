@@ -14,7 +14,7 @@ class WireMockService(
     private val wireMockClient: WireMock = WireMock(
         config.wireMockConfig.wireMockHost,
         config.wireMockConfig
-        .wireMockPort)
+            .wireMockPort)
 ) : MockService {
   private val log = TestLogger.getLogger()
 
@@ -26,9 +26,10 @@ class WireMockService(
   override fun addStub(mockConfig: MockConfig) {
     if (!isStubExist(mockConfig)) {
       val mapping: MappingBuilder = stubBuilder.getStubMapping(mockConfig)
-      val stubMapping: StubMapping = wireMockClient.register(mapping)
+      val registeredMapping: StubMapping = wireMockClient.register(mapping)
       mockConfig.apply {
-        id = stubMapping.id
+        id = registeredMapping.id
+        stubMapping = registeredMapping
       }
     } else {
       log.error("Mock ${mockConfig.name}/${mockConfig.id} was already configured")
