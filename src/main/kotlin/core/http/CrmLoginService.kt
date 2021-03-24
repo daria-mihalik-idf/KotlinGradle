@@ -13,8 +13,8 @@ class CrmLoginService(private val applicationConfig: ApplicationConfig) {
     return jacksonObjectMapper().writeValueAsString(applicationConfig.crmLoginData)
   }
 
-  fun logInCrm(): MyResponse {
+  fun logInCrm(url: String = baseUrl, endpoint: String = urlEndpoint): MyResponse {
     val body: String = getCrmAuthRequest()
-    return defaultHttpClient.post(baseUrl, urlEndpoint, body)
+    return defaultHttpClient.post(url, endpoint, body)
   }
 }

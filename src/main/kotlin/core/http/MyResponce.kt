@@ -2,7 +2,7 @@ package core.http
 
 import okhttp3.Response
 
-class MyResponse(private val response: Response) : MyNewResponse {
+class MyResponse(val response: Response) : MyNewResponse {
 
   override fun getHeaders(): Map<String, String> {
     return response.headers.toMap()

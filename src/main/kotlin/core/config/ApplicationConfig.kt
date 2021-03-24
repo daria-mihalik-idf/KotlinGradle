@@ -17,7 +17,8 @@ data class ApplicationConfig(
     val crmLoginData: CrmUser,
     @JsonProperty("type")
     val fileType: String,
-    val testType: String?
+    val testType: String?,
+    val wireMockConfig: WireMockConfig
 ) {
   private val httpsPrefix: String = "https://"
 
@@ -28,4 +29,6 @@ data class ApplicationConfig(
   fun getBaseUrl(): String {
     return "$httpsPrefix$host/"
   }
+
+  data class WireMockConfig(val wireMockHost: String, val wireMockPort: Int)
 }
