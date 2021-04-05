@@ -4,11 +4,12 @@ class SqlQuery {
 
   val userAccountSelectByIdQuery: String = """
     select * from mx_moneyman.user_account
-    where id = %S
+    where id = :id
   """.trimIndent()
 
-  val userAccountSelectByEmailQuery: String = """
+  val userAccountSelectByRoleIdQuery: String = """
     select * from mx_moneyman.user_account
-    where role_id = %S
+    where role_id = :role_id 
+    limit 2
   """.trimIndent()
 }

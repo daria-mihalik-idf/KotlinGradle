@@ -1,13 +1,16 @@
 package core.sqlClient
 
-class MySqlService {
-  private val mySqlClient: DbClient = MySqlClient()
+import core.config.ApplicationConfig
 
-  fun getUserDataById(sqlQueryRaw: String, id: Long): Map<String, Any?> {
-    return mySqlClient.selectOneRow(sqlQueryRaw, mapOf("id" to id))
+class MySqlService (config: ApplicationConfig.SqlConfig) {
+  private val mySqlClient: DbClient = MySqlClient(config)
+  private val sqlQuery = SqlQuery()
+
+  fun getUserDataById(id: Long): Map<String, Any?> {
+    return mySqlClient.selectOneRow(sqlQuery.userAccountSelectByIdQuery,  mapOf("id" to id))
   }
 
-  fun getUserdataByEmail(sqlQueryRaw: String, roleId: Long): List<Map<String, Any?>> {
-    return mySqlClient.selectAllRows(sqlQueryRaw, mapOf("role_id" to roleId))
+  fun getUserdataByRoleId( roleId: Long): List<Map<String, Any?>> {
+    return mySqlClient.selectAllRows(sqlQuery.userAccountSelectByRoleIdQuery, mapOf("role_id" to roleId))
   }
 }

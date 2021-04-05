@@ -3,24 +3,20 @@ package core.sqlClient
 import com.vladsch.kotlin.jdbc.Session
 import com.vladsch.kotlin.jdbc.SqlQuery
 import com.vladsch.kotlin.jdbc.session
+import com.vladsch.kotlin.jdbc.sqlQuery
 import core.config.ApplicationConfig
-import core.config.ApplicationConfigProviderManager
-import core.config.FileType
 import java.sql.ResultSet
 
-class MySqlClient : DbClient {
-
+class MySqlClient(config: ApplicationConfig.SqlConfig) : DbClient {
+  private val sqlConfig = config
   private var session: Session? = null
 
-
   override fun getDbConnection(): Session {
-    val applicationConfig: ApplicationConfig = ApplicationConfigProviderManager().getConfig(FileType.YAML)
-
     if (session == null) {
       session = session(
-          url = applicationConfig.sqlConfig.dbUrl,
-          user = applicationConfig.sqlConfig.dbUser,
-          password = applicationConfig.sqlConfig.dbPassword
+          url = sqlConfig.dbUrl,
+          user = sqlConfig.dbUser,
+          password = sqlConfig.dbPassword
       )
     }
     return session as Session
@@ -30,7 +26,7 @@ class MySqlClient : DbClient {
       sqlQueryRaw: String,
       queryParams: Map<String, Any?>
   ): Map<String, Any?> {
-    val sqlQuery = SqlQuery(sqlQueryRaw.format(queryParams.getValue("id")))
+    val sqlQuery = buildQuery(sqlQueryRaw, queryParams)
     return getDbConnection().query(sqlQuery, resultSetFirstRow)
   }
 
@@ -38,7 +34,7 @@ class MySqlClient : DbClient {
       sqlQueryRaw: String,
       queryParams: Map<String, Any?>
   ): List<Map<String, Any?>> {
-    val sqlQuery = SqlQuery(sqlQueryRaw.format(queryParams.getValue("role_id")))
+    val sqlQuery = buildQuery(sqlQueryRaw, queryParams)
     return getDbConnection().query(sqlQuery, resultSetToList)
   }
 
@@ -73,5 +69,17 @@ class MySqlClient : DbClient {
       allRowsSelectData.add(firstRowSelectData)
     }
     allRowsSelectData
+  }
+
+  private fun buildQuery(sqlQueryRaw: String, queryParams: Map<String, Any?>): SqlQuery {
+    return if (queryParams.isNullOrEmpty()) {
+      SqlQuery(sqlQueryRaw)
+    } else {
+      var sqlQuery: SqlQuery = sqlQuery(sqlQueryRaw)
+      queryParams.forEach { (paramName, paramValue) ->
+        sqlQuery = sqlQuery.params(paramName to paramValue)
+      }
+      sqlQuery
+    }
   }
 }
