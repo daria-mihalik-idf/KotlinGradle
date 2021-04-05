@@ -16,3 +16,8 @@ crmLoginData:
 wireMockConfig:
     wireMockPort: 9091
     wireMockHost: "localhost"
+#Sql
+sqlConfig:
+    dbUrl: jdbc:mysql://db.delta.mmmx:3306
+    dbUser: root
+    dbPassword: root
