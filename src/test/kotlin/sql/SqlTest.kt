@@ -1,6 +1,8 @@
 package sql
 
+import core.sqlClient.MySqlClient
 import core.sqlClient.MySqlService
+import core.sqlClient.model.UserAccountTable
 import core.sqlClient.model.UserAccountTableModel
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -30,8 +32,8 @@ class SqlTest : SqlBaseTest() {
 
   @Test
   fun selectOneRawFromDbModel() {
-    val model = UserAccountTableModel()
-    val queryResult = model.useModel()
+    val model = UserAccountTableModel(MySqlClient(config).getDbConnection())
+    val queryResult: List<UserAccountTable> = model.listData()
     Assertions.assertTrue(
         queryResult.isNotEmpty(),
         "Query result is empty"

@@ -18,6 +18,6 @@ wireMockConfig:
     wireMockHost: "localhost"
 #Sql
 sqlConfig:
-    dbUrl: jdbc:mysql://db.delta.mmmx:3306
+    dbUrl: jdbc:mysql://db.delta.mmmx:3306/mx_moneyman
     dbUser: root
     dbPassword: root
