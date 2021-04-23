@@ -18,7 +18,8 @@ data class ApplicationConfig(
     @JsonProperty("type")
     val fileType: String,
     val testType: String?,
-    val wireMockConfig: WireMockConfig
+    val wireMockConfig: WireMockConfig,
+    val sqlConfig: SqlConfig
 ) {
   private val httpsPrefix: String = "https://"
 
@@ -31,4 +32,5 @@ data class ApplicationConfig(
   }
 
   data class WireMockConfig(val wireMockHost: String, val wireMockPort: Int)
+  data class SqlConfig(val dbUrl: String, val dbUser: String, val dbPassword: String)
 }

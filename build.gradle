@@ -23,7 +23,8 @@ dependencies {
     implementation("com.codeborne:selenide:5.16.2")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
-
+    implementation("com.vladsch.kotlin-jdbc:kotlin-jdbc:0.5.2")
+    implementation("mysql:mysql-connector-java:8.0.23")
 }
 
 tasks.test {
