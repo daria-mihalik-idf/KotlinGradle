@@ -9,7 +9,7 @@ import java.time.Duration
 
 object Waiter {
   private const val DEFAULT_POLLING_TIMEOUT_SECONDS: Long = 3
-  private const val DEFAULT_WAIT_TIMEOUT_SECONDS: Long = 10
+  private const val DEFAULT_WAIT_TIMEOUT_SECONDS: Long = 15
   private const val PAGE_LOAD_WAIT_TIMEOUT_SECONDS: Long = 15
 
   fun waitUntilElementDisappeared(locator: By, timeout: Long = DEFAULT_WAIT_TIMEOUT_SECONDS,

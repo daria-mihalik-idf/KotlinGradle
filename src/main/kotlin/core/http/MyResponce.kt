@@ -13,6 +13,7 @@ class MyResponse(val response: Response) : MyNewResponse {
   }
 
   override fun getStatusCode(): Int {
-    return response.code
+    return 2
   }
+
 }

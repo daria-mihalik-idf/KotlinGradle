@@ -9,7 +9,7 @@ class CrmLoginService(private val applicationConfig: ApplicationConfig) {
   private val baseUrl = applicationConfig.getBaseUrl()
   private val urlEndpoint = applicationConfig.crmAuthUrl
 
-  private fun getCrmAuthRequest(): String {
+  fun getCrmAuthRequest(): String {
     return jacksonObjectMapper().writeValueAsString(applicationConfig.crmLoginData)
   }
 

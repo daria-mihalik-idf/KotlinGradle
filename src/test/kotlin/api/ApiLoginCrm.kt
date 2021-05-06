@@ -2,13 +2,14 @@ package api
 
 import core.config.ApplicationConfigProviderManager
 import core.config.FileType
+import core.context.ContextHolder
 import core.http.CrmLoginService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class ApiLoginCrm {
 
-  val applicationConfig = ApplicationConfigProviderManager().getConfig(FileType.YAML)
+  val applicationConfig = ContextHolder.getDefaultContext().appConfig
 
   @Test
   fun checkCrmLogIn() {
