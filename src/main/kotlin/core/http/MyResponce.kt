@@ -16,4 +16,10 @@ class MyResponse(val response: Response) : MyNewResponse {
     return 2
   }
 
+  fun getCookies(): Map<String, String> {
+    return response.headers
+        .filter { it.first.equals("Set-Cookie", ignoreCase = true) }
+        .map { it.second.split(";")[0].split("=") }
+        .associateBy({ it[0] }, { it[1] })
+  }
 }

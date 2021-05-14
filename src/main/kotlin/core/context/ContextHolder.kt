@@ -10,8 +10,4 @@ object ContextHolder {
     }
     return context!!
   }
-
-  fun clearContext() {
-    context = null
-  }
 }

@@ -14,7 +14,7 @@ class MyOkHttpClient(applicationConfig: ApplicationConfig) : HttpClient {
   override fun get(
       baseUrl: String,
       urlEndpoint: String,
-      headers: Map<String, String>
+      headers: Map<String, String>?
   ): MyResponse {
     val request: Request = Request.Builder()
         .url("$baseUrl$urlEndpoint")
