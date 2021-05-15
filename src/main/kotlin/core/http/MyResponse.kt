@@ -13,7 +13,7 @@ class MyResponse(val response: Response) : MyNewResponse {
   }
 
   override fun getStatusCode(): Int {
-    return 2
+    return response.code
   }
 
   fun getCookies(): Map<String, String> {

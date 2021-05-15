@@ -1,24 +1,24 @@
 package context
 
-import core.context.Context
 import core.context.ContextHolder
-import core.http.CrmLoginService
+import core.context.listener.RememberAuthTokenListener
+import core.http.MyResponse
+import core.http.RegistrationService
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class ContextTest {
 
-  private lateinit var testDynamicContext: Context
-  private lateinit var authUserCookieName: String
-
   val applicationConfig = ContextHolder.getDefaultContext().appConfig
 
   @Test
-  fun setSessionCookiesPropertyUpdatesNotifiersList() {
-    val expectedAuthUserValue = "qwerty"
-    val expectedFrontEndExperimentValue = "12345"
+  fun checkRegistrationOpen() {
+    val registrationService = RegistrationService(applicationConfig, listOf(RememberAuthTokenListener()))
+    val response: MyResponse = registrationService.registrationGet(applicationConfig.getBaseUrl())
+    ContextHolder.getDefaultContext().session.currentHttpResponse = response
+    val expectedAuthUserCookie = response.getCookies()["AuthUser"]
+    val actualAuthUserCookie = ContextHolder.getDefaultContext().session.authToken
 
-    val crmApiService = CrmLoginService(applicationConfig)
-    val kkk = crmApiService.logInCrm()
-    println("")
+    Assertions.assertEquals(expectedAuthUserCookie, actualAuthUserCookie, "Invalid authUser cookie")
   }
 }

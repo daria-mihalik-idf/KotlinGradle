@@ -1,19 +1,19 @@
 package core.http
 
 import core.config.ApplicationConfig
-import core.context.listener.RegistrationServiceListener
+import core.context.listener.Listener
 
 class RegistrationService(
     applicationConfig: ApplicationConfig,
-    private val listeners: List<RegistrationServiceListener>
+    private val listeners: List<Listener>
 ) {
   private val defaultHttpClient: MyOkHttpClient = MyOkHttpClient(applicationConfig)
   private val baseUrl = applicationConfig.getBaseUrl()
   private val urlEndpoint = applicationConfig.registrationUrl
 
-  fun openRegistration(url: String = baseUrl, endpoint: String = urlEndpoint): MyResponse {
+  fun registrationGet(url: String = baseUrl, endpoint: String = urlEndpoint): MyResponse {
     val response = defaultHttpClient.get(url, endpoint)
-    listeners.forEach { it.onOpenRegistration(response) }
+    listeners.forEach { it.onUpdate(response) }
     return response
   }
 }
