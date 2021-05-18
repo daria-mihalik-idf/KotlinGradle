@@ -4,14 +4,14 @@ class EventManager {
   private var listeners: MutableMap<EventType, Listener> = mutableMapOf()
 
   fun subscribe(event: EventType, listener: Listener) {
-    listeners = mutableMapOf(event to listener)
+    listeners[event] = listener
   }
 
   fun unsubscribe(event: EventType) {
     listeners.remove(event)
   }
 
-  fun notifyUpdate(event: EventType, value:Any) {
+  fun notifyUpdate(event: EventType, value: Any) {
     listeners[event]!!.onUpdate(value)
   }
 }
