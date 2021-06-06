@@ -9,10 +9,14 @@ class SessionContext(private val eventManager: EventManager) {
   var currentHttpResponse: MyResponse? = null
     set(value) {
       field = value
-      if (value != null) {
-        eventManager.notifyUpdate(EventType.AUTH_TOKEN, value)
+      value?.let {
+        eventManager.apply {
+          notifyUpdate(EventType.AUTH_TOKEN, it)
+          notifyUpdate(EventType.STATUS_CODE, it)
+        }
       }
     }
 
   var authToken: String? = null
+  var responseStatusCode: Int? = null
 }
