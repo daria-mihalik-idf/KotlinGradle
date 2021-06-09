@@ -1,21 +1,12 @@
 pipeline {
     agent any
+
     tools {
         jdk 'jdk8u172'
         gradle 'gradle-6.7'
     }
 
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        post {
-            always {
-                echo '..'
-            }
-        }
         stage('Get KotlinGradle code') {
             steps {
                 echo 'Get code..'
@@ -24,7 +15,7 @@ pipeline {
         }
         stage('Run tests') {
             steps {
-                bat 'gradle :uiTest'
+                gradle.bat test
             }
         }
         stage('Allure') {
@@ -33,5 +24,11 @@ pipeline {
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
             }
         }
+    }
+    post {
+       always {
+           junit skipPublishingChecks: true, testResults: 'test-results.xml'
+
+       }
     }
 }
