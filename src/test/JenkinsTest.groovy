@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        cron('0 0 0 * * ?')
+    }
+
     tools {
         jdk 'jdk8u172'
         gradle 'gradle-6.7'
